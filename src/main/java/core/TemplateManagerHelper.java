@@ -1,4 +1,4 @@
-package root;
+package core;
 
 import java.io.File;
 

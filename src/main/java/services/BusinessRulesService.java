@@ -1,6 +1,6 @@
 package services;
 
-import root.*;
+import core.*;
 
 import java.util.Collection;
 

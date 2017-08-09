@@ -1,4 +1,4 @@
-package root;
+package core;
 
 /**
  * Consists of constants related to root.Template Manager
