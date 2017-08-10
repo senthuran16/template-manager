@@ -2,12 +2,29 @@ package services;
 
 import core.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Exposed root.Template Manager service, that handles Templates and Business Rules
  */
-public class TemplateManagerService implements TemplateManager, BusinessRulesService{
+public class TemplateManagerService implements TemplateManager, BusinessRulesService {
+    public static void main(String[] args) throws TemplateManagerException {
+        TemplateManagerService templateManagerService = new TemplateManagerService();
+        TemplateManagerHelper templateManagerHelper = new TemplateManagerHelper();
+        HashMap<String,String> map = new HashMap<String,String>();
+        map.put("${inStream1}","TemperatureSensorReadings");
+        map.put("${property1}","sensorName");
+        map.put("${property2}","sensorValue");
+        //map.put("${outStream1}","sensorReadingsCopy");
+        map.put("${value1}","100");
+        map.put("${outStream2}","highValueSensors");
+        templateManagerService.createBusinessRuleFromTemplate(templateManagerHelper.jsonToTemplate("sample-template.json"), map);
+    }
     // todo: implement all methods
 
     /**
@@ -72,6 +89,50 @@ public class TemplateManagerService implements TemplateManager, BusinessRulesSer
      * @return
      */
     public Collection<Template> listTemplates() {
+        return null;
+    }
+
+    /**
+     * Returns a Business Rule, with given Template and given values for templated elements
+     *
+     * @param template Given template
+     * @param givenValues Given Values for templated elements
+     * @return Business Rule object
+     */
+    public BusinessRule createBusinessRuleFromTemplate(Template template, Map<String, String> givenValues) {
+        // New siddhiApps to store in Business Rule
+        ArrayList<String> valueEnteredSiddhiApps = new ArrayList<String>();
+
+        // For each siddhiApp in given template
+        for(String siddhiApp : template.getSiddhiApps()){
+            StringBuffer stringBuffer = new StringBuffer();
+            Pattern pattern = Pattern.compile(TemplateManagerConstants.TEMPLATED_ELEMENT_REGEX_PATTERN);
+            Matcher templatedElementMatcher = pattern.matcher(siddhiApp);
+
+            // When a templated element is found
+            while (templatedElementMatcher.find()){
+                // Find whether a value is given for the templated element
+                String elementReplacement = givenValues.get(templatedElementMatcher.group(1));
+                // If value is given
+                if ((elementReplacement != null)){
+                    // Replace with given value
+                    templatedElementMatcher.appendReplacement(stringBuffer, elementReplacement);
+                }else{
+                    // todo: default value is specified as ${elementName} in the template. it should be just 'elementName'
+                    // Replace with default value
+                    templatedElementMatcher.appendReplacement(stringBuffer, template.getDefaultValue(templatedElementMatcher.group(1)));
+                }
+
+            }
+            templatedElementMatcher.appendTail(stringBuffer);
+            valueEnteredSiddhiApps.add(stringBuffer.toString());
+        }
+
+        // test
+        for (String valueEnteredSiddhiApp : valueEnteredSiddhiApps) {
+            System.out.println(valueEnteredSiddhiApp);
+        }
+
         return null;
     }
 }

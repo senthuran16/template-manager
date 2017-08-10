@@ -99,7 +99,7 @@ public class TemplateManagerHelper {
      * @param jsonFile Given JSON file
      * @return Business Rule object
      */
-    public BusinessRule jsonToBusinessRule(File jsonFile){
+    public BusinessRule jsonToBusinessRule(String jsonFileName){
         // todo: as same as jsonToTemplate()
         return null;
     }
