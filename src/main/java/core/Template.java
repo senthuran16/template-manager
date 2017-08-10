@@ -14,7 +14,7 @@ public class Template {
     private Collection<String> siddhiApps;
     private Map<String, Map<String, String>> properties; // { {propertyName : {defaultValue:xxx, type:yyy}} , ...}
 
-    // TODO : rough
+    // TODO : remove after rough testing
     public Template(String name, int maximumInstances, String description, String javascript, Collection<String> siddhiApps, Map<String, Map<String, String>> properties) {
         this.name = name;
         this.maximumInstances = maximumInstances;
@@ -22,5 +22,17 @@ public class Template {
         this.javascript = javascript;
         this.siddhiApps = siddhiApps;
         this.properties = properties;
+    }
+
+    @Override
+    public String toString() {
+        return "Template{" +
+                "\n\tname='" + name + '\'' +
+                ", \n\tmaximumInstances=" + maximumInstances +
+                ", \n\tdescription='" + description + '\'' +
+                ", \n\tjavascript='" + javascript + '\'' +
+                ", \n\tsiddhiApps=" + siddhiApps +
+                ", \n\tproperties=" + properties +
+                "\n}";
     }
 }
