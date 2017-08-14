@@ -1,8 +1,9 @@
 package services;
 
-import core.*;
+import core.Template;
+import core.TemplateManagerException;
 
-import java.util.Collection;
+import java.util.Map;
 
 /**
  * Consists of back end methods to handle Templates
@@ -10,20 +11,25 @@ import java.util.Collection;
 public interface TemplateManager {
     /**
      * Saves the given root.Template to the directory
-     * @param template Given root.Template
+     *
+     * @param template Given Template Object
+     * @param fileName Given Name of the file when saving
+     * @throws TemplateManagerException
      */
-    public void addTemplate(Template template);
+    public void addTemplate(Template template, String fileName) throws TemplateManagerException;
 
     /**
-     * Deletes the root.Template with the given name, from the directory
-     * @param templateName Given Name of root.Template
-     * @return Deleted root.Template object
+     * Deletes the Template with the given name, from the directory
+     *
+     * @param templateName Given Name of Template
+     * @return Deleted Template object
      */
-    public Template deleteTemplate(String templateName);
+    public Template deleteTemplate(String templateName); // todo: read file & template name. mapping double check
 
     /**
-     * Returns available Templates, from the directory
-     * @return
+     * Returns a list of available Templates, from the directory
+     *
+     * @return List of Template names, and denoting Template objects
      */
-    public Collection<Template> listTemplates();
+    public Map<String, Template> listTemplates();
 }

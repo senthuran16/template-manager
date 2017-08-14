@@ -2,7 +2,7 @@ package core;
 
 import java.security.PrivilegedActionException;
 
-public class TemplateManagerException extends Exception{
+public class TemplateManagerException extends Exception {
     /**
      * Constructs a new exception with the specified detail message.  The
      * cause is not initialized, and may subsequently be initialized by

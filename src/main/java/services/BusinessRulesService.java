@@ -1,9 +1,9 @@
 package services;
 
-import core.*;
+import core.BusinessRule;
+import core.TemplateManagerException;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
 
 
@@ -13,28 +13,48 @@ import java.util.Map;
 public interface BusinessRulesService {
 
     /**
-     * Saves the given Business Rule to the directory, as a Siddhi App
-     * @param businessRule Given Business Rule
+     * Saves the given Business Rule to the directory as a JSON file, and saves its SiddhiApps //todo: rather than deploying only siddhi apps, also save the BR as JSON?
+     *
+     * @param businessRule Given Business Rule Object
+     * @param fileName     Given File Name
      */
-    public void addBusinessRule(BusinessRule businessRule);
+    public void addBusinessRule(BusinessRule businessRule, String fileName) throws TemplateManagerException;
+
+    /**
+     * Saves each SiddhiApp from a given Business Rule, to the directory as *.siddhi files
+     *
+     * @param businessRule Given Business Rule Object
+     */
+    public void addSiddhiApps(BusinessRule businessRule) throws TemplateManagerException;
+
+    /**
+     * Deletes each SiddhiApp from a given BusinessRule, from the directory
+     * @param businessRule Given Business Rule Object
+     * @return Collection of undeleted siddhiApp names if any. Otherwise null
+     * @throws TemplateManagerException
+     */
+    public Collection<String> deleteSiddhiApps(BusinessRule businessRule) throws TemplateManagerException;
 
     /**
      * Deletes the Business Rule with the given name, from the directory
+     *
      * @param businessRuleName Given Name of Business Rule
      * @return Deleted Business Rule object
      */
-    public BusinessRule deleteBusinessRule(String businessRuleName);
+    public BusinessRule deleteBusinessRule(String businessRuleName) throws TemplateManagerException;
 
     /**
      * Overwrites the existing Business Rule, that has the same name as the given Business Rule
-     * @param businessRule Given Business Rule
+     *
+     * @param businessRule Given Business Rule Object
      */
-    public void editBusinessRule(BusinessRule businessRule);
+    public void editBusinessRule(BusinessRule businessRule) throws TemplateManagerException;
 
     /**
      * Returns a list of available Business Rules, from the directory
-     * @return
+     *
+     * @return List of Business Rule names, and denoting BusinessRule objects
      */
-    public Collection<BusinessRule> listBusinessRules();
+    public Map<String,BusinessRule> listBusinessRules();
 
 }

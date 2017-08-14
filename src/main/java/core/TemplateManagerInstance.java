@@ -8,15 +8,15 @@ import services.TemplateManagerService;
 public class TemplateManagerInstance {
     private TemplateManagerService templateManagerInstance;
 
-    private TemplateManagerInstance(){
+    private TemplateManagerInstance() {
 
     }
 
     /**
      * @return Singleton root.Template Manager Service instance
      */
-    public TemplateManagerService getInstance(){
-        if(templateManagerInstance == null){
+    public TemplateManagerService getInstance() {
+        if (templateManagerInstance == null) {
             templateManagerInstance = new TemplateManagerService();
         }
         return templateManagerInstance;

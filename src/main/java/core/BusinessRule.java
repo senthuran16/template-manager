@@ -1,7 +1,6 @@
 package core;
 
 import java.util.Collection;
-import java.util.Map;
 
 /**
  * Java representation of a Business Rule
@@ -9,7 +8,11 @@ import java.util.Map;
 public class BusinessRule {
     private String name;
     private Collection<String> siddhiApps;
-    private Map<String,String> properties; //todo: are these always strings?
+
+    public BusinessRule(String name, Collection<String> siddhiApps) {
+        this.name = name;
+        this.siddhiApps = siddhiApps;
+    }
 
     public String getName() {
         return name;
@@ -27,11 +30,11 @@ public class BusinessRule {
         this.siddhiApps = siddhiApps;
     }
 
-    public Map<String, String> getProperties() {
-        return properties;
-    }
-
-    public void setProperties(Map<String, String> properties) {
-        this.properties = properties;
+    @Override
+    public String toString() {
+        return "BusinessRule{" +
+                "\n\tname = '" + name + '\'' +
+                ", \n\tsiddhiApps = " + siddhiApps +
+                "\n}";
     }
 }
