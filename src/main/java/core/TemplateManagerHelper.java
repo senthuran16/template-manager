@@ -2,16 +2,19 @@ package core;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import netscape.javascript.JSObject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Collection;
 
 /**
  * Consists of methods for additional features for the exposed root.Template Manager service
@@ -28,67 +31,122 @@ public class TemplateManagerHelper {
 
     // todo : hardcoded test. remove main()
     public static void main(String[] args) throws TemplateManagerException {
-        TemplateManagerHelper t = new TemplateManagerHelper();
+        File jsonFile = new File(TemplateManagerConstants.TEMPLATES_DIRECTORY + "sensorDataAnalysis.json");
+        //RuleCollection ruleCollection = jsonToRuleCollection(jsonFile);
 
-        // A template object //////
-        ArrayList<String> siddhiApps = new ArrayList<String>();
-        siddhiApps.add("siddhiApp1");
-        siddhiApps.add("siddhiApp2");
+        //System.out.println(jsonToRuleCollection(jsonFile).get("ruleCollection").get("name"));
 
-        Map<String, String> property1 = new HashMap<String, String>();
-        property1.put("defaultValue", "Test Temperature");
-        property1.put("type", "String");
-        Map<String, String> property2 = new HashMap<String, String>();
-        property2.put("defaultValue", "Sample Description");
-        property2.put("type", "String");
+        jsonToRuleCollection("{\n" +
+                "  \"ruleCollection\" : {\n" +
+                "    \"name\" : \"SensorDataAnalysis\",\n" +
+                "    \"ruleTemplates\" : [\n" +
+                "      {\n" +
+                "        \"name\" : \"SensorAnalytics\" ,\n" +
+                "        \"type\" : \"<app>\",\n" +
+                "        \"instanceCount\" : \"many\",\n" +
+                "        \"script\" : \"<script> (optional)\",\n" +
+                "        \"description\" : \"Configure a sensor analytics scenario to display statistics for a given stream of your choice\",\n" +
+                "        \"templates\" : [\n" +
+                "          { \"type\" : \"siddhiApp\", \"content\" : \"<from ${inStream1} select ${property1} insert into ${outStream1}>\" },\n" +
+                "          { \"type\" : \"siddhiApp\", \"content\" : \"<from ${inStream1} select ${property2} insert into ${outStream2}>\" }\n" +
+                "        ],\n" +
+                "        \"properties\" : {\n" +
+                "          \"property1\" : {\"description\" : \"Unique Identifier for the sensor\", \"defaultValue\" : \"sensorName\" , \"type\" : \"options\", \"options\" : [\"sensorID\",\"sensorName\"]},\n" +
+                "          \"property2\" : {\"description\" : \"Type of value, the sensor measures\", \"defaultValue\" : \"sensorValue\" , \"type\" : \"String\"}\n" +
+                "        }\n" +
+                "      },\n" +
+                "    ]\n" +
+                "  }\n" +
+                "}\n");
 
-        Map<String, Map<String, String>> properties = new HashMap<String, Map<String, String>>();
-        properties.put("sensorName", property1);
-        properties.put("sensorDescription", property2);
 
-        Template tem = new Template("Template Java Object", "source", 7, 2, "Sample Template Java object", "javascript goes here", siddhiApps, properties);
-        ///////////////////////////
-
-        // To store converted json as string
-        String jsonRepresentation;
-
-        System.out.println("=======================");
-        System.out.println("Template Object to JSON");
-        System.out.println("=======================");
-        jsonRepresentation = t.templateToJson(tem);
-        System.out.println(jsonRepresentation);
-
-        // Sample JSON file's name
-        File jsonFile = new File(TemplateManagerConstants.TEMPLATES_DIRECTORY + "sample-template.json");
-
-        System.out.println("\n=======================");
-        System.out.println("JSON to Template Object");
-        System.out.println("=======================");
-        System.out.println(t.jsonToTemplate(jsonFile));
     }
 
     /**
-     * Checks whether a given Template file has valid content.
-     * Validation criteria : //todo: confirm validation criteria for templates
-     * - name
-     * - maximumInstances
-     * - maxNumberOfNodes
-     * - javascript
-     * - siddhiApps
-     * - properties //todo: validate whether all templated elements are referred as properties?
-     *
-     * @param template Given Template file
-     * @throws TemplateManagerException
+     * Converts Given JSON Element to JSON Object
+     * @param jsonElement Given JSON Element
+     * @return JSON Object
      */
-    public static void validateTemplate(Template template) throws TemplateManagerException {
-        if (template.getName() == null ||
-                template.getMaximumInstances() <= 0 ||
-                template.getMaximumNumberOfNodes() <= 0 ||
-                template.getJavascript() == null ||
-                template.getSiddhiApps() == null ||
-                template.getProperties() == null) {
-            throw new TemplateManagerException("Invalid Template found. Please check the definitions"); //todo: invalid template found error message?
+    public static JsonObject jsonElementToJsonObject(JsonElement jsonElement){
+        String jsonElementString = jsonElement.toString();
+        Gson gson = new Gson();
+        JsonObject  jsonObject = gson.fromJson(jsonElementString, JsonObject.class);
+
+        return jsonObject;
+    }
+
+    /**
+     * Converts given JSON File to a JSON object
+     *
+     * @param jsonFile Given JSON File
+     * @return JSON object
+     */
+    public static JsonObject fileToJsonObject(File jsonFile) {
+        Gson gson = new Gson();
+        JsonObject jsonObject = null;
+
+        try {
+            Reader reader = new FileReader(jsonFile);
+            jsonObject = gson.fromJson(reader,JsonObject.class);
+        } catch (FileNotFoundException e) {
+            log.error("FileNotFound Exception occurred when converting JSON file to JSON Object", e); //todo: FileNotFound exception occured. error message?
         }
+
+        return jsonObject;
+    }
+
+
+    /**
+     * Converts given JSON String to a JSON object
+     *
+     * @param jsonDefinition Given JSON Definition String
+     * @return RuleCollection object
+     */
+    public static JsonObject stringToJsonObject(String jsonDefinition) {
+        Gson gson = new Gson();
+        JsonObject jsonObject = gson.fromJson(jsonDefinition,JsonObject.class);
+        return jsonObject;
+    }
+
+    public static ArrayList<String> stringToJsonArrayList(String jsonDefinition) {
+        Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
+        ArrayList<String> jsonArrayList = gson.fromJson(jsonDefinition,ArrayList.class);
+        return jsonArrayList;
+    }
+
+    public static RuleCollection jsonToRuleCollection(String jsonDefinition){
+//        Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
+//        RuleCollection ruleCollection = new RuleCollection();
+//        // Get the JSON object denoted by "ruleCollection", from given JSON definition
+//        JsonObject ruleCollectionJSON = stringToJsonObject(stringToJsonObject(jsonDefinition).get("ruleCollection").toString());
+//
+//        ruleCollection.setName(ruleCollectionJSON.get("name").toString());
+//
+//        // rule templates array
+//        Collection<String> ruleTemplatesJSON = stringToJsonArrayList(ruleCollectionJSON.get("ruleTemplates").toString());
+//
+//        // templates array
+//        Collection<String> templatesJSON = stringToJsonArrayList(ruleTemplatesJSON.);
+//
+//        System.out.println("ruleCollectionName : "+ruleCollection.getName());
+//        System.out.println("ruleTemplates : "+ruleTemplatesJSON);
+//        System.out.println("templates : ");
+
+        return null;
+    }
+
+    /**
+     * Converts given JSON String to a RuleCollection object
+     *
+     * @param jsonDefinition Given JSON String
+     * @return RuleCollection object
+     */
+    public static RuleCollection jsonToRuleCollectione(String jsonDefinition) {
+        RuleCollection ruleCollection = null;
+        Gson gson = new Gson();
+        ruleCollection = gson.fromJson(jsonDefinition, RuleCollection.class);
+
+        return ruleCollection;
     }
 
     /**
@@ -125,6 +183,30 @@ public class TemplateManagerHelper {
     }
 
     /**
+     * Checks whether a given Template file has valid content.
+     * Validation criteria : //todo: confirm validation criteria for templates
+     * - name
+     * - maximumInstances
+     * - maxNumberOfNodes
+     * - javascript
+     * - siddhiApps
+     * - properties //todo: validate whether all templated elements are referred as properties?
+     *
+     * @param template Given Template object
+     * @throws TemplateManagerException
+     */
+    public static void validateTemplate(Template template) throws TemplateManagerException {
+//        if (template.getName() == null ||
+//                template.getMaximumInstances() <= 0 ||
+//                template.getMaximumNumberOfNodes() <= 0 ||
+//                template.getJavascript() == null ||
+//                template.getSiddhiApps() == null ||
+//                template.getProperties() == null) {
+//            throw new TemplateManagerException("Invalid Template found. Please check the definitions"); //todo: invalid template found error message?
+//        }
+    }
+
+    /**
      * Converts given JSON Business Rule file to a Java BusinessRule object
      *
      * @param jsonFile Given JSON file
@@ -155,5 +237,18 @@ public class TemplateManagerHelper {
         String jsonObject = gson.toJson(businessRule);
 
         return jsonObject;
+    }
+
+    /**
+     * Checks whether a given Template file has valid content.
+     * Validation criteria : //todo: confirm validation criteria for templates
+     * - name is compulsory
+     * - Has at least one SiddhiApp
+     *
+     * @param businessRule Given BusinessRule object
+     * @throws TemplateManagerException
+     */
+    public static void validateBusinessRule(BusinessRule businessRule) throws TemplateManagerException {
+
     }
 }

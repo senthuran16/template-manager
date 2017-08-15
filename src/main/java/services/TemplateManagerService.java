@@ -96,7 +96,7 @@ public class TemplateManagerService implements TemplateManager, BusinessRulesSer
                     writer = new PrintWriter(TemplateManagerConstants.BUSINESS_RULES_DIRECTORY + siddhiAppName + ".siddhi"); //todo: seperate folder for siddhiApps?
                     writer.println(siddhiApp);
                 } catch (IOException e) {
-                    throw new TemplateManagerException(e.getMessage(), e.getCause());
+                    throw new TemplateManagerException(e.getMessage(), e.getCause()); //todo: IO Exception occured. Give proper error message
                 } finally {
                     writer.close();
                 }
@@ -109,9 +109,8 @@ public class TemplateManagerService implements TemplateManager, BusinessRulesSer
      *
      * @param businessRule Given Business Rule Object
      * @return Collection of undeleted siddhiApp names if any. Otherwise null
-     * @throws TemplateManagerException
      */
-    public Collection<String> deleteSiddhiApps(BusinessRule businessRule) throws TemplateManagerException {
+    public Collection<String> deleteSiddhiApps(BusinessRule businessRule) {
         Collection<String> undeletedSiddhiApps = new ArrayList<String>();
         Collection<String> siddhiApps = businessRule.getSiddhiApps();
 
@@ -153,19 +152,16 @@ public class TemplateManagerService implements TemplateManager, BusinessRulesSer
         // Delete SiddhiApps and store undeleted ones, if any
         Collection<String> undeletedSiddhiApps = deleteSiddhiApps(businessRule);
 
-        // Delete Business Rule
-        boolean isBusinessRuleDeleted = businessRuleFile.delete();
-
-        // If BusinessRule is deleted
-        if(isBusinessRuleDeleted){
+        // If BusinessRule is successfully deleted
+        if(businessRuleFile.delete()){
             // If all SiddhiApps are deleted
-            if(undeletedSiddhiApps.size()==0){
+            if(undeletedSiddhiApps == null){
                 return businessRule;
             }
             throw new TemplateManagerException("Unable to delete following SiddhiApps : " + undeletedSiddhiApps.toString()); //todo: proper exception message
         }else{
             // If all SiddhiApps are deleted
-            if(undeletedSiddhiApps.size()==0){
+            if(undeletedSiddhiApps == null){
                 throw new TemplateManagerException("Unable to delete the Business Rule"); //todo: proper exception message
             }
             throw new TemplateManagerException("Unable to delete the Business Rule and the following SiddhiApps : " + undeletedSiddhiApps.toString()); //todo: proper exception message
@@ -185,7 +181,7 @@ public class TemplateManagerService implements TemplateManager, BusinessRulesSer
             // Overwrite file
             writer.println(TemplateManagerHelper.businessRuleToJson(businessRule));
         } catch (IOException e) {
-            throw new TemplateManagerException(e.getMessage(), e.getCause());
+            throw new TemplateManagerException(e.getMessage(), e.getCause()); //todo: proper exception message
         } finally {
             writer.close();
         }
@@ -197,6 +193,37 @@ public class TemplateManagerService implements TemplateManager, BusinessRulesSer
      * @return List of Business Rule names, and denoting BusinessRule objects
      */
     public Map<String, BusinessRule> listBusinessRules() {
+//        File directory = new File(TemplateManagerConstants.TEMPLATES_DIRECTORY);
+//        Map<String, BusinessRule> businessRules = new HashMap<String, BusinessRule>();
+//
+//        // array to store templates in directory
+//        File[] files = directory.listFiles();
+//
+//        if (files != null) {
+//            for (final File fileEntry : files) {
+//                // If file is a valid json file
+//                if (fileEntry.isFile() && fileEntry.getName().endsWith("json")) {
+//                    // convert and store
+//                    BusinessRule businessRule = TemplateManagerHelper.jsonToBusinessRule(fileEntry);
+//                    if (businessRule != null) {
+//                        try {
+//                            TemplateManagerHelper.validateBusinessRule(businessRule);
+//                        } catch (TemplateManagerException e) {
+//                            //In case an invalid template configuration is found, this loader logs
+//                            // an error message and aborts loading that particular template domain config.
+//                            //However, this will load all the valid template domain configurations.
+//                            log.error("Invalid Template Domain configuration file found: " + fileEntry.getName(), e);
+//                        }
+//                        businessRules.put(template.getName(), template);
+//                    } else {
+//                        log.error("Invalid Template Domain configuration file found: " + fileEntry.getName());
+//                    }
+//
+//                }
+//            }
+//        }
+//
+//        return templates;
         return null;
     }
 
@@ -235,37 +262,38 @@ public class TemplateManagerService implements TemplateManager, BusinessRulesSer
      * @return List of Template names, and denoting Template objects
      */
     public Map<String, Template> listTemplates() {
-        File directory = new File(TemplateManagerConstants.TEMPLATES_DIRECTORY);
-        Map<String, Template> templates = new HashMap<String, Template>();
-
-        // array to store templates in directory
-        File[] files = directory.listFiles();
-
-        if (files != null) {
-            for (final File fileEntry : files) {
-                // If file is a valid json file
-                if (fileEntry.isFile() && fileEntry.getName().endsWith("json")) {
-                    // convert and store
-                    Template template = TemplateManagerHelper.jsonToTemplate(fileEntry);
-                    if (template != null) {
-                        try {
-                            TemplateManagerHelper.validateTemplate(template);
-                        } catch (TemplateManagerException e) {
-                            //In case an invalid template configuration is found, this loader logs
-                            // an error message and aborts loading that particular template domain config.
-                            //However, this will load all the valid template domain configurations.
-                            log.error("Invalid Template Domain configuration file found: " + fileEntry.getName(), e);
-                        }
-                        templates.put(template.getName(), template);
-                    } else {
-                        log.error("Invalid Template Domain configuration file found: " + fileEntry.getName());
-                    }
-
-                }
-            }
-        }
-
-        return templates;
+//        File directory = new File(TemplateManagerConstants.TEMPLATES_DIRECTORY);
+//        Map<String, Template> templates = new HashMap<String, Template>();
+//
+//        // array to store templates in directory
+//        File[] files = directory.listFiles();
+//
+//        if (files != null) {
+//            for (final File fileEntry : files) {
+//                // If file is a valid json file
+//                if (fileEntry.isFile() && fileEntry.getName().endsWith("json")) {
+//                    // convert and store
+//                    Template template = TemplateManagerHelper.jsonToTemplate(fileEntry);
+//                    if (template != null) {
+//                        try {
+//                            TemplateManagerHelper.validateTemplate(template);
+//                        } catch (TemplateManagerException e) {
+//                            //In case an invalid template configuration is found, this loader logs
+//                            // an error message and aborts loading that particular template domain config.
+//                            //However, this will load all the valid template domain configurations.
+//                            log.error("Invalid Template Domain configuration file found: " + fileEntry.getName(), e);
+//                        }
+//                        templates.put(template.getName(), template);
+//                    } else {
+//                        log.error("Invalid Template Domain configuration file found: " + fileEntry.getName());
+//                    }
+//
+//                }
+//            }
+//        }
+//
+//        return templates;
+        return null;
     }
 
     /**
@@ -277,55 +305,56 @@ public class TemplateManagerService implements TemplateManager, BusinessRulesSer
      * @return Business Rule object
      */
     public BusinessRule createBusinessRuleFromTemplate(Template template, String businessRuleName, Map<String, String> propertyValues) {
-        // Value entered siddhiApps to store in Business Rule
-        ArrayList<String> valueEnteredSiddhiApps = new ArrayList<String>();
-
-        for (String siddhiApp : template.getSiddhiApps()) {
-            // To replace Templated Elements with given values
-            StringBuffer editableSiddhiApp = new StringBuffer();
-            // Find all templated elements from the siddhiApp
-            Pattern templatedElementPattern = Pattern.compile(TemplateManagerConstants.TEMPLATED_ELEMENT_REGEX_PATTERN);
-            Matcher templatedElementMatcher = templatedElementPattern.matcher(siddhiApp);
-
-            // When each templated element is found
-            while (templatedElementMatcher.find()) {
-                // Templated Element (inclusive of template pattern)
-                String templatedElement = templatedElementMatcher.group(1);
-                // Find Templated Element's Name
-                Pattern templatedElementNamePattern = Pattern.compile(TemplateManagerConstants.TEMPLATED_ELEMENT_NAME_REGEX_PATTERN);
-                Matcher templatedElementNameMatcher = templatedElementNamePattern.matcher(templatedElement);
-
-                // When the Templated Element's Name is found
-                if (templatedElementNameMatcher.find()) {
-                    // Templated Element's Name
-                    String templatedElementName = templatedElementNameMatcher.group(1);
-
-                    // Find whether a value is given for the templated element
-                    String elementReplacement = propertyValues.get(templatedElementName);
-                    // If value is given
-                    if (elementReplacement != null) {
-                        if (!elementReplacement.equals("")) {
-                            // Replace Element with given value
-                            templatedElementMatcher.appendReplacement(editableSiddhiApp, elementReplacement);
-                        } else {
-                            // Replace Element with default value
-                            templatedElementMatcher.appendReplacement(editableSiddhiApp, template.getDefaultValue(templatedElementName));
-                        }
-                    } else {
-                        // Replace Element with default value
-                        templatedElementMatcher.appendReplacement(editableSiddhiApp, template.getDefaultValue(templatedElementName));
-                    }
-                }
-
-            }
-            templatedElementMatcher.appendTail(editableSiddhiApp);
-            valueEnteredSiddhiApps.add(editableSiddhiApp.toString());
-        }
-
-        // Create a Business Rule
-        BusinessRule businessRule = new BusinessRule(businessRuleName, valueEnteredSiddhiApps);
-
-        return businessRule;
+//        // Value entered siddhiApps to store in Business Rule
+//        ArrayList<String> valueEnteredSiddhiApps = new ArrayList<String>();
+//
+//        for (String siddhiApp : template.getSiddhiApps()) {
+//            // To replace Templated Elements with given values
+//            StringBuffer editableSiddhiApp = new StringBuffer();
+//            // Find all templated elements from the siddhiApp
+//            Pattern templatedElementPattern = Pattern.compile(TemplateManagerConstants.TEMPLATED_ELEMENT_REGEX_PATTERN);
+//            Matcher templatedElementMatcher = templatedElementPattern.matcher(siddhiApp);
+//
+//            // When each templated element is found
+//            while (templatedElementMatcher.find()) {
+//                // Templated Element (inclusive of template pattern)
+//                String templatedElement = templatedElementMatcher.group(1);
+//                // Find Templated Element's Name
+//                Pattern templatedElementNamePattern = Pattern.compile(TemplateManagerConstants.TEMPLATED_ELEMENT_NAME_REGEX_PATTERN);
+//                Matcher templatedElementNameMatcher = templatedElementNamePattern.matcher(templatedElement);
+//
+//                // When the Templated Element's Name is found
+//                if (templatedElementNameMatcher.find()) {
+//                    // Templated Element's Name
+//                    String templatedElementName = templatedElementNameMatcher.group(1);
+//
+//                    // Find whether a value is given for the templated element
+//                    String elementReplacement = propertyValues.get(templatedElementName);
+//                    // If value is given
+//                    if (elementReplacement != null) {
+//                        if (!elementReplacement.equals("")) {
+//                            // Replace Element with given value
+//                            templatedElementMatcher.appendReplacement(editableSiddhiApp, elementReplacement);
+//                        } else {
+//                            // Replace Element with default value
+//                            templatedElementMatcher.appendReplacement(editableSiddhiApp, template.getDefaultValue(templatedElementName));
+//                        }
+//                    } else {
+//                        // Replace Element with default value
+//                        templatedElementMatcher.appendReplacement(editableSiddhiApp, template.getDefaultValue(templatedElementName));
+//                    }
+//                }
+//
+//            }
+//            templatedElementMatcher.appendTail(editableSiddhiApp);
+//            valueEnteredSiddhiApps.add(editableSiddhiApp.toString());
+//        }
+//
+//        // Create a Business Rule
+//        BusinessRule businessRule = new BusinessRule(businessRuleName, valueEnteredSiddhiApps);
+//
+//        return businessRule;
+        return null;
     }
 
     /**
