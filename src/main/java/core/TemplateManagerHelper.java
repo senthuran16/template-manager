@@ -63,26 +63,13 @@ public class TemplateManagerHelper {
     }
 
     /**
-     * Converts Given JSON Element to JSON Object
-     * @param jsonElement Given JSON Element
-     * @return JSON Object
-     */
-    public static JsonObject jsonElementToJsonObject(JsonElement jsonElement){
-        String jsonElementString = jsonElement.toString();
-        Gson gson = new Gson();
-        JsonObject  jsonObject = gson.fromJson(jsonElementString, JsonObject.class);
-
-        return jsonObject;
-    }
-
-    /**
      * Converts given JSON File to a JSON object
      *
      * @param jsonFile Given JSON File
      * @return JSON object
      */
-    public static JsonObject fileToJsonObject(File jsonFile) {
-        Gson gson = new Gson();
+    public static JsonObject fileToJson(File jsonFile) {
+        Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
         JsonObject jsonObject = null;
 
         try {
@@ -95,91 +82,30 @@ public class TemplateManagerHelper {
         return jsonObject;
     }
 
-
     /**
-     * Converts given JSON String to a JSON object
+     * Converts given JSON object to RuleCollection object
      *
-     * @param jsonDefinition Given JSON Definition String
+     * @param jsonObject Given JSON object
      * @return RuleCollection object
      */
-    public static JsonObject stringToJsonObject(String jsonDefinition) {
-        Gson gson = new Gson();
-        JsonObject jsonObject = gson.fromJson(jsonDefinition,JsonObject.class);
-        return jsonObject;
-    }
-
-    public static ArrayList<String> stringToJsonArrayList(String jsonDefinition) {
+    public static RuleCollection jsonToRuleCollection(JsonObject jsonObject){
         Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
-        ArrayList<String> jsonArrayList = gson.fromJson(jsonDefinition,ArrayList.class);
-        return jsonArrayList;
-    }
-
-    public static RuleCollection jsonToRuleCollection(String jsonDefinition){
-//        Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
-//        RuleCollection ruleCollection = new RuleCollection();
-//        // Get the JSON object denoted by "ruleCollection", from given JSON definition
-//        JsonObject ruleCollectionJSON = stringToJsonObject(stringToJsonObject(jsonDefinition).get("ruleCollection").toString());
-//
-//        ruleCollection.setName(ruleCollectionJSON.get("name").toString());
-//
-//        // rule templates array
-//        Collection<String> ruleTemplatesJSON = stringToJsonArrayList(ruleCollectionJSON.get("ruleTemplates").toString());
-//
-//        // templates array
-//        Collection<String> templatesJSON = stringToJsonArrayList(ruleTemplatesJSON.);
-//
-//        System.out.println("ruleCollectionName : "+ruleCollection.getName());
-//        System.out.println("ruleTemplates : "+ruleTemplatesJSON);
-//        System.out.println("templates : ");
-
-        return null;
-    }
-
-    /**
-     * Converts given JSON String to a RuleCollection object
-     *
-     * @param jsonDefinition Given JSON String
-     * @return RuleCollection object
-     */
-    public static RuleCollection jsonToRuleCollectione(String jsonDefinition) {
-        RuleCollection ruleCollection = null;
-        Gson gson = new Gson();
-        ruleCollection = gson.fromJson(jsonDefinition, RuleCollection.class);
+        RuleCollection ruleCollection = gson.fromJson(jsonObject, RuleCollection.class);
 
         return ruleCollection;
     }
 
     /**
-     * Converts given JSON Template file to a Java Template object
+     * Converts given String JSON definition to RuleCollection object
      *
-     * @param jsonFile Given JSON file
-     * @return Template object
-     * @throws TemplateManagerException
+     * @param jsonDefinition Given String JSON definition
+     * @return RuleCollection object
      */
-    public static Template jsonToTemplate(File jsonFile) {
-        Template template = null;
-        Gson gson = new Gson();
-        try {
-            Reader reader = new FileReader(jsonFile);
-            template = gson.fromJson(reader, Template.class);
-        } catch (IOException e) {
-            log.error("IO Exception occurred when converting JSON definition to Template", e); //todo: IO exception occured. error message?
-        }
+    public static RuleCollection jsonToRuleCollection(String jsonDefinition){
+        Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
+        RuleCollection ruleCollection = gson.fromJson(jsonDefinition, RuleCollection.class);
 
-        return template;
-    }
-
-    /**
-     * Converts a Java Template object to a JSON Template String
-     *
-     * @param template Given Template object
-     * @return Converted JSON object String
-     */
-    public static String templateToJson(Template template) {
-        Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create(); // Avoid escaping < > etc as unicode characters & Pretty json indentation
-        String jsonObject = gson.toJson(template);
-
-        return jsonObject;
+        return ruleCollection;
     }
 
     /**
@@ -196,59 +122,6 @@ public class TemplateManagerHelper {
      * @throws TemplateManagerException
      */
     public static void validateTemplate(Template template) throws TemplateManagerException {
-//        if (template.getName() == null ||
-//                template.getMaximumInstances() <= 0 ||
-//                template.getMaximumNumberOfNodes() <= 0 ||
-//                template.getJavascript() == null ||
-//                template.getSiddhiApps() == null ||
-//                template.getProperties() == null) {
-//            throw new TemplateManagerException("Invalid Template found. Please check the definitions"); //todo: invalid template found error message?
-//        }
-    }
-
-    /**
-     * Converts given JSON Business Rule file to a Java BusinessRule object
-     *
-     * @param jsonFile Given JSON file
-     * @return BusinessRule object
-     * @throws TemplateManagerException
-     */
-    public static BusinessRule jsonToBusinessRule(File jsonFile) {
-        BusinessRule businessRule = null;
-        Gson gson = new Gson();
-        try {
-            Reader reader = new FileReader(jsonFile);
-            businessRule = gson.fromJson(reader, BusinessRule.class);
-        } catch (IOException e) {
-            log.error("IO Exception occurred when converting JSON definition to Business Rule", e); //todo: IO Exception occured. Error message?
-        }
-
-        return businessRule;
-    }
-
-    /**
-     * Converts a Java BusinessRule object to a JSON Business Rule String
-     *
-     * @param businessRule Given BusinessRule object
-     * @return Converted JSON object String
-     */
-    public static String businessRuleToJson(BusinessRule businessRule) {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create(); // for pretty json indentation
-        String jsonObject = gson.toJson(businessRule);
-
-        return jsonObject;
-    }
-
-    /**
-     * Checks whether a given Template file has valid content.
-     * Validation criteria : //todo: confirm validation criteria for templates
-     * - name is compulsory
-     * - Has at least one SiddhiApp
-     *
-     * @param businessRule Given BusinessRule object
-     * @throws TemplateManagerException
-     */
-    public static void validateBusinessRule(BusinessRule businessRule) throws TemplateManagerException {
-
+        //todo: no need mostly.
     }
 }

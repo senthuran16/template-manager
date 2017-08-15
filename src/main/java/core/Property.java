@@ -1,5 +1,7 @@
 package core;
 
+import java.util.ArrayList;
+
 /**
  * Represents a Property, that is an element of any template
  * (Eg: 'fieldName' in a SiddhiApp template)
@@ -9,9 +11,9 @@ public class Property {
     private String description; // Optional
     private String defaultValue;
     private String type; //todo: what are the types
-    private String options; // Only for type 'Options'
+    private ArrayList<String> options; // Only for type 'Options'
 
-    public Property(String name, String description, String defaultValue, String type, String options) {
+    public Property(String name, String description, String defaultValue, String type, ArrayList<String> options) {
         this.name = name;
         this.description = description;
         this.defaultValue = defaultValue;
@@ -51,22 +53,22 @@ public class Property {
         this.type = type;
     }
 
-    public String getOptions() {
+    public ArrayList<String> getOptions() {
         return options;
     }
 
-    public void setOptions(String options) {
+    public void setOptions(ArrayList<String> options) {
         this.options = options;
     }
 
     @Override
     public String toString() {
-        return "\t\tProperty{" +
-                "\t\t\nname='" + name + '\'' +
-                ", \t\t\ndescription='" + description + '\'' +
-                ", \t\t\ndefaultValue='" + defaultValue + '\'' +
-                ", \t\t\ntype='" + type + '\'' +
-                ", \t\t\noptions='" + options + '\'' +
-                "\t\t\n}";
+        return "Property{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", defaultValue='" + defaultValue + '\'' +
+                ", type='" + type + '\'' +
+                ", options=" + options +
+                '}';
     }
 }

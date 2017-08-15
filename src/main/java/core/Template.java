@@ -16,11 +16,27 @@ public class Template {
         this.content = content;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     @Override
     public String toString() {
-        return "\t\tTemplate{" +
-                "\t\t\ntype='" + type + '\'' +
-                ", \t\t\ncontent='" + content + '\'' +
-                "\t\t\n}";
+        return "Template{" +
+                "type='" + type + '\'' +
+                ", content='" + content + '\'' +
+                '}';
     }
 }

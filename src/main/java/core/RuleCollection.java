@@ -6,11 +6,8 @@ import java.util.Collection;
  * Represents a Rule Collection, which consists of one or more RuleTemplates
  */
 public class RuleCollection {
-
-
-
-    private String name;
-    private Collection<RuleTemplate> ruleTemplates;
+    public String name;
+    public Collection<RuleTemplate> ruleTemplates;
 
     public RuleCollection(String name, Collection<RuleTemplate> ruleTemplates) {
         this.name = name;
@@ -36,8 +33,8 @@ public class RuleCollection {
     @Override
     public String toString() {
         return "RuleCollection{" +
-                "\nname='" + name + '\'' +
-                ", \nruleTemplates=" + ruleTemplates +
-                "\n}";
+                "name='" + name + '\'' +
+                ", ruleTemplates=" + ruleTemplates +
+                '}';
     }
 }

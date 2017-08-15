@@ -25,16 +25,72 @@ public class RuleTemplate {
         this.properties = properties;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getInstanceCount() {
+        return instanceCount;
+    }
+
+    public void setInstanceCount(String instanceCount) {
+        this.instanceCount = instanceCount;
+    }
+
+    public String getScript() {
+        return script;
+    }
+
+    public void setScript(String script) {
+        this.script = script;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Collection<Template> getTemplates() {
+        return templates;
+    }
+
+    public void setTemplates(Collection<Template> templates) {
+        this.templates = templates;
+    }
+
+    public Map<String, Property> getProperties() {
+        return properties;
+    }
+
+    public void setProperties(Map<String, Property> properties) {
+        this.properties = properties;
+    }
+
     @Override
     public String toString() {
-        return "\tRuleTemplate{" +
-                "\t\nname='" + name + '\'' +
-                ", \t\ntype='" + type + '\'' +
-                ", \t\ninstanceCount='" + instanceCount + '\'' +
-                ", \t\nscript='" + script + '\'' +
-                ", \t\ndescription='" + description + '\'' +
-                ", \t\ntemplates=" + templates +
-                ", \t\nproperties=" + properties +
-                "\t\n}";
+        return "RuleTemplate{" +
+                "name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", instanceCount='" + instanceCount + '\'' +
+                ", script='" + script + '\'' +
+                ", description='" + description + '\'' +
+                ", templates=" + templates +
+                ", properties=" + properties +
+                '}';
     }
 }
