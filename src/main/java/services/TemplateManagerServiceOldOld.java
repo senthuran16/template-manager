@@ -22,9 +22,9 @@ import org.apache.commons.logging.LogFactory;
 /**
  * Exposed root.Template Manager service, that handles Templates and Business Rules
  */
-public class TemplateManagerServiceOldOld implements TemplateManager, BusinessRulesServiceOld {
+public abstract class TemplateManagerServiceOldOld implements /*TemplateManager,*/ BusinessRulesServiceOld {
     public static void main(String[] args) throws TemplateManagerException {
-        TemplateManagerServiceOldOld templateManagerServiceOld = new TemplateManagerServiceOldOld();
+//        TemplateManagerServiceOldOld templateManagerServiceOld = new TemplateManagerServiceOldOld();
 
         System.out.println("=====================================");
         System.out.println("CREATED BUSINESS RULE - FROM TEMPLATE");
@@ -37,15 +37,15 @@ public class TemplateManagerServiceOldOld implements TemplateManager, BusinessRu
         map.put("thresholdValue", "100");
         map.put("filteredSensorOutStream", "highRoomTemperatures");
 
-        File templateJsonFile = new File(TemplateManagerConstants.TEMPLATES_DIRECTORY + "sample-template.json");
-        BusinessRule businessRuleFromTemplate = templateManagerServiceOld.createBusinessRuleFromTemplate(TemplateManagerHelper.jsonToTemplate(templateJsonFile), "TemperatureSensorsLoggingBR", map);
-        System.out.println(TemplateManagerHelper.jsonToTemplate(templateJsonFile));
-        System.out.println(businessRuleFromTemplate);
-
-        Template template = TemplateManagerHelper.jsonToTemplate(templateJsonFile);
-        templateManagerServiceOld.addTemplate(template, "mySampleTemplate");
-
-        templateManagerServiceOld.addBusinessRule(businessRuleFromTemplate, "mySampleBusinessRule");
+//        File templateJsonFile = new File(TemplateManagerConstants.TEMPLATES_DIRECTORY + "sample-template.json");
+//        BusinessRule businessRuleFromTemplate = templateManagerServiceOld.createBusinessRuleFromTemplate(TemplateManagerHelper.jsonToTemplate(templateJsonFile), "TemperatureSensorsLoggingBR", map);
+//        System.out.println(TemplateManagerHelper.jsonToTemplate(templateJsonFile));
+//        System.out.println(businessRuleFromTemplate);
+//
+//        Template template = TemplateManagerHelper.jsonToTemplate(templateJsonFile);
+//        templateManagerServiceOld.addTemplate(template, "mySampleTemplate");
+//
+//        templateManagerServiceOld.addBusinessRule(businessRuleFromTemplate, "mySampleBusinessRule");
 
     }
 
@@ -60,19 +60,19 @@ public class TemplateManagerServiceOldOld implements TemplateManager, BusinessRu
      * @param fileName     Given File Name
      */
     public void addBusinessRule(BusinessRule businessRule, String fileName) throws TemplateManagerException {
-        // Save Business Rule
-        PrintWriter writer = null;
-        try {
-            writer = new PrintWriter(TemplateManagerConstants.BUSINESS_RULES_DIRECTORY + fileName + ".json");
-            writer.println(TemplateManagerHelper.businessRuleToJson(businessRule));
-        } catch (IOException e) {
-            throw new TemplateManagerException(e.getMessage(), e.getCause());
-        } finally {
-            writer.close();
-        }
-
-        // Save siddhiApps
-        addSiddhiApps(businessRule);
+//        // Save Business Rule
+//        PrintWriter writer = null;
+//        try {
+//            writer = new PrintWriter(TemplateManagerConstants.BUSINESS_RULES_DIRECTORY + fileName + ".json");
+//            writer.println(TemplateManagerHelper.businessRuleToJson(businessRule));
+//        } catch (IOException e) {
+//            throw new TemplateManagerException(e.getMessage(), e.getCause());
+//        } finally {
+//            writer.close();
+//        }
+//
+//        // Save siddhiApps
+//        addSiddhiApps(businessRule);
     }
 
     /**
@@ -81,29 +81,29 @@ public class TemplateManagerServiceOldOld implements TemplateManager, BusinessRu
      * @param businessRule Given Business Rule Object
      */
     public void addSiddhiApps(BusinessRule businessRule) throws TemplateManagerException {
-        // SiddhiApps from given Business Rule
-        Collection<String> siddhiApps = businessRule.getSiddhiApps();
-
-        for (String siddhiApp : siddhiApps) {
-            // Find SiddhiApp's name
-            Pattern siddhiAppNamePattern = Pattern.compile(TemplateManagerConstants.SIDDHI_APP_NAME_REGEX_PATTERN);
-            Matcher siddhiAppNamePatternMatcher = siddhiAppNamePattern.matcher(siddhiApp);
-
-            // When SiddhiApp's Name is found
-            if (siddhiAppNamePatternMatcher.find()) {
-                String siddhiAppName = siddhiAppNamePatternMatcher.group(1);
-
-                PrintWriter writer = null;
-                try {
-                    writer = new PrintWriter(TemplateManagerConstants.BUSINESS_RULES_DIRECTORY + siddhiAppName + ".siddhi"); //todo: seperate folder for siddhiApps?
-                    writer.println(siddhiApp);
-                } catch (IOException e) {
-                    throw new TemplateManagerException(e.getMessage(), e.getCause()); //todo: IO Exception occured. Give proper error message
-                } finally {
-                    writer.close();
-                }
-            }
-        }
+//        // SiddhiApps from given Business Rule
+//        Collection<String> siddhiApps = businessRule.getSiddhiApps();
+//
+//        for (String siddhiApp : siddhiApps) {
+//            // Find SiddhiApp's name
+//            Pattern siddhiAppNamePattern = Pattern.compile(TemplateManagerConstants.SIDDHI_APP_NAME_REGEX_PATTERN);
+//            Matcher siddhiAppNamePatternMatcher = siddhiAppNamePattern.matcher(siddhiApp);
+//
+//            // When SiddhiApp's Name is found
+//            if (siddhiAppNamePatternMatcher.find()) {
+//                String siddhiAppName = siddhiAppNamePatternMatcher.group(1);
+//
+//                PrintWriter writer = null;
+//                try {
+//                    writer = new PrintWriter(TemplateManagerConstants.BUSINESS_RULES_DIRECTORY + siddhiAppName + ".siddhi"); //todo: seperate folder for siddhiApps?
+//                    writer.println(siddhiApp);
+//                } catch (IOException e) {
+//                    throw new TemplateManagerException(e.getMessage(), e.getCause()); //todo: IO Exception occured. Give proper error message
+//                } finally {
+//                    writer.close();
+//                }
+//            }
+//        }
     }
 
     /**
@@ -113,31 +113,31 @@ public class TemplateManagerServiceOldOld implements TemplateManager, BusinessRu
      * @return Collection of undeleted siddhiApp names if any. Otherwise null
      */
     public Collection<String> deleteSiddhiApps(BusinessRule businessRule) {
-        Collection<String> undeletedSiddhiApps = new ArrayList<String>();
-        Collection<String> siddhiApps = businessRule.getSiddhiApps();
-
-        for (String siddhiApp : siddhiApps) {
-            // Find SiddhiApp's name
-            Pattern siddhiAppNamePattern = Pattern.compile(TemplateManagerConstants.SIDDHI_APP_NAME_REGEX_PATTERN);
-            Matcher siddhiAppNamePatternMatcher = siddhiAppNamePattern.matcher(siddhiApp);
-
-            // When SiddhiApp's Name is found
-            if (siddhiAppNamePatternMatcher.find()) {
-                String siddhiAppName = siddhiAppNamePatternMatcher.group(1);
-                File file = new File(TemplateManagerConstants.BUSINESS_RULES_DIRECTORY + siddhiAppName + ".siddhi"); //todo: siddhiAppLocation (if seperate folder is decided)
-                // if unable to delete
-                if (!file.delete()) {
-                    undeletedSiddhiApps.add(siddhiAppName);
-                }
-            }
-        }
-
-        // If all SiddhiApps are successfully deleted
-        if (undeletedSiddhiApps.size() == 0) {
+//        Collection<String> undeletedSiddhiApps = new ArrayList<String>();
+//        Collection<String> siddhiApps = businessRule.getSiddhiApps();
+//
+//        for (String siddhiApp : siddhiApps) {
+//            // Find SiddhiApp's name
+//            Pattern siddhiAppNamePattern = Pattern.compile(TemplateManagerConstants.SIDDHI_APP_NAME_REGEX_PATTERN);
+//            Matcher siddhiAppNamePatternMatcher = siddhiAppNamePattern.matcher(siddhiApp);
+//
+//            // When SiddhiApp's Name is found
+//            if (siddhiAppNamePatternMatcher.find()) {
+//                String siddhiAppName = siddhiAppNamePatternMatcher.group(1);
+//                File file = new File(TemplateManagerConstants.BUSINESS_RULES_DIRECTORY + siddhiAppName + ".siddhi"); //todo: siddhiAppLocation (if seperate folder is decided)
+//                // if unable to delete
+//                if (!file.delete()) {
+//                    undeletedSiddhiApps.add(siddhiAppName);
+//                }
+//            }
+//        }
+//
+//        // If all SiddhiApps are successfully deleted
+//        if (undeletedSiddhiApps.size() == 0) {
             return null;
-        }
-
-        return undeletedSiddhiApps;
+//        }
+//
+//        return undeletedSiddhiApps;
     }
 
     /**
@@ -147,27 +147,28 @@ public class TemplateManagerServiceOldOld implements TemplateManager, BusinessRu
      * @return Deleted Business Rule object //todo: delete related siddhiApps too
      */
     public BusinessRule deleteBusinessRule(String businessRuleName) throws TemplateManagerException {
-        // Get as object before deleting
-        BusinessRule businessRule = TemplateManagerHelper.jsonToBusinessRule(new File(TemplateManagerConstants.BUSINESS_RULES_DIRECTORY + businessRuleName + ".json"));
-        File businessRuleFile = new File(TemplateManagerConstants.BUSINESS_RULES_DIRECTORY + businessRuleName + ".json"); //todo: exception handling for unfound file
-
-        // Delete SiddhiApps and store undeleted ones, if any
-        Collection<String> undeletedSiddhiApps = deleteSiddhiApps(businessRule);
-
-        // If BusinessRule is successfully deleted
-        if(businessRuleFile.delete()){
-            // If all SiddhiApps are deleted
-            if(undeletedSiddhiApps == null){
-                return businessRule;
-            }
-            throw new TemplateManagerException("Unable to delete following SiddhiApps : " + undeletedSiddhiApps.toString()); //todo: proper exception message
-        }else{
-            // If all SiddhiApps are deleted
-            if(undeletedSiddhiApps == null){
-                throw new TemplateManagerException("Unable to delete the Business Rule"); //todo: proper exception message
-            }
-            throw new TemplateManagerException("Unable to delete the Business Rule and the following SiddhiApps : " + undeletedSiddhiApps.toString()); //todo: proper exception message
-        }
+//        // Get as object before deleting
+//        BusinessRule businessRule = TemplateManagerHelper.jsonToBusinessRule(new File(TemplateManagerConstants.BUSINESS_RULES_DIRECTORY + businessRuleName + ".json"));
+//        File businessRuleFile = new File(TemplateManagerConstants.BUSINESS_RULES_DIRECTORY + businessRuleName + ".json"); //todo: exception handling for unfound file
+//
+//        // Delete SiddhiApps and store undeleted ones, if any
+//        Collection<String> undeletedSiddhiApps = deleteSiddhiApps(businessRule);
+//
+//        // If BusinessRule is successfully deleted
+//        if(businessRuleFile.delete()){
+//            // If all SiddhiApps are deleted
+//            if(undeletedSiddhiApps == null){
+//                return businessRule;
+//            }
+//            throw new TemplateManagerException("Unable to delete following SiddhiApps : " + undeletedSiddhiApps.toString()); //todo: proper exception message
+//        }else{
+//            // If all SiddhiApps are deleted
+//            if(undeletedSiddhiApps == null){
+//                throw new TemplateManagerException("Unable to delete the Business Rule"); //todo: proper exception message
+//            }
+//            throw new TemplateManagerException("Unable to delete the Business Rule and the following SiddhiApps : " + undeletedSiddhiApps.toString()); //todo: proper exception message
+//        }
+        return null;
     }
 
     /**
@@ -176,17 +177,18 @@ public class TemplateManagerServiceOldOld implements TemplateManager, BusinessRu
      * @param businessRule Given Business Rule
      */
     public void editBusinessRule(BusinessRule businessRule) throws TemplateManagerException {
-        PrintWriter writer = null;
-        try {
-            // Same file name
-            writer = new PrintWriter(TemplateManagerConstants.TEMPLATES_DIRECTORY + businessRule.getName() + ".json"); //todo: filename & BRname both are same
-            // Overwrite file
-            writer.println(TemplateManagerHelper.businessRuleToJson(businessRule));
-        } catch (IOException e) {
-            throw new TemplateManagerException(e.getMessage(), e.getCause()); //todo: proper exception message
-        } finally {
-            writer.close();
-        }
+//        PrintWriter writer = null;
+//        try {
+//            // Same file name
+//            writer = new PrintWriter(TemplateManagerConstants.TEMPLATES_DIRECTORY + businessRule.getName() + ".json"); //todo: filename & BRname both are same
+//            // Overwrite file
+//            writer.println(TemplateManagerHelper.businessRuleToJson(businessRule));
+//        } catch (IOException e) {
+//            throw new TemplateManagerException(e.getMessage(), e.getCause()); //todo: proper exception message
+//        } finally {
+//            writer.close();
+//        }
+
     }
 
     /**
@@ -237,15 +239,15 @@ public class TemplateManagerServiceOldOld implements TemplateManager, BusinessRu
      * @throws TemplateManagerException
      */
     public void addTemplate(Template template, String fileName) throws TemplateManagerException { //todo: this method won't be mostly there (deploying manually to a folder)
-        PrintWriter writer = null;
-        try {
-            writer = new PrintWriter(TemplateManagerConstants.TEMPLATES_DIRECTORY + fileName + ".json");
-            writer.println(TemplateManagerHelper.templateToJson(template));
-        } catch (IOException e) {
-            throw new TemplateManagerException(e.getMessage(), e.getCause());
-        } finally {
-            writer.close();
-        }
+//        PrintWriter writer = null;
+//        try {
+//            writer = new PrintWriter(TemplateManagerConstants.TEMPLATES_DIRECTORY + fileName + ".json");
+//            writer.println(TemplateManagerHelper.templateToJson(template));
+//        } catch (IOException e) {
+//            throw new TemplateManagerException(e.getMessage(), e.getCause());
+//        } finally {
+//            writer.close();
+//        }
     }
 
     /**
@@ -263,7 +265,7 @@ public class TemplateManagerServiceOldOld implements TemplateManager, BusinessRu
      *
      * @return List of Template names, and denoting Template objects
      */
-    public Map<String, Template> listTemplates() {
+    //public Map<String, Template> listTemplates() {
 //        File directory = new File(TemplateManagerConstants.TEMPLATES_DIRECTORY);
 //        Map<String, Template> templates = new HashMap<String, Template>();
 //
@@ -295,8 +297,8 @@ public class TemplateManagerServiceOldOld implements TemplateManager, BusinessRu
 //        }
 //
 //        return templates;
-        return null;
-    }
+      //  return null;
+    //}
 
     /**
      * Returns a Business Rule, with given Template, name and given values for templated elements
@@ -367,7 +369,8 @@ public class TemplateManagerServiceOldOld implements TemplateManager, BusinessRu
      * @return Business Rule object
      */
     public BusinessRule createBusinessRuleFromScratch(String businessRuleName, Collection<String> siddhiApps) {
-        BusinessRule businessRule = new BusinessRule(businessRuleName, siddhiApps);
-        return businessRule; //todo : hold for now
+//        BusinessRule businessRule = new BusinessRule(businessRuleName, siddhiApps);
+//        return businessRule; //todo : hold for now
+        return null;
     }
 }

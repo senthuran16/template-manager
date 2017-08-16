@@ -108,6 +108,20 @@ public class TemplateManagerHelper {
         return ruleCollection;
     }
 
+    public static BusinessRule jsonToBusinessRule(JsonObject jsonObject){
+        Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
+        BusinessRule businessRule = gson.fromJson(jsonObject, BusinessRule.class);
+
+        return businessRule;
+    }
+
+    public static BusinessRule jsonToBusinessRule(String jsonDefinition){
+        Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
+        BusinessRule businessRule = gson.fromJson(jsonDefinition, BusinessRule.class);
+
+        return businessRule;
+    }
+
     /**
      * Checks whether a given Template file has valid content.
      * Validation criteria : //todo: confirm validation criteria for templates

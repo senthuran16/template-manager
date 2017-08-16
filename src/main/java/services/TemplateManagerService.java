@@ -6,6 +6,7 @@ import core.RuleTemplate;
 import core.Template;
 import core.TemplateManagerConstants;
 import core.TemplateManagerHelper;
+import core.TemplateManagerInstance;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -15,6 +16,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TemplateManagerService implements BusinessRulesService {
+
+    public static void main(String[] args) {
+        TemplateManagerService templateManagerService = TemplateManagerInstance.getInstance();
+
+        //File templateFile = new File(TemplateManagerConstants.TEMPLATES_DIRECTORY+"sensorDataAnalysis.json");
+        File businessRuleFile = new File(TemplateManagerConstants.TEMPLATES_DIRECTORY+"myBusinessRule.json");
+
+        templateManagerService.createbusinessRuleFromTemplate(TemplateManagerHelper.jsonToBusinessRule(TemplateManagerHelper.fileToJson(businessRuleFile)));
+    }
 
     /**
      * Finds the specified RuleTemplate
@@ -198,6 +208,9 @@ public class TemplateManagerService implements BusinessRulesService {
      */
     public void deploySiddhiApp(Template siddhiAppTemplate) {
         // todo: get content of siddhiAppTemplate. Deploy it as *.siddhi
+        // For test
+        System.out.println("[DEPLOYED] ");
+        System.out.println(siddhiAppTemplate);
     }
 
     /**
