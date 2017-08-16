@@ -1,17 +1,22 @@
 package core;
 
 import java.util.Collection;
+import java.util.Map;
 
 /**
  * Java representation of a Business Rule
  */
 public class BusinessRule {
     private String name;
-    private Collection<String> siddhiApps;
+    private String ruleTemplateName; // <ruleCollectionName>/<ruleTemplateName>
+    private String type; // "template" or "fromScratch"
+    private Map<String, String> properties;
 
-    public BusinessRule(String name, Collection<String> siddhiApps) {
+    public BusinessRule(String name, String ruleTemplateName, String type, Map<String, String> properties) {
         this.name = name;
-        this.siddhiApps = siddhiApps;
+        this.ruleTemplateName = ruleTemplateName;
+        this.type = type;
+        this.properties = properties;
     }
 
     public String getName() {
@@ -22,19 +27,27 @@ public class BusinessRule {
         this.name = name;
     }
 
-    public Collection<String> getSiddhiApps() {
-        return siddhiApps;
+    public String getRuleTemplateName() {
+        return ruleTemplateName;
     }
 
-    public void setSiddhiApps(Collection<String> siddhiApps) {
-        this.siddhiApps = siddhiApps;
+    public void setRuleTemplateName(String ruleTemplateName) {
+        this.ruleTemplateName = ruleTemplateName;
     }
 
-    @Override
-    public String toString() {
-        return "BusinessRule{" +
-                "\n\tname = '" + name + '\'' +
-                ", \n\tsiddhiApps = " + siddhiApps +
-                "\n}";
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Map<String, String> getProperties() {
+        return properties;
+    }
+
+    public void setProperties(Map<String, String> properties) {
+        this.properties = properties;
     }
 }

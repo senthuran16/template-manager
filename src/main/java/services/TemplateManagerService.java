@@ -1,371 +1,239 @@
 package services;
 
 import core.BusinessRule;
+import core.RuleCollection;
+import core.RuleTemplate;
 import core.Template;
 import core.TemplateManagerConstants;
-import core.TemplateManagerException;
 import core.TemplateManagerHelper;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-/**
- * Exposed root.Template Manager service, that handles Templates and Business Rules
- */
-public class TemplateManagerService implements TemplateManager, BusinessRulesService {
-    public static void main(String[] args) throws TemplateManagerException {
-        TemplateManagerService templateManagerService = new TemplateManagerService();
-
-        System.out.println("=====================================");
-        System.out.println("CREATED BUSINESS RULE - FROM TEMPLATE");
-        System.out.println("=====================================");
-        HashMap<String, String> map = new HashMap<String, String>();
-        map.put("sensorInStream", "TemperatureSensorInStream");
-        map.put("property", "sensorName");
-        map.put("sensorValue", "roomTemperature");
-        //map.put("outStream1","sensorReadingsCopy");
-        map.put("thresholdValue", "100");
-        map.put("filteredSensorOutStream", "highRoomTemperatures");
-
-        File templateJsonFile = new File(TemplateManagerConstants.TEMPLATES_DIRECTORY + "sample-template.json");
-        BusinessRule businessRuleFromTemplate = templateManagerService.createBusinessRuleFromTemplate(TemplateManagerHelper.jsonToTemplate(templateJsonFile), "TemperatureSensorsLoggingBR", map);
-        System.out.println(TemplateManagerHelper.jsonToTemplate(templateJsonFile));
-        System.out.println(businessRuleFromTemplate);
-
-        Template template = TemplateManagerHelper.jsonToTemplate(templateJsonFile);
-        templateManagerService.addTemplate(template, "mySampleTemplate");
-
-        templateManagerService.addBusinessRule(businessRuleFromTemplate, "mySampleBusinessRule");
-
-    }
-
-    private static final Log log = LogFactory.getLog(TemplateManagerService.class);
+public class TemplateManagerService implements BusinessRulesService {
 
     /**
-     * Saves the given Business Rule to the directory as a JSON file, and saves its SiddhiApps
+     * Finds the specified RuleTemplate
+     * Derives Templates by replacing templated elements with given values
+     * Deploys Templates in corresponding formats
+     * Saves provided values map to the database
      *
-     * @param businessRule Given Business Rule Object
-     * @param fileName     Given File Name
+     * @param businessRule Given BusinessRule object, which has RuleTemplate name and provided values
      */
-    public void addBusinessRule(BusinessRule businessRule, String fileName) throws TemplateManagerException {
-        // Save Business Rule
-        PrintWriter writer = null;
-        try {
-            writer = new PrintWriter(TemplateManagerConstants.BUSINESS_RULES_DIRECTORY + fileName + ".json");
-            writer.println(TemplateManagerHelper.businessRuleToJson(businessRule));
-        } catch (IOException e) {
-            throw new TemplateManagerException(e.getMessage(), e.getCause());
-        } finally {
-            writer.close();
+    public void createbusinessRuleFromTemplate(BusinessRule businessRule) {
+        Collection<Template> templates = getTemplates(businessRule);
+        Map<String, String> properties = businessRule.getProperties();
+
+        // Derive all templates & deploy
+        for (Template template : templates) {
+            deployPropertiesMap(properties);
+
+            // Derive & deploy SiddhiApp
+            if (template.getType().equals("siddhiApp")) {
+                deploySiddhiApp(deriveSiddhiApp(template, properties));
+            }
+            // todo: Other template types (i.e: gadgets etc.)
         }
-
-        // Save siddhiApps
-        addSiddhiApps(businessRule);
     }
 
     /**
-     * Saves each SiddhiApp from a Business Rule, to the directory as *.siddhi files
+     * Returns available BusinessRules
      *
-     * @param businessRule Given Business Rule Object
+     * @return Available Business Rules
      */
-    public void addSiddhiApps(BusinessRule businessRule) throws TemplateManagerException {
-        // SiddhiApps from given Business Rule
-        Collection<String> siddhiApps = businessRule.getSiddhiApps();
+    public Collection<BusinessRule> listBusinessRules() {
+        // todo: implement listAllBusinessRules. Should read from database
+        return null;
+    }
 
-        for (String siddhiApp : siddhiApps) {
-            // Find SiddhiApp's name
-            Pattern siddhiAppNamePattern = Pattern.compile(TemplateManagerConstants.SIDDHI_APP_NAME_REGEX_PATTERN);
-            Matcher siddhiAppNamePatternMatcher = siddhiAppNamePattern.matcher(siddhiApp);
+    /**
+     * Returns BusinessRules, that have RuleCollection as the given one
+     *
+     * @param ruleCollection Given RuleCollection object
+     * @return BusinessRules belonging to the given RuleCollection
+     */
+    public Collection<BusinessRule> getBusinessRules(RuleCollection ruleCollection) {
+        String ruleCollectionName = ruleCollection.getName();
+        Collection<BusinessRule> businessRulesUnderRuleCollection = new ArrayList();
 
-            // When SiddhiApp's Name is found
-            if (siddhiAppNamePatternMatcher.find()) {
-                String siddhiAppName = siddhiAppNamePatternMatcher.group(1);
+        Collection<BusinessRule> availableBusinessRules = listBusinessRules();
 
-                PrintWriter writer = null;
-                try {
-                    writer = new PrintWriter(TemplateManagerConstants.BUSINESS_RULES_DIRECTORY + siddhiAppName + ".siddhi"); //todo: seperate folder for siddhiApps?
-                    writer.println(siddhiApp);
-                } catch (IOException e) {
-                    throw new TemplateManagerException(e.getMessage(), e.getCause()); //todo: IO Exception occured. Give proper error message
-                } finally {
-                    writer.close();
+        for (BusinessRule businessRule : availableBusinessRules) {
+            // Only Business Rules from templates can be listed under a specific RuleCollection
+            if (businessRule.getType().equals("template")) { //todo: [template, scratch] or [fromTemplate, fromScratch] or anything else?
+                // If RuleCollection name of BusinessRule matches
+                if (businessRule.getRuleTemplateName().split("/")[0].equals(ruleCollectionName)) {
+                    businessRulesUnderRuleCollection.add(businessRule);
                 }
             }
+
+        }
+
+        // If at least one configured Business Rule exists under this category
+        if (businessRulesUnderRuleCollection.size() > 0) {
+            return businessRulesUnderRuleCollection;
+        }
+
+        return null;
+    }
+
+    /**
+     * Finds the specified RuleTemplate
+     * Derive Templates by replacing templated elements with newly given values
+     * Deploys Templates in corresponding formats
+     * Updates existing values map in the database, with the new one
+     *
+     * @param businessRule Given BusinessRule object, which has RuleTemplate name and newly provided values
+     */
+    public void editBusinessRule(BusinessRule businessRule) {
+        // Get required templates from the business rule
+        Collection<Template> templates = getTemplates(businessRule);
+        // Get provided values for properties
+        Map<String, String> properties = businessRule.getProperties();
+
+        Collection<Template> derivedTemplates = new ArrayList();
+
+        // Derive all templates & deploy
+        for (Template template : templates) {
+            deployPropertiesMap(properties);
+
+            // Deploy SiddhiApp
+            if (template.getType().equals("siddhiApp")) {
+                deploySiddhiApp(deriveSiddhiApp(template, properties));
+            }
+            // todo: Other template types (i.e: gadgets etc.)
         }
     }
 
     /**
-     * Deletes each SiddhiApp from a given BusinessRule, from the directory
+     * Deletes the given values map from the database
+     * Undeploy the templates
      *
-     * @param businessRule Given Business Rule Object
-     * @return Collection of undeleted siddhiApp names if any. Otherwise null
+     * @param businessRule
      */
-    public Collection<String> deleteSiddhiApps(BusinessRule businessRule) {
-        Collection<String> undeletedSiddhiApps = new ArrayList<String>();
-        Collection<String> siddhiApps = businessRule.getSiddhiApps();
+    public void deleteBusinessRule(BusinessRule businessRule) {
+        // todo: implement deleteBusinessRule. Also, undeployBusinessRule
+    }
 
-        for (String siddhiApp : siddhiApps) {
-            // Find SiddhiApp's name
-            Pattern siddhiAppNamePattern = Pattern.compile(TemplateManagerConstants.SIDDHI_APP_NAME_REGEX_PATTERN);
-            Matcher siddhiAppNamePatternMatcher = siddhiAppNamePattern.matcher(siddhiApp);
+    /**
+     * Finds RuleTemplate which is specified in the given BusinessRule
+     * Returns templates, that belong to the found RuleTemplate
+     *
+     * @param businessRule Given BusinessRule
+     * @return Templates that belong to the found RuleTemplate. null, if RuleTemplate name is invalid //todo: what about name invalid validation?
+     */
+    public Collection<Template> getTemplates(BusinessRule businessRule) {
+        // Get RuleTemplateName mentioned in the BusinessRule
+        String ruleCollectionRuleTemplateName = businessRule.getRuleTemplateName();
+        String ruleCollectionName = ruleCollectionRuleTemplateName.split("/")[0];
+        String ruleTemplateName = ruleCollectionRuleTemplateName.split("/")[1];
 
-            // When SiddhiApp's Name is found
-            if (siddhiAppNamePatternMatcher.find()) {
-                String siddhiAppName = siddhiAppNamePatternMatcher.group(1);
-                File file = new File(TemplateManagerConstants.BUSINESS_RULES_DIRECTORY + siddhiAppName + ".siddhi"); //todo: siddhiAppLocation (if seperate folder is decided)
-                // if unable to delete
-                if (!file.delete()) {
-                    undeletedSiddhiApps.add(siddhiAppName);
-                }
+        File ruleCollectionFile = new File(TemplateManagerConstants.TEMPLATES_DIRECTORY + ruleCollectionName + ".json");
+        RuleCollection ruleCollection = TemplateManagerHelper.jsonToRuleCollection(TemplateManagerHelper.fileToJson(ruleCollectionFile));
+        // Get RuleTemplates belonging to RuleCollection
+        Collection<RuleTemplate> ruleTemplates = ruleCollection.getRuleTemplates();
+        for (RuleTemplate ruleTemplate : ruleTemplates) {
+            // If RuleTemplate name matches with given name
+            if (ruleTemplate.getName().equals(ruleTemplateName)) {
+                return ruleTemplate.getTemplates();
             }
         }
 
-        // If all SiddhiApps are successfully deleted
-        if (undeletedSiddhiApps.size() == 0) {
-            return null;
-        }
-
-        return undeletedSiddhiApps;
+        return null;
     }
 
     /**
-     * Deletes the Business Rule with the given name, from the directory
+     * Derives a Template of SiddhiApp by mapping given values to templated elements
      *
-     * @param businessRuleName Given Name of Business Rule
-     * @return Deleted Business Rule object //todo: delete related siddhiApps too
+     * @return
      */
-    public BusinessRule deleteBusinessRule(String businessRuleName) throws TemplateManagerException {
-        // Get as object before deleting
-        BusinessRule businessRule = TemplateManagerHelper.jsonToBusinessRule(new File(TemplateManagerConstants.BUSINESS_RULES_DIRECTORY + businessRuleName + ".json"));
-        File businessRuleFile = new File(TemplateManagerConstants.BUSINESS_RULES_DIRECTORY + businessRuleName + ".json"); //todo: exception handling for unfound file
+    /**
+     * Derives a Template of SiddhiApp by mapping given values to templated elements
+     *
+     * @param siddhiAppTemplate SiddhiApp with templated elements
+     * @param properties        Given values for templated elements
+     * @return Derived SiddhiApp, as Template object
+     */
+    public Template deriveSiddhiApp(Template siddhiAppTemplate, Map<String, String> properties) {
+        String templatedSiddhiApp = siddhiAppTemplate.getContent();
 
-        // Delete SiddhiApps and store undeleted ones, if any
-        Collection<String> undeletedSiddhiApps = deleteSiddhiApps(businessRule);
+        // To replace Templated Elements with given values
+        StringBuffer derivedSiddhiAppBuffer = new StringBuffer();
+        // Find all templated elements from the siddhiApp
+        Pattern templatedElementPattern = Pattern.compile(TemplateManagerConstants.TEMPLATED_ELEMENT_REGEX_PATTERN);
+        Matcher templatedElementMatcher = templatedElementPattern.matcher(templatedSiddhiApp);
 
-        // If BusinessRule is successfully deleted
-        if(businessRuleFile.delete()){
-            // If all SiddhiApps are deleted
-            if(undeletedSiddhiApps == null){
-                return businessRule;
+        // When each templated element is found
+        while (templatedElementMatcher.find()) {
+            // Templated Element (inclusive of template pattern)
+            String templatedElement = templatedElementMatcher.group(1);
+            // Find Templated Element's Name
+            Pattern templatedElementNamePattern = Pattern.compile(TemplateManagerConstants.TEMPLATED_ELEMENT_NAME_REGEX_PATTERN);
+            Matcher templatedElementNameMatcher = templatedElementNamePattern.matcher(templatedElement);
+
+            // When the Templated Element's Name is found
+            if (templatedElementNameMatcher.find()) {
+                // Templated Element's Name
+                String templatedElementName = templatedElementNameMatcher.group(1);
+
+                String elementReplacement = properties.get(templatedElementName);
+                templatedElementMatcher.appendReplacement(derivedSiddhiAppBuffer, elementReplacement);
             }
-            throw new TemplateManagerException("Unable to delete following SiddhiApps : " + undeletedSiddhiApps.toString()); //todo: proper exception message
-        }else{
-            // If all SiddhiApps are deleted
-            if(undeletedSiddhiApps == null){
-                throw new TemplateManagerException("Unable to delete the Business Rule"); //todo: proper exception message
-            }
-            throw new TemplateManagerException("Unable to delete the Business Rule and the following SiddhiApps : " + undeletedSiddhiApps.toString()); //todo: proper exception message
         }
+        templatedElementMatcher.appendTail(derivedSiddhiAppBuffer);
+
+        Template derivedSiddhiApp = new Template("siddhiApp", derivedSiddhiAppBuffer.toString());
+
+        return derivedSiddhiApp;
     }
 
     /**
-     * Overwrites the existing Business Rule, that has the same name as the given Business Rule
+     * Deploys the given SiddhiApp template's content as a *.siddhi file
      *
-     * @param businessRule Given Business Rule
+     * @param siddhiAppTemplate Siddhi App as a template element
      */
-    public void editBusinessRule(BusinessRule businessRule) throws TemplateManagerException {
-        PrintWriter writer = null;
-        try {
-            // Same file name
-            writer = new PrintWriter(TemplateManagerConstants.TEMPLATES_DIRECTORY + businessRule.getName() + ".json"); //todo: filename & BRname both are same
-            // Overwrite file
-            writer.println(TemplateManagerHelper.businessRuleToJson(businessRule));
-        } catch (IOException e) {
-            throw new TemplateManagerException(e.getMessage(), e.getCause()); //todo: proper exception message
-        } finally {
-            writer.close();
+    public void deploySiddhiApp(Template siddhiAppTemplate) {
+        // todo: get content of siddhiAppTemplate. Deploy it as *.siddhi
+    }
+
+    /**
+     * Deploys the given properties map
+     *
+     * @param properties
+     */
+    public void deployPropertiesMap(Map<String, String> properties) {
+        // todo: implement deployPropertiesMap. Concern about overwriting
+    }
+
+    /**
+     * Derives a Template by mapping the given properties to the templated elements of the given Template
+     *
+     * @param template   Given Template object
+     * @param properties Properties for templated elements of the Templates
+     * @return Derived Template
+     */
+    public Template deriveTemplate(Template template, Map<String, String> properties) {
+        String templateType = template.getType();
+        if (templateType.equals("siddhiApp")) {
+            return deriveSiddhiApp(template, properties);
+        } else {
+            // todo: implement for other template types
         }
-    }
 
-    /**
-     * Returns a list of available Business Rules, from the directory
-     *
-     * @return List of Business Rule names, and denoting BusinessRule objects
-     */
-    public Map<String, BusinessRule> listBusinessRules() {
-//        File directory = new File(TemplateManagerConstants.TEMPLATES_DIRECTORY);
-//        Map<String, BusinessRule> businessRules = new HashMap<String, BusinessRule>();
-//
-//        // array to store templates in directory
-//        File[] files = directory.listFiles();
-//
-//        if (files != null) {
-//            for (final File fileEntry : files) {
-//                // If file is a valid json file
-//                if (fileEntry.isFile() && fileEntry.getName().endsWith("json")) {
-//                    // convert and store
-//                    BusinessRule businessRule = TemplateManagerHelper.jsonToBusinessRule(fileEntry);
-//                    if (businessRule != null) {
-//                        try {
-//                            TemplateManagerHelper.validateBusinessRule(businessRule);
-//                        } catch (TemplateManagerException e) {
-//                            //In case an invalid template configuration is found, this loader logs
-//                            // an error message and aborts loading that particular template domain config.
-//                            //However, this will load all the valid template domain configurations.
-//                            log.error("Invalid Template Domain configuration file found: " + fileEntry.getName(), e);
-//                        }
-//                        businessRules.put(template.getName(), template);
-//                    } else {
-//                        log.error("Invalid Template Domain configuration file found: " + fileEntry.getName());
-//                    }
-//
-//                }
-//            }
-//        }
-//
-//        return templates;
         return null;
     }
 
     /**
-     * Saves the given root.Template to the directory
+     * Returns all the available BusinessRules
      *
-     * @param template Given Template Object
-     * @param fileName Given Name of the file when saving todo: filename - Should automatically get from template name / should be a parameter
-     * @throws TemplateManagerException
+     * @return
      */
-    public void addTemplate(Template template, String fileName) throws TemplateManagerException { //todo: this method won't be mostly there (deploying manually to a folder)
-        PrintWriter writer = null;
-        try {
-            writer = new PrintWriter(TemplateManagerConstants.TEMPLATES_DIRECTORY + fileName + ".json");
-            writer.println(TemplateManagerHelper.templateToJson(template));
-        } catch (IOException e) {
-            throw new TemplateManagerException(e.getMessage(), e.getCause());
-        } finally {
-            writer.close();
-        }
-    }
-
-    /**
-     * Deletes the root.Template with the given name, from the directory
-     *
-     * @param templateName Given Name of root.Template
-     * @return Deleted root.Template object
-     */
-    public Template deleteTemplate(String templateName) {
+    public Collection<BusinessRule> getBusinessRules() {
+        // todo: implement getAllBusinessRules. Check whether how to do it, from DB
         return null;
-    }
-
-    /**
-     * Returns a list of available Templates, from the directory
-     *
-     * @return List of Template names, and denoting Template objects
-     */
-    public Map<String, Template> listTemplates() {
-//        File directory = new File(TemplateManagerConstants.TEMPLATES_DIRECTORY);
-//        Map<String, Template> templates = new HashMap<String, Template>();
-//
-//        // array to store templates in directory
-//        File[] files = directory.listFiles();
-//
-//        if (files != null) {
-//            for (final File fileEntry : files) {
-//                // If file is a valid json file
-//                if (fileEntry.isFile() && fileEntry.getName().endsWith("json")) {
-//                    // convert and store
-//                    Template template = TemplateManagerHelper.jsonToTemplate(fileEntry);
-//                    if (template != null) {
-//                        try {
-//                            TemplateManagerHelper.validateTemplate(template);
-//                        } catch (TemplateManagerException e) {
-//                            //In case an invalid template configuration is found, this loader logs
-//                            // an error message and aborts loading that particular template domain config.
-//                            //However, this will load all the valid template domain configurations.
-//                            log.error("Invalid Template Domain configuration file found: " + fileEntry.getName(), e);
-//                        }
-//                        templates.put(template.getName(), template);
-//                    } else {
-//                        log.error("Invalid Template Domain configuration file found: " + fileEntry.getName());
-//                    }
-//
-//                }
-//            }
-//        }
-//
-//        return templates;
-        return null;
-    }
-
-    /**
-     * Returns a Business Rule, with given Template, name and given values for templated elements
-     *
-     * @param template         Given template
-     * @param businessRuleName Given name for the Business Rule
-     * @param propertyValues   Given values for templated elements (properties) in the template
-     * @return Business Rule object
-     */
-    public BusinessRule createBusinessRuleFromTemplate(Template template, String businessRuleName, Map<String, String> propertyValues) {
-//        // Value entered siddhiApps to store in Business Rule
-//        ArrayList<String> valueEnteredSiddhiApps = new ArrayList<String>();
-//
-//        for (String siddhiApp : template.getSiddhiApps()) {
-//            // To replace Templated Elements with given values
-//            StringBuffer editableSiddhiApp = new StringBuffer();
-//            // Find all templated elements from the siddhiApp
-//            Pattern templatedElementPattern = Pattern.compile(TemplateManagerConstants.TEMPLATED_ELEMENT_REGEX_PATTERN);
-//            Matcher templatedElementMatcher = templatedElementPattern.matcher(siddhiApp);
-//
-//            // When each templated element is found
-//            while (templatedElementMatcher.find()) {
-//                // Templated Element (inclusive of template pattern)
-//                String templatedElement = templatedElementMatcher.group(1);
-//                // Find Templated Element's Name
-//                Pattern templatedElementNamePattern = Pattern.compile(TemplateManagerConstants.TEMPLATED_ELEMENT_NAME_REGEX_PATTERN);
-//                Matcher templatedElementNameMatcher = templatedElementNamePattern.matcher(templatedElement);
-//
-//                // When the Templated Element's Name is found
-//                if (templatedElementNameMatcher.find()) {
-//                    // Templated Element's Name
-//                    String templatedElementName = templatedElementNameMatcher.group(1);
-//
-//                    // Find whether a value is given for the templated element
-//                    String elementReplacement = propertyValues.get(templatedElementName);
-//                    // If value is given
-//                    if (elementReplacement != null) {
-//                        if (!elementReplacement.equals("")) {
-//                            // Replace Element with given value
-//                            templatedElementMatcher.appendReplacement(editableSiddhiApp, elementReplacement);
-//                        } else {
-//                            // Replace Element with default value
-//                            templatedElementMatcher.appendReplacement(editableSiddhiApp, template.getDefaultValue(templatedElementName));
-//                        }
-//                    } else {
-//                        // Replace Element with default value
-//                        templatedElementMatcher.appendReplacement(editableSiddhiApp, template.getDefaultValue(templatedElementName));
-//                    }
-//                }
-//
-//            }
-//            templatedElementMatcher.appendTail(editableSiddhiApp);
-//            valueEnteredSiddhiApps.add(editableSiddhiApp.toString());
-//        }
-//
-//        // Create a Business Rule
-//        BusinessRule businessRule = new BusinessRule(businessRuleName, valueEnteredSiddhiApps);
-//
-//        return businessRule;
-        return null;
-    }
-
-    /**
-     * Returns a Business Rule, with the given name and set of Siddhi Apps
-     *
-     * @param businessRuleName Given name of Business Rule
-     * @param siddhiApps       Given Siddhi Apps
-     * @return Business Rule object
-     */
-    public BusinessRule createBusinessRuleFromScratch(String businessRuleName, Collection<String> siddhiApps) {
-        BusinessRule businessRule = new BusinessRule(businessRuleName, siddhiApps);
-        return businessRule; //todo : hold for now
     }
 }

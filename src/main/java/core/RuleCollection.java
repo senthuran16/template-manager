@@ -6,8 +6,8 @@ import java.util.Collection;
  * Represents a Rule Collection, which consists of one or more RuleTemplates
  */
 public class RuleCollection {
-    public String name;
-    public Collection<RuleTemplate> ruleTemplates;
+    private String name;
+    private Collection<RuleTemplate> ruleTemplates;
 
     public RuleCollection(String name, Collection<RuleTemplate> ruleTemplates) {
         this.name = name;

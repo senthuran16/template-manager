@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * (Eg: 'fieldName' in a SiddhiApp template)
  */
 public class Property {
-    private String name;
+    private String name; //todo:
     private String description; // Optional
     private String defaultValue;
     private String type; //todo: what are the types

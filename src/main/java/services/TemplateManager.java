@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * Consists of back end methods to handle Templates
  */
-public interface TemplateManager {
+public interface TemplateManager { // todo: no need of TemplateManager class anymore
     /**
      * Saves the given root.Template to the directory
      *
