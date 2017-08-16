@@ -50,4 +50,14 @@ public class BusinessRule {
     public void setProperties(Map<String, String> properties) {
         this.properties = properties;
     }
+
+    @Override
+    public String toString() {
+        return "BusinessRule{" +
+                "name='" + name + '\'' +
+                ", ruleTemplateName='" + ruleTemplateName + '\'' +
+                ", type='" + type + '\'' +
+                ", properties=" + properties +
+                '}';
+    }
 }

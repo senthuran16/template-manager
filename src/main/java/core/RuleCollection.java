@@ -7,10 +7,12 @@ import java.util.Collection;
  */
 public class RuleCollection {
     private String name;
+    private String description;
     private Collection<RuleTemplate> ruleTemplates;
 
-    public RuleCollection(String name, Collection<RuleTemplate> ruleTemplates) {
+    public RuleCollection(String name, String description, Collection<RuleTemplate> ruleTemplates) {
         this.name = name;
+        this.description = description;
         this.ruleTemplates = ruleTemplates;
     }
 
@@ -20,6 +22,14 @@ public class RuleCollection {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Collection<RuleTemplate> getRuleTemplates() {
@@ -34,6 +44,7 @@ public class RuleCollection {
     public String toString() {
         return "RuleCollection{" +
                 "name='" + name + '\'' +
+                ", description='" + description + '\'' +
                 ", ruleTemplates=" + ruleTemplates +
                 '}';
     }

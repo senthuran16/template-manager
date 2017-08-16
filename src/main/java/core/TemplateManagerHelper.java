@@ -20,7 +20,7 @@ import java.util.Collection;
  * Consists of methods for additional features for the exposed root.Template Manager service
  */
 public class TemplateManagerHelper {
-    private static final Log log = LogFactory.getLog(TemplateManagerHelper.class);
+    //private static final Log log = LogFactory.getLog(TemplateManagerHelper.class);
 
     /**
      * To avoid instantiation
@@ -34,32 +34,7 @@ public class TemplateManagerHelper {
         File jsonFile = new File(TemplateManagerConstants.TEMPLATES_DIRECTORY + "sensorDataAnalysis.json");
         //RuleCollection ruleCollection = jsonToRuleCollection(jsonFile);
 
-        //System.out.println(jsonToRuleCollection(jsonFile).get("ruleCollection").get("name"));
-
-        jsonToRuleCollection("{\n" +
-                "  \"ruleCollection\" : {\n" +
-                "    \"name\" : \"SensorDataAnalysis\",\n" +
-                "    \"ruleTemplates\" : [\n" +
-                "      {\n" +
-                "        \"name\" : \"SensorAnalytics\" ,\n" +
-                "        \"type\" : \"<app>\",\n" +
-                "        \"instanceCount\" : \"many\",\n" +
-                "        \"script\" : \"<script> (optional)\",\n" +
-                "        \"description\" : \"Configure a sensor analytics scenario to display statistics for a given stream of your choice\",\n" +
-                "        \"templates\" : [\n" +
-                "          { \"type\" : \"siddhiApp\", \"content\" : \"<from ${inStream1} select ${property1} insert into ${outStream1}>\" },\n" +
-                "          { \"type\" : \"siddhiApp\", \"content\" : \"<from ${inStream1} select ${property2} insert into ${outStream2}>\" }\n" +
-                "        ],\n" +
-                "        \"properties\" : {\n" +
-                "          \"property1\" : {\"description\" : \"Unique Identifier for the sensor\", \"defaultValue\" : \"sensorName\" , \"type\" : \"options\", \"options\" : [\"sensorID\",\"sensorName\"]},\n" +
-                "          \"property2\" : {\"description\" : \"Type of value, the sensor measures\", \"defaultValue\" : \"sensorValue\" , \"type\" : \"String\"}\n" +
-                "        }\n" +
-                "      },\n" +
-                "    ]\n" +
-                "  }\n" +
-                "}\n");
-
-
+        System.out.println(TemplateManagerHelper.jsonToRuleCollection(TemplateManagerHelper.fileToJson(jsonFile)));
     }
 
     /**
@@ -76,7 +51,8 @@ public class TemplateManagerHelper {
             Reader reader = new FileReader(jsonFile);
             jsonObject = gson.fromJson(reader,JsonObject.class);
         } catch (FileNotFoundException e) {
-            log.error("FileNotFound Exception occurred when converting JSON file to JSON Object", e); //todo: FileNotFound exception occured. error message?
+            //log.error("FileNotFound Exception occurred when converting JSON file to JSON Object", e); //todo: FileNotFound exception occured. error message?
+            e.printStackTrace();
         }
 
         return jsonObject;
@@ -89,8 +65,9 @@ public class TemplateManagerHelper {
      * @return RuleCollection object
      */
     public static RuleCollection jsonToRuleCollection(JsonObject jsonObject){
+        String ruleCollectionJsonString = jsonObject.get("ruleCollection").toString();
         Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
-        RuleCollection ruleCollection = gson.fromJson(jsonObject, RuleCollection.class);
+        RuleCollection ruleCollection = gson.fromJson(ruleCollectionJsonString, RuleCollection.class);
 
         return ruleCollection;
     }
@@ -108,13 +85,26 @@ public class TemplateManagerHelper {
         return ruleCollection;
     }
 
+    /**
+     * Converts given JSON object to BusinessRule object
+     *
+     * @param jsonObject Given JSON object
+     * @return BusinessRule object
+     */
     public static BusinessRule jsonToBusinessRule(JsonObject jsonObject){
+        String businessRuleJsonString = jsonObject.get("businessRule").toString();
         Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
-        BusinessRule businessRule = gson.fromJson(jsonObject, BusinessRule.class);
+        BusinessRule businessRule = gson.fromJson(businessRuleJsonString, BusinessRule.class);
 
         return businessRule;
     }
 
+    /**
+     * Converts given String JSON definition to RuleCollection object
+     *
+     * @param jsonDefinition Given String JSON definition
+     * @return RuleCollection object
+     */
     public static BusinessRule jsonToBusinessRule(String jsonDefinition){
         Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
         BusinessRule businessRule = gson.fromJson(jsonDefinition, BusinessRule.class);
