@@ -141,7 +141,6 @@ public class TemplateManagerService implements BusinessRulesService {
      * @return Templates that belong to the found RuleTemplate. null, if RuleTemplate name is invalid //todo: what about name invalid validation?
      */
     public Collection<Template> getTemplates(BusinessRule businessRule) {
-        System.out.println("BUSINESS RLE : "+businessRule.toString()); //todo: BusinessRule doesn't map properly
         // Get RuleTemplateName mentioned in the BusinessRule
         String ruleCollectionRuleTemplateName = businessRule.getRuleTemplateName();
         String ruleCollectionName = ruleCollectionRuleTemplateName.split("/")[0];
@@ -150,7 +149,6 @@ public class TemplateManagerService implements BusinessRulesService {
         File ruleCollectionFile = new File(TemplateManagerConstants.TEMPLATES_DIRECTORY + ruleCollectionName + ".json");
         RuleCollection ruleCollection = TemplateManagerHelper.jsonToRuleCollection(TemplateManagerHelper.fileToJson(ruleCollectionFile));
         // Get RuleTemplates belonging to RuleCollection
-        System.out.println("RULETEMPLATE : "+ruleCollection.toString());
         Collection<RuleTemplate> ruleTemplates = ruleCollection.getRuleTemplates();
         for (RuleTemplate ruleTemplate : ruleTemplates) {
             // If RuleTemplate name matches with given name
