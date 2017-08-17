@@ -2,27 +2,20 @@ package services;
 
 import core.BusinessRule;
 import core.Template;
-import core.TemplateManagerConstants;
 import core.TemplateManagerException;
-import core.TemplateManagerHelper;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * Exposed root.Template Manager service, that handles Templates and Business Rules
  */
 public abstract class TemplateManagerServiceOldOld implements /*TemplateManager,*/ BusinessRulesServiceOld {
+    private static final Log log = LogFactory.getLog(TemplateManagerServiceOldOld.class);
+
     public static void main(String[] args) throws TemplateManagerException {
 //        TemplateManagerServiceOldOld templateManagerServiceOld = new TemplateManagerServiceOldOld();
 
@@ -48,10 +41,6 @@ public abstract class TemplateManagerServiceOldOld implements /*TemplateManager,
 //        templateManagerServiceOld.addBusinessRule(businessRuleFromTemplate, "mySampleBusinessRule");
 
     }
-
-    private static final Log log = LogFactory.getLog(TemplateManagerServiceOldOld.class);
-
-
 
     /**
      * Saves the given Business Rule to the directory as a JSON file, and saves its SiddhiApps
@@ -134,7 +123,7 @@ public abstract class TemplateManagerServiceOldOld implements /*TemplateManager,
 //
 //        // If all SiddhiApps are successfully deleted
 //        if (undeletedSiddhiApps.size() == 0) {
-            return null;
+        return null;
 //        }
 //
 //        return undeletedSiddhiApps;
@@ -297,7 +286,7 @@ public abstract class TemplateManagerServiceOldOld implements /*TemplateManager,
 //        }
 //
 //        return templates;
-      //  return null;
+    //  return null;
     //}
 
     /**

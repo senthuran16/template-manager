@@ -2,19 +2,12 @@ package core;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import netscape.javascript.JSObject;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.io.Reader;
-import java.util.ArrayList;
-import java.util.Collection;
 
 /**
  * Consists of methods for additional features for the exposed root.Template Manager service
@@ -49,7 +42,7 @@ public class TemplateManagerHelper {
 
         try {
             Reader reader = new FileReader(jsonFile);
-            jsonObject = gson.fromJson(reader,JsonObject.class);
+            jsonObject = gson.fromJson(reader, JsonObject.class);
         } catch (FileNotFoundException e) {
             //log.error("FileNotFound Exception occurred when converting JSON file to JSON Object", e); //todo: FileNotFound exception occured. error message?
             e.printStackTrace();
@@ -64,7 +57,7 @@ public class TemplateManagerHelper {
      * @param jsonObject Given JSON object
      * @return RuleCollection object
      */
-    public static RuleCollection jsonToRuleCollection(JsonObject jsonObject){
+    public static RuleCollection jsonToRuleCollection(JsonObject jsonObject) {
         String ruleCollectionJsonString = jsonObject.get("ruleCollection").toString();
         Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
         RuleCollection ruleCollection = gson.fromJson(ruleCollectionJsonString, RuleCollection.class);
@@ -78,7 +71,7 @@ public class TemplateManagerHelper {
      * @param jsonDefinition Given String JSON definition
      * @return RuleCollection object
      */
-    public static RuleCollection jsonToRuleCollection(String jsonDefinition){
+    public static RuleCollection jsonToRuleCollection(String jsonDefinition) {
         Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
         RuleCollection ruleCollection = gson.fromJson(jsonDefinition, RuleCollection.class);
 
@@ -91,7 +84,7 @@ public class TemplateManagerHelper {
      * @param jsonObject Given JSON object
      * @return BusinessRule object
      */
-    public static BusinessRule jsonToBusinessRule(JsonObject jsonObject){
+    public static BusinessRule jsonToBusinessRule(JsonObject jsonObject) {
         String businessRuleJsonString = jsonObject.get("businessRule").toString();
         Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
         BusinessRule businessRule = gson.fromJson(businessRuleJsonString, BusinessRule.class);
@@ -105,11 +98,48 @@ public class TemplateManagerHelper {
      * @param jsonDefinition Given String JSON definition
      * @return RuleCollection object
      */
-    public static BusinessRule jsonToBusinessRule(String jsonDefinition){
+    public static BusinessRule jsonToBusinessRule(String jsonDefinition) {
         Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
         BusinessRule businessRule = gson.fromJson(jsonDefinition, BusinessRule.class);
 
         return businessRule;
+    }
+
+    /**
+     * Checks whether a given RuleCollection object has valid content
+     * Validation criteria : //todo: confirm
+     * - name is available
+     * - At least one ruleTemplate is available
+     *
+     * @param ruleCollection
+     * @throws TemplateManagerException
+     */
+    public static void validateRuleCollection(RuleCollection ruleCollection) throws TemplateManagerException {
+        if (ruleCollection.getName() == null) {
+            throw new TemplateManagerException("Invalid RuleCollection configuration file found");
+        }
+        if (!(ruleCollection.getRuleTemplates().size() > 0)) {
+            throw new TemplateManagerException("Invalid RuleCollection configuration file found");
+        }
+    }
+
+    /**
+     * Checks whether a given RuleTemplate object has valid content
+     * Validation Criteria : todo: cofirm validation criteria for RuleTemplate
+     * - name is available
+     * - type is either 'app', 'source' or 'sink'
+     * - At least one template available
+     * - At least one property available
+     * - All properties have defaultValue
+     * - Each property of type 'option' should have at least one option
+     * - Each template type is either 'siddhiApp', 'gadget' or 'dashboard'
+     * - Each templated element in each template, should have a matching property
+     *
+     * @param ruleTemplate
+     * @throws TemplateManagerException
+     */
+    public static void validateRuleTemplate(RuleTemplate ruleTemplate) throws TemplateManagerException {
+
     }
 
     /**

@@ -30,6 +30,7 @@ public interface BusinessRulesServiceOld {
 
     /**
      * Deletes each SiddhiApp from a given BusinessRule, from the directory
+     *
      * @param businessRule Given Business Rule Object
      * @return Collection of undeleted siddhiApp names if any. Otherwise null
      * @throws TemplateManagerException
@@ -56,7 +57,7 @@ public interface BusinessRulesServiceOld {
      *
      * @return List of Business Rule names, and denoting BusinessRule objects
      */
-    public Map<String,BusinessRule> listBusinessRules();
+    public Map<String, BusinessRule> listBusinessRules();
 
     /**
      * Returns a List of available RuleTemplates, denoted by their RuleCollection names

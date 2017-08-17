@@ -5,8 +5,11 @@ import core.RuleCollection;
 import core.RuleTemplate;
 import core.Template;
 import core.TemplateManagerConstants;
+import core.TemplateManagerException;
 import core.TemplateManagerHelper;
 import core.TemplateManagerInstance;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -16,18 +19,24 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TemplateManagerService implements BusinessRulesService {
+    private static final Log log = LogFactory.getLog(TemplateManagerServiceOldOld.class);
+    // Loads and stores available Rule Collections from the directory, at the time of instantiation only todo: is this ok?
+    private Collection<RuleCollection> availableRuleCollections;
+
+    public TemplateManagerService() {
+        this.availableRuleCollections = loadRuleCollections();
+    }
 
     public static void main(String[] args) {
         TemplateManagerService templateManagerService = TemplateManagerInstance.getInstance();
 
-        File templateFile = new File(TemplateManagerConstants.TEMPLATES_DIRECTORY+"SensorDataAnalysis.json");
-        File businessRuleFile = new File(TemplateManagerConstants.TEMPLATES_DIRECTORY+"myBusinessRule.json");
-
-        RuleCollection rc = TemplateManagerHelper.jsonToRuleCollection(TemplateManagerHelper.fileToJson(templateFile));
-
-        System.out.println(rc);
-
+        File businessRuleFile = new File(TemplateManagerConstants.BUSINESS_RULES_DIRECTORY + "myBusinessRule.json");
         templateManagerService.createbusinessRuleFromTemplate(TemplateManagerHelper.jsonToBusinessRule(TemplateManagerHelper.fileToJson(businessRuleFile)));
+        System.out.println(templateManagerService.getAvailableRuleCollections());
+    }
+
+    public Collection<RuleCollection> getAvailableRuleCollections() {
+        return this.availableRuleCollections;
     }
 
     /**
@@ -134,6 +143,53 @@ public class TemplateManagerService implements BusinessRulesService {
     }
 
     /**
+     * Returns available RuleCollections from the directory
+     *
+     * @return Available RuleCollections
+     */
+    public Collection<RuleCollection> loadRuleCollections() {
+        File directory = new File(TemplateManagerConstants.TEMPLATES_DIRECTORY);
+        Collection<RuleCollection> availableRuleCollections = new ArrayList();
+
+        // To store files from the directory
+        File[] files = directory.listFiles();
+        if (files != null) {
+            for (final File fileEntry : files) {
+                // If file is a valid json file
+                if (fileEntry.isFile() && fileEntry.getName().endsWith("json")) {
+                    RuleCollection ruleCollection = null;
+                    // Convert to RuleCollection object
+                    try {
+                        ruleCollection = TemplateManagerHelper.jsonToRuleCollection(TemplateManagerHelper.fileToJson(fileEntry));
+                    } catch (NullPointerException ne) {
+                        log.error("Unable to convert RuleCollection file : " + fileEntry.getName(), ne); // todo: error message
+                        System.out.println("Unable to convert RuleCollection file : " + fileEntry.getName() + " " + ne);
+                    }
+
+                    // Validate contents of the object
+                    if (ruleCollection != null) {
+                        try {
+                            TemplateManagerHelper.validateRuleCollection(ruleCollection);
+                            // Add only valid RuleCollections to the template
+                            availableRuleCollections.add(ruleCollection);
+                        } catch (TemplateManagerException e) { //todo: implement properly
+                            // Files with invalid content are not added.
+                            log.error("Invalid Rule Collection configuration file found : " + fileEntry.getName(), e);
+                            System.out.println("Invalid Rule Collection configuration file found : " + fileEntry.getName() + e);
+                        }
+                    } else {
+                        log.error("Invalid Rule Collection configuration file found : " + fileEntry.getName());
+                        System.out.println("Invalid Rule Collection configuration file found : " + fileEntry.getName());
+                    }
+
+                }
+            }
+        }
+
+        return availableRuleCollections;
+    }
+
+    /**
      * Finds RuleTemplate which is specified in the given BusinessRule
      * Returns templates, that belong to the found RuleTemplate
      *
@@ -145,15 +201,25 @@ public class TemplateManagerService implements BusinessRulesService {
         String ruleCollectionRuleTemplateName = businessRule.getRuleTemplateName();
         String ruleCollectionName = ruleCollectionRuleTemplateName.split("/")[0];
         String ruleTemplateName = ruleCollectionRuleTemplateName.split("/")[1];
+        RuleCollection ruleCollection = null;
 
-        File ruleCollectionFile = new File(TemplateManagerConstants.TEMPLATES_DIRECTORY + ruleCollectionName + ".json");
-        RuleCollection ruleCollection = TemplateManagerHelper.jsonToRuleCollection(TemplateManagerHelper.fileToJson(ruleCollectionFile));
-        // Get RuleTemplates belonging to RuleCollection
-        Collection<RuleTemplate> ruleTemplates = ruleCollection.getRuleTemplates();
-        for (RuleTemplate ruleTemplate : ruleTemplates) {
-            // If RuleTemplate name matches with given name
-            if (ruleTemplate.getName().equals(ruleTemplateName)) {
-                return ruleTemplate.getTemplates();
+        // Get specified RuleCollection
+        for (RuleCollection availableRuleCollection : this.availableRuleCollections) {
+            if (availableRuleCollection.getName().equals(ruleCollectionName)) {
+                ruleCollection = availableRuleCollection;
+                break;
+            }
+        }
+
+        // If RuleCollection is found
+        if (ruleCollection != null) {
+            // Get RuleTemplates belonging to RuleCollection
+            Collection<RuleTemplate> ruleTemplates = ruleCollection.getRuleTemplates();
+            for (RuleTemplate ruleTemplate : ruleTemplates) {
+                // If RuleTemplate name matches with given name
+                if (ruleTemplate.getName().equals(ruleTemplateName)) {
+                    return ruleTemplate.getTemplates();
+                }
             }
         }
 
@@ -213,8 +279,7 @@ public class TemplateManagerService implements BusinessRulesService {
     public void deploySiddhiApp(Template siddhiAppTemplate) {
         // todo: get content of siddhiAppTemplate. Deploy it as *.siddhi
         // For test
-        System.out.println("[DEPLOYED] ");
-        System.out.println(siddhiAppTemplate);
+        System.out.println("[DEPLOYED]  " + siddhiAppTemplate);
     }
 
     /**
@@ -253,4 +318,5 @@ public class TemplateManagerService implements BusinessRulesService {
         // todo: implement getAllBusinessRules. Check whether how to do it, from DB
         return null;
     }
+
 }

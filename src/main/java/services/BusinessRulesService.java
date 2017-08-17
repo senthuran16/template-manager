@@ -2,10 +2,8 @@ package services;
 
 import core.BusinessRule;
 import core.RuleCollection;
-import core.RuleTemplate;
 
 import java.util.Collection;
-import java.util.Map;
 
 public interface BusinessRulesService {
     /**
@@ -43,4 +41,11 @@ public interface BusinessRulesService {
      * @param businessRule
      */
     public void deleteBusinessRule(BusinessRule businessRule);
+
+    /**
+     * Returns available RuleCollections from the directory
+     *
+     * @return Available RuleCollections
+     */
+    public Collection<RuleCollection> loadRuleCollections();
 }

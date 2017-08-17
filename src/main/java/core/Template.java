@@ -1,8 +1,5 @@
 package core;
 
-import java.util.Collection;
-import java.util.Map;
-
 /**
  * Represents a Templated item
  * Eg: SiddhiApp, //todo: Gadget & Dashboard

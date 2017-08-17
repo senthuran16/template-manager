@@ -6,7 +6,7 @@ package core;
 public class TemplateManagerConstants {
     // Directory locations
     public static final String TEMPLATES_DIRECTORY = "/home/senthuran/Desktop/rough-templates/"; // todo: not finalized
-    public static final String BUSINESS_RULES_DIRECTORY = "/home/senthuran/Desktop/rough-templates/"; // todo: not finalized
+    public static final String BUSINESS_RULES_DIRECTORY = "/home/senthuran/Desktop/rough-templates/BR/"; // todo: not finalized
 
     // Pattern of a templated element in Templates
     public static final String TEMPLATED_ELEMENT_REGEX_PATTERN = "(\\$\\{[^}]+\\})"; // templateName

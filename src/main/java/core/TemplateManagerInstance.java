@@ -1,7 +1,6 @@
 package core;
 
 import services.TemplateManagerService;
-import services.TemplateManagerServiceOldOld;
 
 /**
  * Singleton class for the exposed root.Template Manager Service
@@ -14,7 +13,7 @@ public class TemplateManagerInstance {
     }
 
     /**
-     * @return Singleton root.Template Manager Service instance
+     * @return Singleton Template Manager Service instance
      */
     public static TemplateManagerService getInstance() {
         if (templateManagerInstance == null) {
