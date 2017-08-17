@@ -32,6 +32,7 @@ public class TemplateManagerService implements BusinessRulesService {
 
         File businessRuleFile = new File(TemplateManagerConstants.BUSINESS_RULES_DIRECTORY + "myBusinessRule.json");
         templateManagerService.createbusinessRuleFromTemplate(TemplateManagerHelper.jsonToBusinessRule(TemplateManagerHelper.fileToJson(businessRuleFile)));
+        System.out.println("\nFound RuleCollections from the directory : ");
         System.out.println(templateManagerService.getAvailableRuleCollections());
     }
 
