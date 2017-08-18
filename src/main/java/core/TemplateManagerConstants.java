@@ -10,6 +10,8 @@ public class TemplateManagerConstants {
 
     // Pattern of a templated element in Templates
     public static final String TEMPLATED_ELEMENT_REGEX_PATTERN = "(\\$\\{[^}]+\\})"; // templateName
+    public static final String TEMPLATED_ELEMENT_START = "${";
+    public static final String TEMPLATED_ELEMENT_END = "}";
     public static final String TEMPLATED_ELEMENT_NAME_REGEX_PATTERN = "\\$\\{(\\S+)\\}"; // to extract element name, from [element with template pattern]
 
     // Pattern of a SiddhiApp name
