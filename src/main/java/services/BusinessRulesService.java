@@ -14,14 +14,14 @@ public interface BusinessRulesService {
      *
      * @param businessRule Given BusinessRule object, which has RuleTemplate name and provided values
      */
-    public void createbusinessRuleFromTemplate(BusinessRule businessRule);
+    void createbusinessRuleFromTemplate(BusinessRule businessRule);
 
     /**
      * Returns available BusinessRules
      *
      * @return Available Business Rules
      */
-    public Collection<BusinessRule> listBusinessRules();
+    Collection<BusinessRule> listBusinessRules();
 
     /**
      * Finds the specified RuleTemplate
@@ -31,7 +31,7 @@ public interface BusinessRulesService {
      *
      * @param businessRule Given BusinessRule object, which has RuleTemplate name and newly provided values
      */
-    public void editBusinessRule(BusinessRule businessRule);
+    void editBusinessRule(BusinessRule businessRule);
 
 
     /**
@@ -40,12 +40,12 @@ public interface BusinessRulesService {
      *
      * @param businessRule
      */
-    public void deleteBusinessRule(BusinessRule businessRule);
+    void deleteBusinessRule(BusinessRule businessRule);
 
     /**
      * Returns available RuleCollections from the directory
      *
      * @return Available RuleCollections
      */
-    public Collection<RuleCollection> loadRuleCollections();
+    Collection<RuleCollection> loadRuleCollections();
 }

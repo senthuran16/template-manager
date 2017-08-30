@@ -23,6 +23,7 @@ public class TemplateManagerService implements BusinessRulesService {
     // Loads and stores available Rule Collections from the directory, at the time of instantiation only todo: is this ok?
     private Collection<RuleCollection> availableRuleCollections;
 
+    // Load available Rule Collections & Business Rules at the time of instantiation todo: Do for BRs as well
     public TemplateManagerService() {
         this.availableRuleCollections = loadRuleCollections();
     }
@@ -36,6 +37,11 @@ public class TemplateManagerService implements BusinessRulesService {
         System.out.println(templateManagerService.getAvailableRuleCollections());
     }
 
+    /**
+     * Loads available Rule Collections from the stored Collection
+     *
+     * @return Available Rule Collections
+     */
     public Collection<RuleCollection> getAvailableRuleCollections() {
         return this.availableRuleCollections;
     }
@@ -191,8 +197,7 @@ public class TemplateManagerService implements BusinessRulesService {
     }
 
     /**
-     * Finds RuleTemplate which is specified in the given BusinessRule
-     * Returns templates, that belong to the found RuleTemplate
+     * Returns templates, that belong to the RuleTemplate mentioned in the given BusinessRule
      *
      * @param businessRule Given BusinessRule
      * @return Templates that belong to the found RuleTemplate. null, if RuleTemplate name is invalid //todo: what about name invalid validation?
@@ -288,7 +293,7 @@ public class TemplateManagerService implements BusinessRulesService {
      *
      * @param properties
      */
-    public void deployPropertiesMap(Map<String, String> properties) {
+    public void deployPropertiesMap(Map<String, String> properties) { //todo: now it's deploy BusinessRule Blob
         // todo: implement deployPropertiesMap. Concern about overwriting
     }
 
