@@ -292,4 +292,48 @@ public class TemplateManagerHelper {
     public static void validateTemplate(Template template) throws TemplateManagerException {
         //todo: no need mostly.
     }
+
+    public static void validateBusinessRule(BusinessRule businessRule) throws TemplateManagerException {
+        // todo: implement
+    }
+
+    /**
+     * Generates UUID for the given Template Group
+     *
+     * @param templateGroup
+     * @return
+     */
+    public static String generateUUID(TemplateGroup templateGroup){
+        return null; //todo: implement
+    }
+
+    /**
+     * Generates UUID for the given RuleTemplate
+     *
+     * @param ruleTemplate
+     * @return
+     */
+    public static String generateUUID(RuleTemplate ruleTemplate){
+        return null; //todo: implement
+    }
+
+    /**
+     * Generates UUID for the given Template
+     *
+     * @param template
+     * @return
+     */
+    public static String generateUUID(Template template){
+        return null; //todo: implement
+    }
+
+    /**
+     * Generates UUID for the given BusinessRule
+     *
+     * @param businessRule
+     * @return
+     */
+    public static String generateUUID(BusinessRule businessRule){
+        return null; //todo: implement
+    }
 }
