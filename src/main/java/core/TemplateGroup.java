@@ -3,14 +3,14 @@ package core;
 import java.util.Collection;
 
 /**
- * Represents a Rule Collection, which consists of one or more RuleTemplates
+ * Represents a Template Group, which consists of one or more RuleTemplates
  */
-public class RuleCollection {
+public class TemplateGroup {
     private String name;
     private String description;
     private Collection<RuleTemplate> ruleTemplates;
 
-    public RuleCollection(String name, String description, Collection<RuleTemplate> ruleTemplates) {
+    public TemplateGroup(String name, String description, Collection<RuleTemplate> ruleTemplates) {
         this.name = name;
         this.description = description;
         this.ruleTemplates = ruleTemplates;
@@ -42,7 +42,7 @@ public class RuleCollection {
 
     @Override
     public String toString() {
-        return "RuleCollection{" +
+        return "TemplateGroup{" +
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", ruleTemplates=" + ruleTemplates +

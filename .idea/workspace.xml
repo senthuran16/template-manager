@@ -2,8 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4fc1d313-e26a-4e28-8a8d-931ddcbf6c8d" name="Default" comment="">
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/core/RuleCollection.java" afterPath="$PROJECT_DIR$/src/main/java/core/TemplateGroup.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/core/BusinessRule.java" afterPath="$PROJECT_DIR$/src/main/java/core/BusinessRule.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/core/TemplateManagerHelper.java" afterPath="$PROJECT_DIR$/src/main/java/core/TemplateManagerHelper.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/services/BusinessRulesService.java" afterPath="$PROJECT_DIR$/src/main/java/services/BusinessRulesService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/services/BusinessRulesServiceOld.java" afterPath="$PROJECT_DIR$/src/main/java/services/BusinessRulesServiceOld.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/services/TemplateManager.java" afterPath="$PROJECT_DIR$/src/main/java/services/TemplateManager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/services/TemplateManagerService.java" afterPath="$PROJECT_DIR$/src/main/java/services/TemplateManagerService.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -17,75 +22,55 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="BusinessRulesService.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/services/BusinessRulesService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="729">
-              <caret line="36" column="7" lean-forward="true" selection-start-line="36" selection-start-column="7" selection-end-line="36" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BusinessRule.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/core/BusinessRule.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="TemplateManagerService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/services/TemplateManagerService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-758">
-              <caret line="198" column="7" lean-forward="false" selection-start-line="198" selection-start-column="7" selection-end-line="198" selection-end-column="7" />
+            <state relative-caret-position="270">
+              <caret line="26" column="84" lean-forward="false" selection-start-line="26" selection-start-column="84" selection-end-line="26" selection-end-column="84" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="method#main#0;class#TemplateManagerService#0" expanded="false" />
+                <element signature="method#loadTemplateGroups#0;class#TemplateManagerService#0" expanded="false" />
+                <element signature="method#loadBusinessRules#0;class#TemplateManagerService#0" expanded="false" />
+                <element signature="method#listTemplates#0;class#TemplateManagerService#0" expanded="false" />
                 <element signature="method#createbusinessRuleFromTemplate#0;class#TemplateManagerService#0" expanded="false" />
                 <element signature="method#listBusinessRules#0;class#TemplateManagerService#0" expanded="false" />
-                <element signature="method#getBusinessRules#0;class#TemplateManagerService#0" expanded="false" />
                 <element signature="method#editBusinessRule#0;class#TemplateManagerService#0" expanded="false" />
                 <element signature="method#deleteBusinessRule#0;class#TemplateManagerService#0" expanded="false" />
-                <element signature="method#loadRuleCollections#0;class#TemplateManagerService#0" expanded="false" />
-                <element signature="method#getTemplates#0;class#TemplateManagerService#0" expanded="false" />
+                <element signature="method#deriveBusinessRule#0;class#TemplateManagerService#0" expanded="false" />
+                <element signature="method#deriveTemplates#0;class#TemplateManagerService#0" expanded="false" />
                 <element signature="method#deriveSiddhiApp#0;class#TemplateManagerService#0" expanded="false" />
+                <element signature="method#deployTemplate#0;class#TemplateManagerService#0" expanded="false" />
                 <element signature="method#deploySiddhiApp#0;class#TemplateManagerService#0" expanded="false" />
-                <element signature="e#12626#12667#0" expanded="false" />
-                <element signature="method#deriveTemplate#0;class#TemplateManagerService#0" expanded="false" />
-                <element signature="method#getBusinessRules#1;class#TemplateManagerService#0" expanded="false" />
+                <element signature="method#SaveBusinessRule#0;class#TemplateManagerService#0" expanded="false" />
+                <element signature="method#getBusinessRuleProperties#0;class#TemplateManagerService#0" expanded="false" />
+                <element signature="method#updateDeployTemplate#0;class#TemplateManagerService#0" expanded="false" />
+                <element signature="method#updateDeploySiddhiApp#0;class#TemplateManagerService#0" expanded="false" />
+                <element signature="method#getTemplates#0;class#TemplateManagerService#0" expanded="false" />
+                <element signature="method#getBusinessRules#0;class#TemplateManagerService#0" expanded="false" />
+                <element signature="method#undeployTemplate#0;class#TemplateManagerService#0" expanded="false" />
+                <element signature="method#undeploySiddhiApp#0;class#TemplateManagerService#0" expanded="false" />
+                <element signature="method#getTemplateGroup#0;class#TemplateManagerService#0" expanded="false" />
+                <element signature="method#getRuleTemplate#0;class#TemplateManagerService#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TemplateManagerHelper.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TemplateManagerHelper.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/core/TemplateManagerHelper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3861">
-              <caret line="156" column="38" lean-forward="false" selection-start-line="156" selection-start-column="38" selection-end-line="156" selection-end-column="38" />
+            <state relative-caret-position="3726">
+              <caret line="151" column="17" lean-forward="false" selection-start-line="151" selection-start-column="17" selection-end-line="151" selection-end-column="17" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Collection.java" pinned="false" current-in-tab="false">
-        <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/util/Collection.java">
+      <file leaf-file-name="BusinessRulesService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/services/BusinessRulesService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="8316">
-              <caret line="333" column="12" lean-forward="false" selection-start-line="333" selection-start-column="12" selection-end-line="333" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TemplateManagerConstants.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/core/TemplateManagerConstants.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
-              <caret line="13" column="59" lean-forward="false" selection-start-line="13" selection-start-column="59" selection-end-line="13" selection-end-column="59" />
+            <state relative-caret-position="-277">
+              <caret line="34" column="39" lean-forward="true" selection-start-line="34" selection-start-column="39" selection-end-line="34" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -107,11 +92,24 @@
       <find>elements</find>
       <find>templated properties</find>
       <find>File</find>
-      <find>RuleCollection</find>
       <find>deploy</find>
+      <find>RuleCo</find>
+      <find>Rule C</find>
+      <find>ruleC</find>
+      <find>RuleC</find>
+      <find>rule co</find>
+      <find>rule</find>
+      <find>RuleCollection</find>
+      <find>Rule Collection</find>
+      <find>regex</find>
+      <find>spli</find>
+      <find>ruleCollection</find>
     </findStrings>
     <replaceStrings>
       <replace>templated elements</replace>
+      <replace>templateGroup</replace>
+      <replace>TemplateGroup</replace>
+      <replace>Template Group</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -150,19 +148,20 @@
         <option value="$PROJECT_DIR$/src/main/java/test/SPTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/core/Test.java" />
         <option value="$PROJECT_DIR$/src/main/java/services/TemplateManagerServiceOld.java" />
-        <option value="$PROJECT_DIR$/src/main/java/services/TemplateManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/core/Property.java" />
         <option value="$PROJECT_DIR$/src/main/java/core/RuleCollection.java" />
         <option value="$PROJECT_DIR$/src/main/java/core/RuleTemplate.java" />
-        <option value="$PROJECT_DIR$/src/main/java/core/BusinessRule.java" />
         <option value="$PROJECT_DIR$/src/main/java/core/Template.java" />
         <option value="$PROJECT_DIR$/src/main/java/core/TemplateManagerInstance.java" />
         <option value="$PROJECT_DIR$/src/main/java/services/BusinessRulesServiceOld.java" />
         <option value="$PROJECT_DIR$/src/main/java/services/TemplateManagerServiceOldOld.java" />
         <option value="$PROJECT_DIR$/src/main/java/core/TemplateManagerConstants.java" />
+        <option value="$PROJECT_DIR$/src/main/java/core/TemplateGroup.java" />
         <option value="$PROJECT_DIR$/src/main/java/core/TemplateManagerHelper.java" />
-        <option value="$PROJECT_DIR$/src/main/java/services/TemplateManagerService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/services/TemplateManager.java" />
+        <option value="$PROJECT_DIR$/src/main/java/core/BusinessRule.java" />
         <option value="$PROJECT_DIR$/src/main/java/services/BusinessRulesService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/services/TemplateManagerService.java" />
       </list>
     </option>
   </component>
@@ -189,13 +188,13 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="938" />
-    <option name="y" value="24" />
-    <option name="width" value="1851" />
-    <option name="height" value="1092" />
+    <option name="x" value="31" />
+    <option name="y" value="47" />
+    <option name="width" value="971" />
+    <option name="height" value="1078" />
   </component>
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -208,7 +207,57 @@
       <manualOrder />
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="Scratches" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="template-manager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="template-manager" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="template-manager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="template-manager" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="template-manager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="template-manager" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="template-manager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="template-manager" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="template-manager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="template-manager" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="template-manager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="template-manager" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="services" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
@@ -473,6 +522,8 @@
       <workItem from="1503476685611" duration="8000" />
       <workItem from="1503909338873" duration="130000" />
       <workItem from="1504066490559" duration="2591000" />
+      <workItem from="1504173150176" duration="6408000" />
+      <workItem from="1504239231401" duration="5242000" />
     </task>
     <task id="LOCAL-00001" summary="Checks whether a given RuleCollection object has valid content">
       <created>1502960237602</created>
@@ -485,7 +536,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="202886000" />
+    <option name="totallyTimeSpent" value="214536000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -498,6 +549,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="71" y="-4" width="1849" height="1084" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23076923" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -512,8 +564,9 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28216216" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25403002" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20566982" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3097826" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -526,7 +579,6 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32173914" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3097826" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -551,9 +603,9 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28804347" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.275" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25403002" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28804347" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28216216" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.45904955" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3097826" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
@@ -581,19 +633,29 @@
         <state relative-caret-position="1728">
           <caret line="64" column="66" lean-forward="true" selection-start-line="64" selection-start-column="66" selection-end-line="64" selection-end-column="66" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="method#main#0;class#TemplateManagerService#0" expanded="false" />
+            <element signature="method#loadTemplateGroups#0;class#TemplateManagerService#0" expanded="false" />
+            <element signature="method#loadBusinessRules#0;class#TemplateManagerService#0" expanded="false" />
+            <element signature="method#listTemplates#0;class#TemplateManagerService#0" expanded="false" />
             <element signature="method#createbusinessRuleFromTemplate#0;class#TemplateManagerService#0" expanded="false" />
             <element signature="method#listBusinessRules#0;class#TemplateManagerService#0" expanded="false" />
-            <element signature="method#getBusinessRules#0;class#TemplateManagerService#0" expanded="false" />
             <element signature="method#editBusinessRule#0;class#TemplateManagerService#0" expanded="false" />
             <element signature="method#deleteBusinessRule#0;class#TemplateManagerService#0" expanded="false" />
-            <element signature="method#loadRuleCollections#0;class#TemplateManagerService#0" expanded="false" />
-            <element signature="method#getTemplates#0;class#TemplateManagerService#0" expanded="false" />
+            <element signature="method#deriveBusinessRule#0;class#TemplateManagerService#0" expanded="false" />
+            <element signature="method#deriveTemplates#0;class#TemplateManagerService#0" expanded="false" />
             <element signature="method#deriveSiddhiApp#0;class#TemplateManagerService#0" expanded="false" />
+            <element signature="method#deployTemplate#0;class#TemplateManagerService#0" expanded="false" />
             <element signature="method#deploySiddhiApp#0;class#TemplateManagerService#0" expanded="false" />
-            <element signature="e#12626#12667#0" expanded="false" />
-            <element signature="method#deriveTemplate#0;class#TemplateManagerService#0" expanded="false" />
-            <element signature="method#getBusinessRules#1;class#TemplateManagerService#0" expanded="false" />
+            <element signature="method#SaveBusinessRule#0;class#TemplateManagerService#0" expanded="false" />
+            <element signature="method#getBusinessRuleProperties#0;class#TemplateManagerService#0" expanded="false" />
+            <element signature="method#updateDeployTemplate#0;class#TemplateManagerService#0" expanded="false" />
+            <element signature="method#updateDeploySiddhiApp#0;class#TemplateManagerService#0" expanded="false" />
+            <element signature="method#getTemplates#0;class#TemplateManagerService#0" expanded="false" />
+            <element signature="method#getBusinessRules#0;class#TemplateManagerService#0" expanded="false" />
+            <element signature="method#undeployTemplate#0;class#TemplateManagerService#0" expanded="false" />
+            <element signature="method#undeploySiddhiApp#0;class#TemplateManagerService#0" expanded="false" />
+            <element signature="method#getTemplateGroup#0;class#TemplateManagerService#0" expanded="false" />
+            <element signature="method#getRuleTemplate#0;class#TemplateManagerService#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -813,48 +875,6 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/core/Test2.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/core/Test.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/core/TemplateOld.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/core/RuleCollection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="41" column="0" lean-forward="false" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/core/RuleTemplate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="87" column="33" lean-forward="false" selection-start-line="87" selection-start-column="33" selection-end-line="87" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/core/TemplateManagerException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="23" column="33" lean-forward="false" selection-start-line="23" selection-start-column="33" selection-end-line="23" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/core/TemplateManagerInstance.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/services/BusinessRulesServiceOld.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="20" column="7" lean-forward="false" selection-start-line="20" selection-start-column="7" selection-end-line="20" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/services/TemplateManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="15" column="46" lean-forward="false" selection-start-line="15" selection-start-column="46" selection-end-line="15" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/services/TemplateManagerServiceOldOld.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="297">
@@ -862,78 +882,141 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/core/Template.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/core/Property.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/core/BusinessRule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/core/TemplateManagerHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3861">
-          <caret line="156" column="38" lean-forward="false" selection-start-line="156" selection-start-column="38" selection-end-line="156" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/util/Collection.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8316">
+        <state relative-caret-position="27">
           <caret line="333" column="12" lean-forward="false" selection-start-line="333" selection-start-column="12" selection-end-line="333" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/core/BusinessRule.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="10" column="23" lean-forward="false" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/core/RuleTemplate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-5">
+          <caret line="6" column="20" lean-forward="false" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/core/Property.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="5" column="4" lean-forward="false" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/core/Template.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-5">
+          <caret line="3" column="7" lean-forward="false" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/core/TemplateGroup.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="49">
+          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding>
+            <element signature="e#842#843#0" expanded="true" />
+            <element signature="e#878#879#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/core/TemplateManagerConstants.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="13" column="59" lean-forward="false" selection-start-line="13" selection-start-column="59" selection-end-line="13" selection-end-column="59" />
+        <state relative-caret-position="162">
+          <caret line="6" column="26" lean-forward="true" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/core/TemplateManagerException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="20" column="27" lean-forward="false" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/core/TemplateManagerInstance.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="6" column="3" lean-forward="true" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/services/TemplateManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="349">
+          <caret line="24" column="6" lean-forward="true" selection-start-line="24" selection-start-column="6" selection-end-line="24" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/services/BusinessRulesServiceOld.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="16" column="23" lean-forward="true" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/services/BusinessRulesService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-277">
+          <caret line="34" column="39" lean-forward="true" selection-start-line="34" selection-start-column="39" selection-end-line="34" selection-end-column="39" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/services/TemplateManagerService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-758">
-          <caret line="198" column="7" lean-forward="false" selection-start-line="198" selection-start-column="7" selection-end-line="198" selection-end-column="7" />
+        <state relative-caret-position="270">
+          <caret line="26" column="84" lean-forward="false" selection-start-line="26" selection-start-column="84" selection-end-line="26" selection-end-column="84" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="method#main#0;class#TemplateManagerService#0" expanded="false" />
+            <element signature="method#loadTemplateGroups#0;class#TemplateManagerService#0" expanded="false" />
+            <element signature="method#loadBusinessRules#0;class#TemplateManagerService#0" expanded="false" />
+            <element signature="method#listTemplates#0;class#TemplateManagerService#0" expanded="false" />
             <element signature="method#createbusinessRuleFromTemplate#0;class#TemplateManagerService#0" expanded="false" />
             <element signature="method#listBusinessRules#0;class#TemplateManagerService#0" expanded="false" />
-            <element signature="method#getBusinessRules#0;class#TemplateManagerService#0" expanded="false" />
             <element signature="method#editBusinessRule#0;class#TemplateManagerService#0" expanded="false" />
             <element signature="method#deleteBusinessRule#0;class#TemplateManagerService#0" expanded="false" />
-            <element signature="method#loadRuleCollections#0;class#TemplateManagerService#0" expanded="false" />
-            <element signature="method#getTemplates#0;class#TemplateManagerService#0" expanded="false" />
+            <element signature="method#deriveBusinessRule#0;class#TemplateManagerService#0" expanded="false" />
+            <element signature="method#deriveTemplates#0;class#TemplateManagerService#0" expanded="false" />
             <element signature="method#deriveSiddhiApp#0;class#TemplateManagerService#0" expanded="false" />
+            <element signature="method#deployTemplate#0;class#TemplateManagerService#0" expanded="false" />
             <element signature="method#deploySiddhiApp#0;class#TemplateManagerService#0" expanded="false" />
-            <element signature="e#12626#12667#0" expanded="false" />
-            <element signature="method#deriveTemplate#0;class#TemplateManagerService#0" expanded="false" />
-            <element signature="method#getBusinessRules#1;class#TemplateManagerService#0" expanded="false" />
+            <element signature="method#SaveBusinessRule#0;class#TemplateManagerService#0" expanded="false" />
+            <element signature="method#getBusinessRuleProperties#0;class#TemplateManagerService#0" expanded="false" />
+            <element signature="method#updateDeployTemplate#0;class#TemplateManagerService#0" expanded="false" />
+            <element signature="method#updateDeploySiddhiApp#0;class#TemplateManagerService#0" expanded="false" />
+            <element signature="method#getTemplates#0;class#TemplateManagerService#0" expanded="false" />
+            <element signature="method#getBusinessRules#0;class#TemplateManagerService#0" expanded="false" />
+            <element signature="method#undeployTemplate#0;class#TemplateManagerService#0" expanded="false" />
+            <element signature="method#undeploySiddhiApp#0;class#TemplateManagerService#0" expanded="false" />
+            <element signature="method#getTemplateGroup#0;class#TemplateManagerService#0" expanded="false" />
+            <element signature="method#getRuleTemplate#0;class#TemplateManagerService#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/services/BusinessRulesService.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/core/TemplateManagerHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="729">
-          <caret line="36" column="7" lean-forward="true" selection-start-line="36" selection-start-column="7" selection-end-line="36" selection-end-column="7" />
+        <state relative-caret-position="3726">
+          <caret line="151" column="17" lean-forward="false" selection-start-line="151" selection-start-column="17" selection-end-line="151" selection-end-column="17" />
           <folding />
         </state>
       </provider>

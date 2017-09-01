@@ -1,11 +1,11 @@
 package services;
 
 import core.BusinessRule;
-import core.RuleCollection;
+import core.Property;
 import core.RuleTemplate;
 import core.Template;
+import core.TemplateGroup;
 import core.TemplateManagerConstants;
-import core.TemplateManagerException;
 import core.TemplateManagerHelper;
 import core.TemplateManagerInstance;
 import org.apache.commons.logging.Log;
@@ -20,12 +20,14 @@ import java.util.regex.Pattern;
 
 public class TemplateManagerService implements BusinessRulesService {
     private static final Log log = LogFactory.getLog(TemplateManagerServiceOldOld.class);
-    // Loads and stores available Rule Collections from the directory, at the time of instantiation only todo: is this ok?
-    private Collection<RuleCollection> availableRuleCollections;
+    // Available Template Groups from the directory
+    private Collection<TemplateGroup> availableTemplateGroups;
+    private Collection<BusinessRule> availableBusinessRules;
 
-    // Load available Rule Collections & Business Rules at the time of instantiation todo: Do for BRs as well
+    // Load & store available Template Groups & Business Rules at the time of instantiation
     public TemplateManagerService() {
-        this.availableRuleCollections = loadRuleCollections();
+        this.availableTemplateGroups = loadTemplateGroups();
+        this.availableBusinessRules = loadBusinessRules();
     }
 
     public static void main(String[] args) {
@@ -33,17 +35,68 @@ public class TemplateManagerService implements BusinessRulesService {
 
         File businessRuleFile = new File(TemplateManagerConstants.BUSINESS_RULES_DIRECTORY + "myBusinessRule.json");
         templateManagerService.createbusinessRuleFromTemplate(TemplateManagerHelper.jsonToBusinessRule(TemplateManagerHelper.fileToJson(businessRuleFile)));
-        System.out.println("\nFound RuleCollections from the directory : ");
-        System.out.println(templateManagerService.getAvailableRuleCollections());
+        System.out.println("\nFound TemplateGroups from the directory : ");
+        System.out.println(templateManagerService.listTemplateGroups());
     }
 
     /**
-     * Loads available Rule Collections from the stored Collection
+     * Loads available Template Groups from the directory
      *
-     * @return Available Rule Collections
+     * @return Available Template Groups
      */
-    public Collection<RuleCollection> getAvailableRuleCollections() {
-        return this.availableRuleCollections;
+    public Collection<TemplateGroup> loadTemplateGroups() {
+        // todo: implement
+        return null;
+    }
+
+    /**
+     * Loads available Business Rules from the database
+     *
+     * @return Available Business Rules
+     */
+    public Collection<BusinessRule> loadBusinessRules() {
+        // todo: implement
+        return null;
+    }
+
+    /**
+     * Lists available Template Groups
+     *
+     * @return available Template Groups
+     */
+    public Collection<TemplateGroup> listTemplateGroups() {
+        return this.availableTemplateGroups;
+    }
+
+    /**
+     * Lists available Rule Templates, that belong to the given Template Group
+     *
+     * @param templateGroupName Given Template Group name
+     * @return Collection of Rule Templates
+     */
+    public Collection<RuleTemplate> listRuleTemplates(String templateGroupName) {
+        return null;
+    }
+
+    /**
+     * Lists Properties of a given Rule Template
+     *
+     * @param ruleTemplateName Given Rule Template name
+     * @return Properties of the given Rule Template
+     */
+    public Collection<Property> listProperties(String ruleTemplateName) {
+        return null;
+    }
+
+    /**
+     * Returns templates, that belong to the given RuleTemplate
+     *
+     * @param ruleTemplate Given RuleTemplate
+     * @return Templates of the given Rule Template
+     */
+    public Collection<Template> listTemplates(RuleTemplate ruleTemplate) {
+        // todo: implement
+        return null;
     }
 
     /**
@@ -60,7 +113,7 @@ public class TemplateManagerService implements BusinessRulesService {
 
         // Derive all templates & deploy
         for (Template template : templates) {
-            deployPropertiesMap(properties);
+            //deployPropertiesMap(properties);
 
             // Derive & deploy SiddhiApp
             if (template.getType().equals("siddhiApp")) {
@@ -77,37 +130,6 @@ public class TemplateManagerService implements BusinessRulesService {
      */
     public Collection<BusinessRule> listBusinessRules() {
         // todo: implement listAllBusinessRules. Should read from database
-        return null;
-    }
-
-    /**
-     * Returns BusinessRules, that have RuleCollection as the given one
-     *
-     * @param ruleCollection Given RuleCollection object
-     * @return BusinessRules belonging to the given RuleCollection
-     */
-    public Collection<BusinessRule> getBusinessRules(RuleCollection ruleCollection) {
-        String ruleCollectionName = ruleCollection.getName();
-        Collection<BusinessRule> businessRulesUnderRuleCollection = new ArrayList();
-
-        Collection<BusinessRule> availableBusinessRules = listBusinessRules();
-
-        for (BusinessRule businessRule : availableBusinessRules) {
-            // Only Business Rules from templates can be listed under a specific RuleCollection
-            if (businessRule.getType().equals("template")) { //todo: [template, scratch] or [fromTemplate, fromScratch] or anything else?
-                // If RuleCollection name of BusinessRule matches
-                if (businessRule.getRuleTemplateName().split("/")[0].equals(ruleCollectionName)) {
-                    businessRulesUnderRuleCollection.add(businessRule);
-                }
-            }
-
-        }
-
-        // If at least one configured Business Rule exists under this category
-        if (businessRulesUnderRuleCollection.size() > 0) {
-            return businessRulesUnderRuleCollection;
-        }
-
         return null;
     }
 
@@ -129,7 +151,7 @@ public class TemplateManagerService implements BusinessRulesService {
 
         // Derive all templates & deploy
         for (Template template : templates) {
-            deployPropertiesMap(properties);
+            //deployPropertiesMap(properties);
 
             // Deploy SiddhiApp
             if (template.getType().equals("siddhiApp")) {
@@ -150,93 +172,29 @@ public class TemplateManagerService implements BusinessRulesService {
     }
 
     /**
-     * Returns available RuleCollections from the directory
+     * Derives Business Rule from a given Rule Template and entered values
      *
-     * @return Available RuleCollections
+     * @param ruleTemplate  RuleTemplate
+     * @param enteredValues Values given for the templated properties
+     * @return Derived BusinessRule object
      */
-    public Collection<RuleCollection> loadRuleCollections() {
-        File directory = new File(TemplateManagerConstants.TEMPLATES_DIRECTORY);
-        Collection<RuleCollection> availableRuleCollections = new ArrayList();
-
-        // To store files from the directory
-        File[] files = directory.listFiles();
-        if (files != null) {
-            for (final File fileEntry : files) {
-                // If file is a valid json file
-                if (fileEntry.isFile() && fileEntry.getName().endsWith("json")) {
-                    RuleCollection ruleCollection = null;
-                    // Convert to RuleCollection object
-                    try {
-                        ruleCollection = TemplateManagerHelper.jsonToRuleCollection(TemplateManagerHelper.fileToJson(fileEntry));
-                    } catch (NullPointerException ne) {
-                        log.error("Unable to convert RuleCollection file : " + fileEntry.getName(), ne); // todo: error message
-                        System.out.println("Unable to convert RuleCollection file : " + fileEntry.getName() + " " + ne);
-                    }
-
-                    // Validate contents of the object
-                    if (ruleCollection != null) {
-                        try {
-                            TemplateManagerHelper.validateRuleCollection(ruleCollection);
-                            // Add only valid RuleCollections to the template
-                            availableRuleCollections.add(ruleCollection);
-                        } catch (TemplateManagerException e) { //todo: implement properly
-                            // Files with invalid content are not added.
-                            log.error("Invalid Rule Collection configuration file found : " + fileEntry.getName(), e);
-                            System.out.println("Invalid Rule Collection configuration file found : " + fileEntry.getName() + e);
-                        }
-                    } else {
-                        log.error("Invalid Rule Collection configuration file found : " + fileEntry.getName());
-                        System.out.println("Invalid Rule Collection configuration file found : " + fileEntry.getName());
-                    }
-
-                }
-            }
-        }
-
-        return availableRuleCollections;
-    }
-
-    /**
-     * Returns templates, that belong to the RuleTemplate mentioned in the given BusinessRule
-     *
-     * @param businessRule Given BusinessRule
-     * @return Templates that belong to the found RuleTemplate. null, if RuleTemplate name is invalid //todo: what about name invalid validation?
-     */
-    public Collection<Template> getTemplates(BusinessRule businessRule) {
-        // Get RuleTemplateName mentioned in the BusinessRule
-        String ruleCollectionRuleTemplateName = businessRule.getRuleTemplateName();
-        String ruleCollectionName = ruleCollectionRuleTemplateName.split("/")[0];
-        String ruleTemplateName = ruleCollectionRuleTemplateName.split("/")[1];
-        RuleCollection ruleCollection = null;
-
-        // Get specified RuleCollection
-        for (RuleCollection availableRuleCollection : this.availableRuleCollections) {
-            if (availableRuleCollection.getName().equals(ruleCollectionName)) {
-                ruleCollection = availableRuleCollection;
-                break;
-            }
-        }
-
-        // If RuleCollection is found
-        if (ruleCollection != null) {
-            // Get RuleTemplates belonging to RuleCollection
-            Collection<RuleTemplate> ruleTemplates = ruleCollection.getRuleTemplates();
-            for (RuleTemplate ruleTemplate : ruleTemplates) {
-                // If RuleTemplate name matches with given name
-                if (ruleTemplate.getName().equals(ruleTemplateName)) {
-                    return ruleTemplate.getTemplates();
-                }
-            }
-        }
-
+    public BusinessRule deriveBusinessRule(RuleTemplate ruleTemplate, Map<String, String> enteredValues) {
+        // todo: implement
         return null;
     }
 
     /**
-     * Derives a Template of SiddhiApp by mapping given values to templated elements
+     * Derives a Template by mapping the given properties to the templated elements of the given Template
      *
+     * @param templates     Given Template objects
+     * @param enteredValues Values given for templated Properties
      * @return
      */
+    public Collection<Template> deriveTemplates(Collection<Template> templates, Map<String, String> enteredValues) {
+        // todo: implement
+        return null;
+    }
+
     /**
      * Derives a Template of SiddhiApp by mapping given values to templated elements
      *
@@ -278,6 +236,15 @@ public class TemplateManagerService implements BusinessRulesService {
     }
 
     /**
+     * Deploys the given Template
+     *
+     * @param template Given Template
+     */
+    public void deployTemplate(Template template) {
+        // todo: implement
+    }
+
+    /**
      * Deploys the given SiddhiApp template's content as a *.siddhi file
      *
      * @param siddhiAppTemplate Siddhi App as a template element
@@ -288,28 +255,79 @@ public class TemplateManagerService implements BusinessRulesService {
         System.out.println("[DEPLOYED]  " + siddhiAppTemplate);
     }
 
+
     /**
-     * Deploys the given properties map
+     * Saves the JSON definition of the given Business Rule to the database
      *
-     * @param properties
+     * @param businessRule
      */
-    public void deployPropertiesMap(Map<String, String> properties) { //todo: now it's deploy BusinessRule Blob
-        // todo: implement deployPropertiesMap. Concern about overwriting
+    public void SaveBusinessRule(BusinessRule businessRule) {
+        // todo: implement
     }
 
     /**
-     * Derives a Template by mapping the given properties to the templated elements of the given Template
+     * Gives Filled Properties of a given Business Rule
      *
-     * @param template   Given Template object
-     * @param properties Properties for templated elements of the Templates
-     * @return Derived Template
+     * @param businessRuleName Given Business Rule name
+     * @return
      */
-    public Template deriveTemplate(Template template, Map<String, String> properties) {
-        String templateType = template.getType();
-        if (templateType.equals("siddhiApp")) {
-            return deriveSiddhiApp(template, properties);
-        } else {
-            // todo: implement for other template types
+    public Collection<Property> getBusinessRuleProperties(String businessRuleName) {
+        // todo: implement
+        // todo: return currently filled values as defaultValues. That'll be displayed in front end.
+        return null;
+    }
+
+    /**
+     * Update Deploys the given Template
+     *
+     * @param template Given Template
+     */
+    public void updateDeployTemplate(Template template) {
+        // todo: implement
+    }
+
+    /**
+     * Update Deploys the given SiddhiApp template's content as a *.siddhi file
+     *
+     * @param siddhiAppTemplate Siddhi App as a template element
+     */
+    public void updateDeploySiddhiApp(Template siddhiAppTemplate) {
+        // todo: get content of siddhiAppTemplate. Deploy it as *.siddhi
+        // For test
+        System.out.println("[DEPLOYED]  " + siddhiAppTemplate);
+    }
+
+
+    /**
+     * Returns templates, that belong to the RuleTemplate mentioned in the given BusinessRule
+     *
+     * @param businessRule Given BusinessRule
+     * @return Templates that belong to the found RuleTemplate. null, if RuleTemplate name is invalid //todo: what about name invalid validation?
+     */
+    public Collection<Template> getTemplates(BusinessRule businessRule) {
+        // Get RuleTemplateName mentioned in the BusinessRule
+        String templateGroupName = businessRule.getTemplateGroupName();
+        String ruleTemplateName = businessRule.getRuleTemplateName();
+        TemplateGroup templateGroup = null;
+
+        // Get specified TemplateGroup
+        for (TemplateGroup availableTemplateGroup : this.availableTemplateGroups) {
+            if (availableTemplateGroup.getName().equals(templateGroupName)) {
+                templateGroup = availableTemplateGroup;
+                break;
+            }
+        }
+
+        // If TemplateGroup is found
+        if (templateGroup != null) {
+            // Get RuleTemplates belonging to TemplateGroup
+            Collection<RuleTemplate> ruleTemplates = templateGroup.getRuleTemplates();
+            for (RuleTemplate ruleTemplate : ruleTemplates) {
+                // If RuleTemplate name matches with given name
+                if (ruleTemplate.getName().equals(ruleTemplateName)) {
+                    return ruleTemplate.getTemplates();
+                }
+            }
         }
 
         return null;
@@ -324,5 +342,46 @@ public class TemplateManagerService implements BusinessRulesService {
         // todo: implement getAllBusinessRules. Check whether how to do it, from DB
         return null;
     }
+
+    /**
+     * Undeploys the Template with the given name
+     *
+     * @param templateName
+     */
+    public void undeployTemplate(String templateName) {
+        // todo: implement
+    }
+
+    /**
+     * Undeploys the SiddhiApp, with the given name
+     *
+     * @param siddhiAppName
+     */
+    public void undeploySiddhiApp(String siddhiAppName) {
+        // todo: implement
+    }
+
+    /**
+     * Gets the Template Group object, that has the given name
+     *
+     * @param templateGroupName Given name for Template Group
+     * @return Found Template Group object
+     */
+    public TemplateGroup getTemplateGroup(String templateGroupName) {
+        // todo: implement
+        return null;
+    }
+
+    /**
+     * Gets the Rule Template object, that has the given name
+     *
+     * @param ruleTemplateName Given name for Rule Template
+     * @return Found Rule Template object
+     */
+    public RuleTemplate getRuleTemplate(String ruleTemplateName) {
+        // todo: implement
+        return null;
+    }
+
 
 }

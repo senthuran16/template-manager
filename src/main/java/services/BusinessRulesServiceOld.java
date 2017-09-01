@@ -60,9 +60,9 @@ public interface BusinessRulesServiceOld {
     public Map<String, BusinessRule> listBusinessRules();
 
     /**
-     * Returns a List of available RuleTemplates, denoted by their RuleCollection names
+     * Returns a List of available RuleTemplates, denoted by their TemplateGroup names
      *
-     * @return RuleCollection names, denoting RuleTemplates available under that
+     * @return TemplateGroup names, denoting RuleTemplates available under that
      */
     public Map<String, Collection<RuleTemplate>> listTemplates();
 

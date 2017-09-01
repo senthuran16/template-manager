@@ -3,16 +3,18 @@ package core;
 import java.util.Map;
 
 /**
- * Java representation of a Business Rule
+ * Represents of a Business Rule
  */
 public class BusinessRule {
     private String name;
-    private String ruleTemplateName; // <ruleCollectionName>/<ruleTemplateName>
+    private String templateGroupName;
+    private String ruleTemplateName;
     private String type; // "template" or "fromScratch"
     private Map<String, String> properties;
 
-    public BusinessRule(String name, String ruleTemplateName, String type, Map<String, String> properties) {
+    public BusinessRule(String name, String templateGroupName, String ruleTemplateName, String type, Map<String, String> properties) {
         this.name = name;
+        this.templateGroupName = templateGroupName;
         this.ruleTemplateName = ruleTemplateName;
         this.type = type;
         this.properties = properties;
@@ -24,6 +26,14 @@ public class BusinessRule {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getTemplateGroupName() {
+        return templateGroupName;
+    }
+
+    public void setTemplateGroupName(String templateGroupName) {
+        this.templateGroupName = templateGroupName;
     }
 
     public String getRuleTemplateName() {
@@ -53,10 +63,11 @@ public class BusinessRule {
     @Override
     public String toString() {
         return "BusinessRule{" +
-                "name='" + name + '\'' +
-                ", ruleTemplateName='" + ruleTemplateName + '\'' +
-                ", type='" + type + '\'' +
-                ", properties=" + properties +
-                '}';
+                "\nname='" + name + '\'' +
+                ", \ntemplateGroupName='" + templateGroupName + '\'' +
+                ", \nruleTemplateName='" + ruleTemplateName + '\'' +
+                ", \ntype='" + type + '\'' +
+                ", \nproperties=" + properties +
+                "\n}";
     }
 }

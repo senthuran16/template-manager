@@ -1,8 +1,10 @@
 package services;
 
+import core.RuleTemplate;
 import core.Template;
 import core.TemplateManagerException;
 
+import java.util.Collection;
 import java.util.Map;
 
 /**

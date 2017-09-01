@@ -1,11 +1,36 @@
 package services;
 
 import core.BusinessRule;
-import core.RuleCollection;
+import core.Property;
+import core.RuleTemplate;
+import core.TemplateGroup;
 
 import java.util.Collection;
 
 public interface BusinessRulesService {
+    /**
+     * Lists available Template Groups, from the directory
+     *
+     * @return available Template Groups
+     */
+    Collection<TemplateGroup> listTemplateGroups();
+
+    /**
+     * Lists available Rule Templates, that belong to the given Template Group
+     *
+     * @param templateGroupName Given Template Group name
+     * @return Collection of Rule Templates
+     */
+    Collection<RuleTemplate> listRuleTemplates(String templateGroupName);
+
+    /**
+     * Lists Properties of a given Rule Template
+     *
+     * @param ruleTemplateName Given Rule Template name
+     * @return Properties of the given Rule Template
+     */
+    Collection<Property> listProperties(String ruleTemplateName);
+
     /**
      * Finds the specified RuleTemplate
      * Derives Templates by replacing templated elements with given values
@@ -41,11 +66,4 @@ public interface BusinessRulesService {
      * @param businessRule
      */
     void deleteBusinessRule(BusinessRule businessRule);
-
-    /**
-     * Returns available RuleCollections from the directory
-     *
-     * @return Available RuleCollections
-     */
-    Collection<RuleCollection> loadRuleCollections();
 }

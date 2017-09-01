@@ -32,7 +32,7 @@ public class TemplateManagerHelper {
     public static void main(String[] args) throws TemplateManagerException {
 
         File directory = new File(TemplateManagerConstants.TEMPLATES_DIRECTORY);
-        Collection<RuleCollection> availableRuleCollections = new ArrayList();
+        Collection<TemplateGroup> availableTemplateGroups = new ArrayList();
 
         // To store files from the directory
         File[] files = directory.listFiles();
@@ -40,33 +40,33 @@ public class TemplateManagerHelper {
             for (final File fileEntry : files) {
                 // If file is a valid json file
                 if (fileEntry.isFile() && fileEntry.getName().endsWith("json")) {
-                    RuleCollection ruleCollection = null;
-                    // Convert to RuleCollection object
+                    TemplateGroup templateGroup = null;
+                    // Convert to TemplateGroup object
                     try {
-                        ruleCollection = TemplateManagerHelper.jsonToRuleCollection(TemplateManagerHelper.fileToJson(fileEntry));
+                        templateGroup = TemplateManagerHelper.jsonToTemplateGroup(TemplateManagerHelper.fileToJson(fileEntry));
                     } catch (NullPointerException ne) {
-                        System.out.println("Unable to convert RuleCollection file : " + fileEntry.getName() + " " + ne);
+                        System.out.println("Unable to convert TemplateGroup file : " + fileEntry.getName() + " " + ne);
                     }
 
                     // Validate contents of the object
-                    if (ruleCollection != null) {
+                    if (templateGroup != null) {
                         try {
-                            TemplateManagerHelper.validateRuleCollection(ruleCollection);
-                            // Add only valid RuleCollections to the template
-                            availableRuleCollections.add(ruleCollection);
+                            TemplateManagerHelper.validateTemplateGroup(templateGroup);
+                            // Add only valid TemplateGroups to the template
+                            availableTemplateGroups.add(templateGroup);
                         } catch (TemplateManagerException e) { //todo: implement properly
                             // Files with invalid content are not added.
-                            System.out.println("Invalid Rule Collection configuration file found : " + fileEntry.getName() + e);
+                            System.out.println("Invalid Template Group configuration file found : " + fileEntry.getName() + e);
                         }
                     } else {
-                        System.out.println("Invalid Rule Collection configuration file found : " + fileEntry.getName());
+                        System.out.println("Invalid Template Group configuration file found : " + fileEntry.getName());
                     }
 
                 }
             }
         }
 
-        System.out.println(availableRuleCollections.size()+" Templates Found");
+        System.out.println(availableTemplateGroups.size()+" Templates Found");
 
     }
 
@@ -92,30 +92,30 @@ public class TemplateManagerHelper {
     }
 
     /**
-     * Converts given JSON object to RuleCollection object
+     * Converts given JSON object to TemplateGroup object
      *
      * @param jsonObject Given JSON object
-     * @return RuleCollection object
+     * @return TemplateGroup object
      */
-    public static RuleCollection jsonToRuleCollection(JsonObject jsonObject) {
-        String ruleCollectionJsonString = jsonObject.get("ruleCollection").toString();
+    public static TemplateGroup jsonToTemplateGroup(JsonObject jsonObject) {
+        String templateGroupJsonString = jsonObject.get("templateGroup").toString();
         Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
-        RuleCollection ruleCollection = gson.fromJson(ruleCollectionJsonString, RuleCollection.class);
+        TemplateGroup templateGroup = gson.fromJson(templateGroupJsonString, TemplateGroup.class);
 
-        return ruleCollection;
+        return templateGroup;
     }
 
     /**
-     * Converts given String JSON definition to RuleCollection object
+     * Converts given String JSON definition to TemplateGroup object
      *
      * @param jsonDefinition Given String JSON definition
-     * @return RuleCollection object
+     * @return TemplateGroup object
      */
-    public static RuleCollection jsonToRuleCollection(String jsonDefinition) {
+    public static TemplateGroup jsonToTemplateGroup(String jsonDefinition) {
         Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
-        RuleCollection ruleCollection = gson.fromJson(jsonDefinition, RuleCollection.class);
+        TemplateGroup templateGroup = gson.fromJson(jsonDefinition, TemplateGroup.class);
 
-        return ruleCollection;
+        return templateGroup;
     }
 
     /**
@@ -133,10 +133,10 @@ public class TemplateManagerHelper {
     }
 
     /**
-     * Converts given String JSON definition to RuleCollection object
+     * Converts given String JSON definition to TemplateGroup object
      *
      * @param jsonDefinition Given String JSON definition
-     * @return RuleCollection object
+     * @return TemplateGroup object
      */
     public static BusinessRule jsonToBusinessRule(String jsonDefinition) {
         Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
@@ -146,34 +146,34 @@ public class TemplateManagerHelper {
     }
 
     /**
-     * Checks whether a given RuleCollection object has valid content
+     * Checks whether a given TemplateGroup object has valid content
      * Validation criteria : //todo: confirm
      * - name is available
      * - At least one ruleTemplate is available
      *
-     * @param ruleCollection
+     * @param templateGroup
      * @throws TemplateManagerException
      */
-    public static void validateRuleCollection(RuleCollection ruleCollection) throws TemplateManagerException {
+    public static void validateTemplateGroup(TemplateGroup templateGroup) throws TemplateManagerException {
         try{ // todo: remove this. This is just temporary
-            if (ruleCollection.getName() == null) {
-                throw new TemplateManagerException("Invalid RuleCollection configuration file found");
+            if (templateGroup.getName() == null) {
+                throw new TemplateManagerException("Invalid TemplateGroup configuration file found");
             }
-            if (!(ruleCollection.getRuleTemplates().size() > 0)) {
-                throw new TemplateManagerException("Invalid RuleCollection configuration file found");
+            if (!(templateGroup.getRuleTemplates().size() > 0)) {
+                throw new TemplateManagerException("Invalid TemplateGroup configuration file found");
             }
-            for (RuleTemplate ruleTemplate : ruleCollection.getRuleTemplates()) {
+            for (RuleTemplate ruleTemplate : templateGroup.getRuleTemplates()) {
                 validateRuleTemplate(ruleTemplate);
             }
         }catch(TemplateManagerException x){
-            System.out.println("RuleCollection Not Valid");
+            System.out.println("TemplateGroup Not Valid");
         }
 
     }
 
     /**
      * Checks whether a given RuleTemplate object has valid content
-     * Validation Criteria : todo: cofirm validation criteria for RuleTemplate
+     * Validation Criteria : todo: confirm validation criteria for RuleTemplate
      * - name is available
      * - type is either 'app', 'source' or 'sink'
      * - At least one template available
