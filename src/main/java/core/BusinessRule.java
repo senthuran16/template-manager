@@ -6,18 +6,28 @@ import java.util.Map;
  * Represents of a Business Rule
  */
 public class BusinessRule {
+    private String uuid;
     private String name;
     private String templateGroupName;
     private String ruleTemplateName;
     private String type; // "template" or "fromScratch"
     private Map<String, String> properties;
 
-    public BusinessRule(String name, String templateGroupName, String ruleTemplateName, String type, Map<String, String> properties) {
+    public BusinessRule(String uuid, String name, String templateGroupName, String ruleTemplateName, String type, Map<String, String> properties) {
+        this.uuid = uuid;
         this.name = name;
         this.templateGroupName = templateGroupName;
         this.ruleTemplateName = ruleTemplateName;
         this.type = type;
         this.properties = properties;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     public String getName() {
@@ -63,11 +73,12 @@ public class BusinessRule {
     @Override
     public String toString() {
         return "BusinessRule{" +
-                "\nname='" + name + '\'' +
-                ", \ntemplateGroupName='" + templateGroupName + '\'' +
-                ", \nruleTemplateName='" + ruleTemplateName + '\'' +
-                ", \ntype='" + type + '\'' +
-                ", \nproperties=" + properties +
+                "\nuuid='" + uuid + '\'' +
+                ",\n name='" + name + '\'' +
+                ",\n templateGroupName='" + templateGroupName + '\'' +
+                ",\n ruleTemplateName='" + ruleTemplateName + '\'' +
+                ",\n type='" + type + '\'' +
+                ",\n properties=" + properties +
                 "\n}";
     }
 }

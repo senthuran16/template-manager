@@ -187,7 +187,7 @@ public class TemplateManagerHelper {
      * @throws TemplateManagerException
      */
     public static void validateRuleTemplate(RuleTemplate ruleTemplate) throws TemplateManagerException {
-        ArrayList<String> validTemplateTypes = new ArrayList<String>(Arrays.asList("siddhiApp", "gadget", "dashboard")); //todo: more types might come
+        ArrayList<String> validTemplateTypes = new ArrayList<String>(Arrays.asList(TemplateManagerConstants.SIDDHI_APP_TEMPLATE_TYPE, "gadget", "dashboard")); //todo: more types might come
 
         if(ruleTemplate == null){
             // todo: throw exception
