@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -29,6 +30,12 @@ public class TemplateManagerService implements BusinessRulesService {
         // Load & store available Template Groups & Business Rules at the time of instantiation
         this.availableTemplateGroups = loadTemplateGroups();
         this.availableBusinessRules = loadBusinessRules();
+    }
+
+    public static void main(String[] args) {
+        System.out.println(TemplateManagerHelper.generateUUID("my-template-group",new RuleTemplate("MyRuleTemplate", "app", "many", "script", "desctiprion", new ArrayList<Template>(),new HashMap<String, Property>())));
+        System.out.println(TemplateManagerHelper.generateUUID("my-template-group",new RuleTemplate("MyRuleTemplate", "app", "many", "script", "desctiprion", new ArrayList<Template>(),new HashMap<String, Property>())));
+
     }
 
     public void createBusinessRuleFromTemplate(BusinessRule businessRule) {
@@ -182,7 +189,7 @@ public class TemplateManagerService implements BusinessRulesService {
 
                 // Put found Rule Templates denoted by UUIDs, for returning
                 for (RuleTemplate foundRuleTemplate : foundRuleTemplates) {
-                    ruleTemplates.put(TemplateManagerHelper.generateUUID(foundRuleTemplate), foundRuleTemplate);
+                    ruleTemplates.put(TemplateManagerHelper.generateUUID(templateGroupUUID,foundRuleTemplate), foundRuleTemplate);
                 }
 
                 return ruleTemplates;
@@ -211,7 +218,7 @@ public class TemplateManagerService implements BusinessRulesService {
             if (template.getType().equals(TemplateManagerConstants.SIDDHI_APP_TEMPLATE_TYPE)) {
                 Template derivedSiddhiApp = deriveSiddhiApp(template, givenProperties);
                 try {
-                    derivedTemplates.put(getSiddhiAppName(derivedSiddhiApp), derivedSiddhiApp);
+                    derivedTemplates.put(TemplateManagerHelper.getSiddhiAppName(derivedSiddhiApp), derivedSiddhiApp);
                 } catch (TemplateManagerException e) {
                     log.error("Error in deriving SiddhiApp", e); // todo: (Q) Is this ok?
                 }
@@ -393,7 +400,7 @@ public class TemplateManagerService implements BusinessRulesService {
             // If Template is a SiddhiApp
             if (derivedTemplate.getType().equals(TemplateManagerConstants.SIDDHI_APP_TEMPLATE_TYPE)) {
                 try {
-                    String siddhiAppName = getSiddhiAppName(derivedTemplate);
+                    String siddhiAppName = TemplateManagerHelper.getSiddhiAppName(derivedTemplate);
                     // Add type and name of template
                     templateTypesAndUUIDs.add(new String[]{TemplateManagerConstants.SIDDHI_APP_TEMPLATE_TYPE, siddhiAppName});
                 } catch (TemplateManagerException e) {
@@ -404,24 +411,6 @@ public class TemplateManagerService implements BusinessRulesService {
         }
 
         return templateTypesAndUUIDs;
-    }
-
-    /**
-     * Gives name of the given SiddhiApp
-     *
-     * @param siddhiAppTemplate
-     * @return
-     * @throws TemplateManagerException
-     */
-    public String getSiddhiAppName(Template siddhiAppTemplate) throws TemplateManagerException {
-        String siddhiApp = siddhiAppTemplate.getContent();
-        Pattern siddhiAppNamePattern = Pattern.compile(TemplateManagerConstants.SIDDHI_APP_NAME_REGEX_PATTERN);
-        Matcher siddhiAppNameMatcher = siddhiAppNamePattern.matcher(siddhiApp);
-        if (siddhiAppNameMatcher.find()) {
-            return siddhiAppNameMatcher.group(1);
-        }
-
-        throw new TemplateManagerException("Invalid SiddhiApp Name Found"); //todo: (Q) Is this correct?
     }
 
     /**

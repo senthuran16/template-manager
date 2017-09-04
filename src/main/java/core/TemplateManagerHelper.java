@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -66,7 +67,7 @@ public class TemplateManagerHelper {
             }
         }
 
-        System.out.println(availableTemplateGroups.size()+" Templates Found");
+        System.out.println(availableTemplateGroups.size() + " Templates Found");
 
     }
 
@@ -155,7 +156,7 @@ public class TemplateManagerHelper {
      * @throws TemplateManagerException
      */
     public static void validateTemplateGroup(TemplateGroup templateGroup) throws TemplateManagerException {
-        try{ // todo: remove this. This is just temporary
+        try { // todo: remove this. This is just temporary
             if (templateGroup.getName() == null) {
                 throw new TemplateManagerException("Invalid TemplateGroup configuration file found");
             }
@@ -165,7 +166,7 @@ public class TemplateManagerHelper {
             for (RuleTemplate ruleTemplate : templateGroup.getRuleTemplates()) {
                 validateRuleTemplate(ruleTemplate);
             }
-        }catch(TemplateManagerException x){
+        } catch (TemplateManagerException x) {
             System.out.println("TemplateGroup Not Valid");
         }
 
@@ -189,7 +190,7 @@ public class TemplateManagerHelper {
     public static void validateRuleTemplate(RuleTemplate ruleTemplate) throws TemplateManagerException {
         ArrayList<String> validTemplateTypes = new ArrayList<String>(Arrays.asList(TemplateManagerConstants.SIDDHI_APP_TEMPLATE_TYPE, "gadget", "dashboard")); //todo: more types might come
 
-        if(ruleTemplate == null){
+        if (ruleTemplate == null) {
             // todo: throw exception
         }
         if (ruleTemplate.getName() == null) {
@@ -298,23 +299,26 @@ public class TemplateManagerHelper {
     }
 
     /**
-     * Generates UUID for the given Template Group
+     * Generates UUID for the given Template Group.
+     * TemplateGroup name is converted into lowercase and spaces are replaced with dashes
      *
      * @param templateGroup
      * @return
      */
-    public static String generateUUID(TemplateGroup templateGroup){
-        return null; //todo: implement
+    public static String generateUUID(TemplateGroup templateGroup) {
+        return templateGroup.getName().toLowerCase().replace(' ', '-');
     }
 
     /**
-     * Generates UUID for the given RuleTemplate
+     * Generates UUID for the given RuleTemplate.
+     * UUID is generated with the given TemplateGroup's UUID that the RuleTemplate belongs to, and the RuleTemplate's name
      *
-     * @param ruleTemplate
-     * @return
+     * @param templateGroupUUID Template Group's UUID
+     * @param ruleTemplate      RuleTemplate object
+     * @return Generated UUID
      */
-    public static String generateUUID(RuleTemplate ruleTemplate){
-        return null; //todo: implement
+    public static String generateUUID(String templateGroupUUID, RuleTemplate ruleTemplate) {
+        return UUID.nameUUIDFromBytes((templateGroupUUID + ruleTemplate.getName()).getBytes()).toString();
     }
 
     /**
@@ -323,8 +327,31 @@ public class TemplateManagerHelper {
      * @param template
      * @return
      */
-    public static String generateUUID(Template template){
-        return null; //todo: implement
+    public static String generateUUID(Template template) throws TemplateManagerException {
+        // SiddhiApp Template
+        if (template.getType().equals(TemplateManagerConstants.SIDDHI_APP_TEMPLATE_TYPE)) {
+            return getSiddhiAppName(template);
+        }
+        // Other template types are not considered for now
+        throw new TemplateManagerException("Invalid template type. Unable to generate UUID"); // todo: (Q) is this correct?
+    }
+
+    /**
+     * Gives the name of the given SiddhiApp
+     *
+     * @param siddhiAppTemplate
+     * @return
+     * @throws TemplateManagerException
+     */
+    public static String getSiddhiAppName(Template siddhiAppTemplate) throws TemplateManagerException {
+        String siddhiApp = siddhiAppTemplate.getContent();
+        Pattern siddhiAppNamePattern = Pattern.compile(TemplateManagerConstants.SIDDHI_APP_NAME_REGEX_PATTERN);
+        Matcher siddhiAppNameMatcher = siddhiAppNamePattern.matcher(siddhiApp);
+        if (siddhiAppNameMatcher.find()) {
+            return siddhiAppNameMatcher.group(1);
+        }
+
+        throw new TemplateManagerException("Invalid SiddhiApp Name Found"); //todo: (Q) Is this correct?
     }
 
     /**
@@ -333,7 +360,23 @@ public class TemplateManagerHelper {
      * @param businessRule
      * @return
      */
-    public static String generateUUID(BusinessRule businessRule){
+    public static String generateUUID(BusinessRule businessRule) {
         return null; //todo: implement
+    }
+
+    /**
+     * Generates UUID from the given values, entered for the BusinessRule
+     * todo: This will be only called after user's form values come from the API (Read below)
+     * 1. User enters values (propertyName : givenValue)
+     * 2. TemplateGroupName, and RuleTemplateName is already there
+     * 3. A Map with above details will be given from the API, to the backend
+     * 4. These details are combined and the UUID is got
+     * 5. BR object is created with those entered values, + the uuid in the backend
+     *
+     * @param givenValuesForBusinessRule
+     * @return
+     */
+    public static String generateUUID(Map<String, String> givenValuesForBusinessRule){
+        return UUID.nameUUIDFromBytes(givenValuesForBusinessRule.toString().getBytes()).toString();
     }
 }
