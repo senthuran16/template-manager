@@ -355,16 +355,6 @@ public class TemplateManagerHelper {
     }
 
     /**
-     * Generates UUID for the given BusinessRule
-     *
-     * @param businessRule
-     * @return
-     */
-    public static String generateUUID(BusinessRule businessRule) {
-        return null; //todo: implement
-    }
-
-    /**
      * Generates UUID from the given values, entered for the BusinessRule
      * todo: This will be only called after user's form values come from the API (Read below)
      * 1. User enters values (propertyName : givenValue)
@@ -376,7 +366,7 @@ public class TemplateManagerHelper {
      * @param givenValuesForBusinessRule
      * @return
      */
-    public static String generateUUID(Map<String, String> givenValuesForBusinessRule){
+    public static String generateUUID(Map<String, String> givenValuesForBusinessRule) {
         return UUID.nameUUIDFromBytes(givenValuesForBusinessRule.toString().getBytes()).toString();
     }
 }

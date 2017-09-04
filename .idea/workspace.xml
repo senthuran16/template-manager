@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4fc1d313-e26a-4e28-8a8d-931ddcbf6c8d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/core/TemplateManagerHelper.java" afterPath="$PROJECT_DIR$/src/main/java/core/TemplateManagerHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/services/TemplateManagerService.java" afterPath="$PROJECT_DIR$/src/main/java/services/TemplateManagerService.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -41,8 +40,8 @@
       <file leaf-file-name="TemplateManagerHelper.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/core/TemplateManagerHelper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="327">
-              <caret line="369" column="56" lean-forward="true" selection-start-line="369" selection-start-column="56" selection-end-line="369" selection-end-column="56" />
+            <state relative-caret-position="224">
+              <caret line="355" column="4" lean-forward="false" selection-start-line="355" selection-start-column="4" selection-end-line="355" selection-end-column="4" />
               <folding>
                 <element signature="method#fileToJson#0;class#TemplateManagerHelper#0" expanded="false" />
                 <element signature="method#jsonToTemplateGroup#0;class#TemplateManagerHelper#0" expanded="false" />
@@ -52,8 +51,6 @@
                 <element signature="method#validateTemplateGroup#0;class#TemplateManagerHelper#0" expanded="false" />
                 <element signature="method#validateProperty#0;class#TemplateManagerHelper#0" expanded="false" />
                 <element signature="method#validateTemplatesAndProperties#0;class#TemplateManagerHelper#0" expanded="false" />
-                <element signature="e#14423#14424#0" expanded="true" />
-                <element signature="e#14468#14469#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -519,7 +516,7 @@
       <workItem from="1504380387637" duration="6206000" />
       <workItem from="1504499694895" duration="23323000" />
       <workItem from="1504523476935" duration="383000" />
-      <workItem from="1504523892495" duration="5553000" />
+      <workItem from="1504523892495" duration="5755000" />
     </task>
     <task id="LOCAL-00001" summary="Checks whether a given RuleCollection object has valid content">
       <created>1502960237602</created>
@@ -532,7 +529,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="276500000" />
+    <option name="totallyTimeSpent" value="276702000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -557,8 +554,8 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962757" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2826087" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2826087" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1951084" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -645,8 +642,6 @@
             <element signature="method#validateTemplateGroup#0;class#TemplateManagerHelper#0" expanded="false" />
             <element signature="method#validateProperty#0;class#TemplateManagerHelper#0" expanded="false" />
             <element signature="method#validateTemplatesAndProperties#0;class#TemplateManagerHelper#0" expanded="false" />
-            <element signature="e#14423#14424#0" expanded="true" />
-            <element signature="e#14468#14469#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -688,8 +683,6 @@
             <element signature="method#validateTemplateGroup#0;class#TemplateManagerHelper#0" expanded="false" />
             <element signature="method#validateProperty#0;class#TemplateManagerHelper#0" expanded="false" />
             <element signature="method#validateTemplatesAndProperties#0;class#TemplateManagerHelper#0" expanded="false" />
-            <element signature="e#14423#14424#0" expanded="true" />
-            <element signature="e#14468#14469#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -950,8 +943,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/core/TemplateManagerHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="327">
-          <caret line="369" column="56" lean-forward="true" selection-start-line="369" selection-start-column="56" selection-end-line="369" selection-end-column="56" />
+        <state relative-caret-position="224">
+          <caret line="355" column="4" lean-forward="false" selection-start-line="355" selection-start-column="4" selection-end-line="355" selection-end-column="4" />
           <folding>
             <element signature="method#fileToJson#0;class#TemplateManagerHelper#0" expanded="false" />
             <element signature="method#jsonToTemplateGroup#0;class#TemplateManagerHelper#0" expanded="false" />
@@ -961,8 +954,6 @@
             <element signature="method#validateTemplateGroup#0;class#TemplateManagerHelper#0" expanded="false" />
             <element signature="method#validateProperty#0;class#TemplateManagerHelper#0" expanded="false" />
             <element signature="method#validateTemplatesAndProperties#0;class#TemplateManagerHelper#0" expanded="false" />
-            <element signature="e#14423#14424#0" expanded="true" />
-            <element signature="e#14468#14469#0" expanded="true" />
           </folding>
         </state>
       </provider>
