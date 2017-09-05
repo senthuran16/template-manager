@@ -1,12 +1,6 @@
-package services;
+package internal.services;
 
-import core.BusinessRule;
-import core.Property;
-import core.RuleTemplate;
-import core.TemplateGroup;
-
-import java.util.Collection;
-import java.util.Map;
+import internal.bean.BusinessRule;
 
 public interface BusinessRulesService {
 

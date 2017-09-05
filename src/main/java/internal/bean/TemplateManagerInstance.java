@@ -1,6 +1,6 @@
-package core;
+package internal.bean;
 
-import services.TemplateManagerService;
+import internal.services.TemplateManagerService;
 
 /**
  * Singleton class for the exposed root.Template Manager Service

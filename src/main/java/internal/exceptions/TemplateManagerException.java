@@ -1,4 +1,4 @@
-package core;
+package internal.exceptions;
 
 import java.security.PrivilegedActionException;
 

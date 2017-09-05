@@ -1,10 +1,8 @@
-package services;
+package internal.services;
 
-import core.RuleTemplate;
-import core.Template;
-import core.TemplateManagerException;
+import internal.bean.Template;
+import internal.exceptions.TemplateManagerException;
 
-import java.util.Collection;
 import java.util.Map;
 
 /**

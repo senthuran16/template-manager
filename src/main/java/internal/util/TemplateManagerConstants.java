@@ -1,4 +1,4 @@
-package core;
+package internal.util;
 
 /**
  * Consists of constants related to root.Template Manager
@@ -16,5 +16,11 @@ public class TemplateManagerConstants {
 
     // Template types
     public static final String SIDDHI_APP_TEMPLATE_TYPE = "siddhiApp";
+    public static final String SOURCE = "source";
+    public static final String SINK = "sink";
+    public static final String GADGET = "gadget";
+    public static final String DASHBOARD = "dashboard";
+
+
 
 }

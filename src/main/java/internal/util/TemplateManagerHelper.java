@@ -1,8 +1,14 @@
-package core;
+package internal.util;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+import internal.exceptions.TemplateManagerException;
+import internal.bean.BusinessRule;
+import internal.bean.Property;
+import internal.bean.RuleTemplate;
+import internal.bean.Template;
+import internal.bean.TemplateGroup;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,6 +25,7 @@ import java.util.regex.Pattern;
 /**
  * Consists of methods for additional features for the exposed root.Template Manager service
  */
+//TODO : Verify class names
 public class TemplateManagerHelper {
     //private static final Log log = LogFactory.getLog(TemplateManagerHelper.class);
 

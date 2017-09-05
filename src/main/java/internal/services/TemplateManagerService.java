@@ -1,13 +1,13 @@
-package services;
+package internal.services;
 
-import core.BusinessRule;
-import core.Property;
-import core.RuleTemplate;
-import core.Template;
-import core.TemplateGroup;
-import core.TemplateManagerConstants;
-import core.TemplateManagerException;
-import core.TemplateManagerHelper;
+import internal.bean.BusinessRule;
+import internal.bean.Property;
+import internal.bean.RuleTemplate;
+import internal.bean.Template;
+import internal.bean.TemplateGroup;
+import internal.util.TemplateManagerConstants;
+import internal.exceptions.TemplateManagerException;
+import internal.util.TemplateManagerHelper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
