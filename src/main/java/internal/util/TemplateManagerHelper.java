@@ -328,7 +328,9 @@ public class TemplateManagerHelper {
      * @throws TemplateManagerException
      */
     public static String getSiddhiAppName(Template siddhiAppTemplate) throws TemplateManagerException {
+        // Content of the SiddhiApp
         String siddhiApp = siddhiAppTemplate.getContent();
+        // Regex match and find name
         Pattern siddhiAppNamePattern = Pattern.compile(TemplateManagerConstants.SIDDHI_APP_NAME_REGEX_PATTERN);
         Matcher siddhiAppNameMatcher = siddhiAppNamePattern.matcher(siddhiApp);
         if (siddhiAppNameMatcher.find()) {
