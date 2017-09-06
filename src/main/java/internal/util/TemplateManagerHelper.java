@@ -306,29 +306,6 @@ public class TemplateManagerHelper {
     }
 
     /**
-     * Generates UUID for the given Template Group.
-     * TemplateGroup name is converted into lowercase and spaces are replaced with dashes
-     *
-     * @param templateGroup
-     * @return
-     */
-    public static String generateUUID(TemplateGroup templateGroup) {
-        return templateGroup.getName().toLowerCase().replace(' ', '-');
-    }
-
-    /**
-     * Generates UUID for the given RuleTemplate.
-     * UUID is generated with the given TemplateGroup's UUID that the RuleTemplate belongs to, and the RuleTemplate's name
-     *
-     * @param templateGroupUUID Template Group's UUID
-     * @param ruleTemplate      RuleTemplate object
-     * @return Generated UUID
-     */
-    public static String generateUUID(String templateGroupUUID, RuleTemplate ruleTemplate) {
-        return UUID.nameUUIDFromBytes((templateGroupUUID + ruleTemplate.getName()).getBytes()).toString();
-    }
-
-    /**
      * Generates UUID for the given Template
      *
      * @param template
