@@ -19,6 +19,10 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * The exposed Template Manager service, which contains methods related to
+ * Business Rules from template, and Business Rules from scratch
+ */
 public class TemplateManagerService implements BusinessRulesService {
     private static final Log log = LogFactory.getLog(TemplateManagerService.class);
     // Available Template Groups from the directory

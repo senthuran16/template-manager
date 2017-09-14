@@ -2,16 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4fc1d313-e26a-4e28-8a8d-931ddcbf6c8d" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/internal/bean/BRFromTemplateNew.java" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/internal/bean/BusinessRuleFromScratch.java" afterPath="$PROJECT_DIR$/src/main/java/internal/bean/businessRulesFromScratch/BusinessRuleFromScratch.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/internal/bean/BusinessRuleFromTemplate.java" afterPath="$PROJECT_DIR$/src/main/java/internal/bean/businessRulesFromTemplate/BusinessRuleFromTemplate.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/internal/bean/BusinessRulePropertyFromScratch.java" afterPath="$PROJECT_DIR$/src/main/java/internal/bean/businessRulesFromScratch/BusinessRulePropertyFromScratch.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/internal/bean/RuleTemplate.java" afterPath="$PROJECT_DIR$/src/main/java/internal/bean/businessRulesFromTemplate/RuleTemplate.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/internal/bean/RuleTemplateProperty.java" afterPath="$PROJECT_DIR$/src/main/java/internal/bean/businessRulesFromTemplate/RuleTemplateProperty.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/internal/bean/Template.java" afterPath="$PROJECT_DIR$/src/main/java/internal/bean/businessRulesFromTemplate/Template.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/internal/bean/TemplateGroup.java" afterPath="$PROJECT_DIR$/src/main/java/internal/bean/businessRulesFromTemplate/TemplateGroup.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/internal/services/TemplateManager.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/internal/services/BusinessRulesService.java" afterPath="$PROJECT_DIR$/src/main/java/internal/services/BusinessRulesService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/internal/services/TemplateManager.java" afterPath="$PROJECT_DIR$/src/main/java/internal/services/TemplateManager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/internal/services/TemplateManagerService.java" afterPath="$PROJECT_DIR$/src/main/java/internal/services/TemplateManagerService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/internal/util/TemplateManagerHelper.java" afterPath="$PROJECT_DIR$/src/main/java/internal/util/TemplateManagerHelper.java" />
     </list>
@@ -25,13 +18,44 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="BusinessRulesFromTemplateHelper.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/internal/util/businessRulesFromTemplate/BusinessRulesFromTemplateHelper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="486">
+              <caret line="18" column="17" lean-forward="false" selection-start-line="18" selection-start-column="17" selection-end-line="18" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TemplateManagerHelper.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/internal/util/TemplateManagerHelper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="216">
+              <caret line="30" column="109" lean-forward="false" selection-start-line="30" selection-start-column="109" selection-end-line="30" selection-end-column="109" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BusinessRulesFromScratchHelper.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/internal/util/businessRulesFromScratch/BusinessRulesFromScratchHelper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="513">
+              <caret line="19" column="66" lean-forward="false" selection-start-line="19" selection-start-column="66" selection-end-line="19" selection-end-column="66" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -86,13 +110,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/TemplateManager.java" />
-        <option value="$PROJECT_DIR$/src/main/java/BusinessRulesService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/BusinessRule.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Template.java" />
-        <option value="$PROJECT_DIR$/src/main/java/TemplateManagerHelper.java" />
-        <option value="$PROJECT_DIR$/src/main/java/TemplateManagerConstants.java" />
-        <option value="$PROJECT_DIR$/src/main/java/TemplateManagerInstance.java" />
         <option value="$PROJECT_DIR$/src/main/java/TemplateManagerService.java" />
         <option value="$PROJECT_DIR$/src/main/java/root/BusinessRule.java" />
         <option value="$PROJECT_DIR$/src/main/java/root/TemplateManagerInstance.java" />
@@ -120,8 +137,6 @@
         <option value="$PROJECT_DIR$/src/main/java/core/TemplateGroup.java" />
         <option value="$PROJECT_DIR$/src/main/java/services/TemplateManagerService.java" />
         <option value="$PROJECT_DIR$/src/main/java/core/TemplateManagerHelper.java" />
-        <option value="$PROJECT_DIR$/src/main/java/internal/util/TemplateManagerHelper.java" />
-        <option value="$PROJECT_DIR$/src/main/java/internal/services/TemplateManagerService.java" />
         <option value="$PROJECT_DIR$/src/main/java/internal/bean/BRFromTemplateNew.java" />
         <option value="$PROJECT_DIR$/src/main/java/internal/bean/BusinessRule.java" />
         <option value="$PROJECT_DIR$/src/main/java/internal/bean/BusinessRuleFromTemplate.java" />
@@ -137,6 +152,15 @@
         <option value="$PROJECT_DIR$/src/main/java/internal/bean/businessRulesFromTemplate/RuleTemplate.java" />
         <option value="$PROJECT_DIR$/src/main/java/internal/bean/businessRulesFromTemplate/RuleTemplateProperty.java" />
         <option value="$PROJECT_DIR$/src/main/java/internal/bean/businessRulesFromTemplate/Template.java" />
+        <option value="$PROJECT_DIR$/src/main/java/internal/services/BusinessRulesFromTemplate.java" />
+        <option value="$PROJECT_DIR$/src/main/java/internal/services/BusinessRulesService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/internal/services/TemplateManagerService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/internal/services/BusinessRulesFromScratch.java" />
+        <option value="$PROJECT_DIR$/src/main/java/internal/util/BusinessRulesFromTemplateHelper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/internal/util/BusinessRulesFromScratchHelper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/internal/util/TemplateManagerHelper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/internal/util/businessRulesFromTemplate/BusinessRulesFromTemplateHelper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/internal/util/businessRulesFromScratch/BusinessRulesFromScratchHelper.java" />
       </list>
     </option>
   </component>
@@ -265,6 +289,26 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="internal" type="462c0819:PsiDirectoryNode" />
               <item name="util" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="template-manager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="template-manager" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="internal" type="462c0819:PsiDirectoryNode" />
+              <item name="util" type="462c0819:PsiDirectoryNode" />
+              <item name="businessRulesFromScratch" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="template-manager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="template-manager" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="internal" type="462c0819:PsiDirectoryNode" />
+              <item name="util" type="462c0819:PsiDirectoryNode" />
+              <item name="businessRulesFromTemplate" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -549,7 +593,7 @@
       <workItem from="1504760143834" duration="9000" />
       <workItem from="1504761149971" duration="7000" />
       <workItem from="1505126940339" duration="597000" />
-      <workItem from="1505372387656" duration="8217000" />
+      <workItem from="1505372387656" duration="10190000" />
     </task>
     <task id="LOCAL-00001" summary="Checks whether a given RuleCollection object has valid content">
       <created>1502960237602</created>
@@ -562,7 +606,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="304470000" />
+    <option name="totallyTimeSpent" value="306443000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -575,6 +619,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="71" y="-4" width="1849" height="1084" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23076923" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -585,10 +630,10 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962757" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28913045" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28913045" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2479155" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33185104" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30941704" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -629,8 +674,8 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28913045" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3017566" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28913045" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33185104" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30941704" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
@@ -653,41 +698,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/util/regex/Pattern.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="1026" column="26" lean-forward="false" selection-start-line="1026" selection-start-column="26" selection-end-line="1026" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/util/regex/Matcher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-306">
-          <caret line="533" column="18" lean-forward="false" selection-start-line="533" selection-start-column="18" selection-end-line="533" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/io/FileReader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="56" column="11" lean-forward="false" selection-start-line="56" selection-start-column="11" selection-end-line="56" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/io/IOException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="38" column="6" lean-forward="false" selection-start-line="38" selection-start-column="6" selection-end-line="38" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/io/FileInputStream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="122" column="11" lean-forward="false" selection-start-line="122" selection-start-column="11" selection-end-line="122" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/io/File.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2887">
@@ -786,30 +796,6 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/core/TemplateGroup.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/core/TemplateManagerHelper.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/internal/services/My.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/internal/services/TemplateManagerService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="21" column="57" lean-forward="true" selection-start-line="21" selection-start-column="57" selection-end-line="21" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/internal/util/TemplateManagerHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8370">
-          <caret line="330" column="35" lean-forward="false" selection-start-line="330" selection-start-column="35" selection-end-line="330" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/internal/services/BusinessRulesService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="12" column="47" lean-forward="true" selection-start-line="12" selection-start-column="47" selection-end-line="12" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/internal/bean/BRFromTemplateNew.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-795">
@@ -894,6 +880,72 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
           <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/internal/services/TemplateManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-241">
+          <caret line="10" column="17" lean-forward="false" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/internal/services/TemplateManagerService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="23" column="64" lean-forward="false" selection-start-line="23" selection-start-column="64" selection-end-line="23" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/internal/services/BusinessRulesService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/internal/services/BusinessRulesFromScratch.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="24" column="66" lean-forward="false" selection-start-line="24" selection-start-column="66" selection-end-line="24" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/internal/services/BusinessRulesFromTemplate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="23" column="17" lean-forward="false" selection-start-line="23" selection-start-column="17" selection-end-line="23" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/internal/util/businessRulesFromTemplate/BusinessRulesFromTemplateHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="18" column="17" lean-forward="false" selection-start-line="18" selection-start-column="17" selection-end-line="18" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/internal/util/TemplateManagerHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="30" column="109" lean-forward="false" selection-start-line="30" selection-start-column="109" selection-end-line="30" selection-end-column="109" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/internal/util/businessRulesFromScratch/BusinessRulesFromScratchHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="513">
+          <caret line="19" column="66" lean-forward="false" selection-start-line="19" selection-start-column="66" selection-end-line="19" selection-end-column="66" />
           <folding />
         </state>
       </provider>
