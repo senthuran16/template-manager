@@ -1,6 +1,6 @@
 package internal.services;
 
-import internal.bean.BusinessRule;
+import internal.bean.BusinessRuleFromTemplate;
 
 public interface BusinessRulesService {
 
@@ -8,18 +8,18 @@ public interface BusinessRulesService {
      * Creates a Business Rule instance from the specifications of the given Business Rule
      * and Deploys the Templates belonging to the Business Rule
      *
-     * @param businessRule
+     * @param businessRuleFromTemplate
      */
-    void createBusinessRuleFromTemplate(BusinessRule businessRule);
+    void createBusinessRuleFromTemplate(BusinessRuleFromTemplate businessRuleFromTemplate);
 
     /**
      * Overwrites the Business Rule which has the given UUID, with the given Business Rule
      * and Updates the deployed Templates belonging to the Business Rule
      *
      * @param uuid UUID of the saved Business Rule definition
-     * @param businessRule
+     * @param businessRuleFromTemplate
      */
-    void editBusinessRule(String uuid, BusinessRule businessRule);
+    void editBusinessRule(String uuid, BusinessRuleFromTemplate businessRuleFromTemplate);
 
     /**
      * Deletes the Business Rule that has the given UUID
@@ -30,9 +30,9 @@ public interface BusinessRulesService {
     void deleteBusinessRule(String uuid);
 
     /**
-     * Deploys the Templates belonging to the given BusinessRule, that is denoted by the given UUID
+     * Deploys the Templates belonging to the given BusinessRuleFromTemplate, that is denoted by the given UUID
      *
      * @param businessRule
      */
-    void deployTemplates(BusinessRule businessRule);
+    void deployTemplates(BusinessRuleFromTemplate businessRule);
 }

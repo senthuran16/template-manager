@@ -13,9 +13,9 @@ public class RuleTemplate {
     private String script; // Optional
     private String description; // Optional
     private Collection<Template> templates;
-    private Map<String, Property> properties; // Name, Property object
+    private Map<String, RuleTemplateProperty> properties; // Name, RuleTemplateProperty object
 
-    public RuleTemplate(String name, String type, String instanceCount, String script, String description, Collection<Template> templates, Map<String, Property> properties) {
+    public RuleTemplate(String name, String type, String instanceCount, String script, String description, Collection<Template> templates, Map<String, RuleTemplateProperty> properties) {
         this.name = name;
         this.type = type;
         this.instanceCount = instanceCount;
@@ -73,11 +73,11 @@ public class RuleTemplate {
         this.templates = templates;
     }
 
-    public Map<String, Property> getProperties() {
+    public Map<String, RuleTemplateProperty> getProperties() {
         return properties;
     }
 
-    public void setProperties(Map<String, Property> properties) {
+    public void setProperties(Map<String, RuleTemplateProperty> properties) {
         this.properties = properties;
     }
 

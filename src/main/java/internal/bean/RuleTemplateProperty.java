@@ -3,17 +3,17 @@ package internal.bean;
 import java.util.ArrayList;
 
 /**
- * Represents a Property, that is an element of any template
+ * Represents a Property which belongs to a Rule Template, that is a templated element of any template
  * (Eg: 'fieldName' in a SiddhiApp template)
  */
-public class Property {
+public class RuleTemplateProperty {
     private String name; //todo:
     private String description; // Optional
     private String defaultValue;
     private String type; //todo: what are the types
     private ArrayList<String> options; // Only for type 'Options'
 
-    public Property(String name, String description, String defaultValue, String type, ArrayList<String> options) {
+    public RuleTemplateProperty(String name, String description, String defaultValue, String type, ArrayList<String> options) {
         this.name = name;
         this.description = description;
         this.defaultValue = defaultValue;
@@ -63,7 +63,7 @@ public class Property {
 
     @Override
     public String toString() {
-        return "Property{" +
+        return "RuleTemplateProperty{" +
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", defaultValue='" + defaultValue + '\'' +

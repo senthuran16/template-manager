@@ -17,22 +17,26 @@
  */
 package internal.bean;
 
+import java.util.Map;
+
 /**
- * Represents the parent of Business Rules
- * created from Template
- * and created from scratch
+ * Rough new representation of Business Rule from Template
  */
-public abstract class BusinessRule {
+public class BRFromTemplateNew {
     private String uuid;
     private String name;
     private String templateGroupName;
-    private String type; // "template" or "scratch"
+    private String ruleTemplateName;
+    private String type; // "template" or "fromScratch"
+    private Map<String, String> properties;
 
-    public BusinessRule(String uuid, String name, String templateGroupName, String type) {
+    public BRFromTemplateNew(String uuid, String name, String templateGroupName, String ruleTemplateName, String type, Map<String, String> properties) {
         this.uuid = uuid;
         this.name = name;
         this.templateGroupName = templateGroupName;
+        this.ruleTemplateName = ruleTemplateName;
         this.type = type;
+        this.properties = properties;
     }
 
     public String getUuid() {
@@ -59,6 +63,14 @@ public abstract class BusinessRule {
         this.templateGroupName = templateGroupName;
     }
 
+    public String getRuleTemplateName() {
+        return ruleTemplateName;
+    }
+
+    public void setRuleTemplateName(String ruleTemplateName) {
+        this.ruleTemplateName = ruleTemplateName;
+    }
+
     public String getType() {
         return type;
     }
@@ -67,13 +79,23 @@ public abstract class BusinessRule {
         this.type = type;
     }
 
+    public Map<String, String> getProperties() {
+        return properties;
+    }
+
+    public void setProperties(Map<String, String> properties) {
+        this.properties = properties;
+    }
+
     @Override
     public String toString() {
-        return "BusinessRule{" +
-                "uuid='" + uuid + '\'' +
-                ", name='" + name + '\'' +
-                ", templateGroupName='" + templateGroupName + '\'' +
-                ", type='" + type + '\'' +
-                '}';
+        return "BusinessRuleFromTemplate{" +
+                "\nuuid='" + uuid + '\'' +
+                ",\n name='" + name + '\'' +
+                ",\n templateGroupName='" + templateGroupName + '\'' +
+                ",\n ruleTemplateName='" + ruleTemplateName + '\'' +
+                ",\n type='" + type + '\'' +
+                ",\n properties=" + properties +
+                "\n}";
     }
 }

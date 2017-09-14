@@ -3,9 +3,9 @@ package internal.util;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+import internal.bean.BusinessRuleFromTemplate;
 import internal.exceptions.TemplateManagerException;
-import internal.bean.BusinessRule;
-import internal.bean.Property;
+import internal.bean.RuleTemplateProperty;
 import internal.bean.RuleTemplate;
 import internal.bean.Template;
 import internal.bean.TemplateGroup;
@@ -127,17 +127,17 @@ public class TemplateManagerHelper {
     }
 
     /**
-     * Converts given JSON object to BusinessRule object
+     * Converts given JSON object to BusinessRuleFromTemplate object
      *
      * @param jsonObject Given JSON object
-     * @return BusinessRule object
+     * @return BusinessRuleFromTemplate object
      */
-    public static BusinessRule jsonToBusinessRule(JsonObject jsonObject) {
-        String businessRuleJsonString = jsonObject.get("businessRule").toString();
+    public static BusinessRuleFromTemplate jsonToBusinessRule(JsonObject jsonObject) {
+        String businessRuleJsonString = jsonObject.get("businessRuleFromTemplate").toString();
         Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
-        BusinessRule businessRule = gson.fromJson(businessRuleJsonString, BusinessRule.class);
+        BusinessRuleFromTemplate businessRuleFromTemplate = gson.fromJson(businessRuleJsonString, BusinessRuleFromTemplate.class);
 
-        return businessRule;
+        return businessRuleFromTemplate;
     }
 
     /**
@@ -146,11 +146,11 @@ public class TemplateManagerHelper {
      * @param jsonDefinition Given String JSON definition
      * @return TemplateGroup object
      */
-    public static BusinessRule jsonToBusinessRule(String jsonDefinition) {
+    public static BusinessRuleFromTemplate jsonToBusinessRule(String jsonDefinition) {
         Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
-        BusinessRule businessRule = gson.fromJson(jsonDefinition, BusinessRule.class);
+        BusinessRuleFromTemplate businessRuleFromTemplate = gson.fromJson(jsonDefinition, BusinessRuleFromTemplate.class);
 
-        return businessRule;
+        return businessRuleFromTemplate;
     }
 
     /**
@@ -223,19 +223,19 @@ public class TemplateManagerHelper {
     }
 
     /**
-     * Checks whether a given property object has valid content
+     * Checks whether a given ruleTemplateProperty object has valid content
      * Validation Criteria :
      * - All properties have defaultValue
-     * - Each property of type 'option' should have at least one option
+     * - Each ruleTemplateProperty of type 'option' should have at least one option
      *
-     * @param property
+     * @param ruleTemplateProperty
      * @throws TemplateManagerException
      */
-    public static void validateProperty(Property property) throws TemplateManagerException { //todo: conversion null pointer exception
-        if (property.getDefaultValue() == null) {
+    public static void validateProperty(RuleTemplateProperty ruleTemplateProperty) throws TemplateManagerException { //todo: conversion null pointer exception
+        if (ruleTemplateProperty.getDefaultValue() == null) {
             // todo: throw exception
         }
-        if (property.getType().equals("option") && (property.getOptions() == null || property.getOptions().size() < 1)) {
+        if (ruleTemplateProperty.getType().equals("option") && (ruleTemplateProperty.getOptions() == null || ruleTemplateProperty.getOptions().size() < 1)) {
             // todo: throw exception
         }
     }
@@ -244,10 +244,10 @@ public class TemplateManagerHelper {
      * Checks whether all the templated elements of each template, has matching values in properties
      *
      * @param templates  Templates
-     * @param properties Property names, denoting Property objects
+     * @param properties RuleTemplateProperty names, denoting RuleTemplateProperty objects
      * @throws TemplateManagerException
      */
-    public static void validateTemplatesAndProperties(Collection<Template> templates, Map<String, Property> properties) throws TemplateManagerException {
+    public static void validateTemplatesAndProperties(Collection<Template> templates, Map<String, RuleTemplateProperty> properties) throws TemplateManagerException {
         Collection<String> templatedElements = new ArrayList();
 
         // Add all templated elements to Collection
@@ -301,7 +301,7 @@ public class TemplateManagerHelper {
         //todo: no need mostly.
     }
 
-    public static void validateBusinessRule(BusinessRule businessRule) throws TemplateManagerException {
+    public static void validateBusinessRule(BusinessRuleFromTemplate businessRuleFromTemplate) throws TemplateManagerException {
         // todo: implement
     }
 
@@ -341,7 +341,7 @@ public class TemplateManagerHelper {
     }
 
     /**
-     * Generates UUID from the given values, entered for the BusinessRule
+     * Generates UUID from the given values, entered for the BusinessRuleFromTemplate
      * todo: This will be only called after user's form values come from the API (Read below)
      * 1. User enters values (propertyName : givenValue)
      * 2. TemplateGroupName, and RuleTemplateName is already there
