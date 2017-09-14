@@ -1,10 +1,10 @@
-package internal.bean;
+package internal.bean.businessRulesFromTemplate;
 
 import java.util.Collection;
 import java.util.Map;
 
 /**
- * Represents a RuleTemplate, which consists of one or more Templates
+ * Represents a Rule Template, which consists of one or more Templates
  */
 public class RuleTemplate {
     private String name;

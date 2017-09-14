@@ -1,9 +1,10 @@
-package internal.bean;
+package internal.bean.businessRulesFromTemplate;
 
 import java.util.ArrayList;
 
 /**
- * Represents a Property which belongs to a Rule Template, that is a templated element of any template
+ * Represents a Property, that is a templated element of any template,
+ * which belongs to a Rule Template
  * (Eg: 'fieldName' in a SiddhiApp template)
  */
 public class RuleTemplateProperty {

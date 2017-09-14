@@ -3,12 +3,12 @@ package internal.util;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import internal.bean.BusinessRuleFromTemplate;
+import internal.bean.businessRulesFromTemplate.BusinessRuleFromTemplate;
 import internal.exceptions.TemplateManagerException;
-import internal.bean.RuleTemplateProperty;
-import internal.bean.RuleTemplate;
-import internal.bean.Template;
-import internal.bean.TemplateGroup;
+import internal.bean.businessRulesFromTemplate.RuleTemplateProperty;
+import internal.bean.businessRulesFromTemplate.RuleTemplate;
+import internal.bean.businessRulesFromTemplate.Template;
+import internal.bean.businessRulesFromTemplate.TemplateGroup;
 
 import java.io.File;
 import java.io.FileNotFoundException;

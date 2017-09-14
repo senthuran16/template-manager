@@ -1,4 +1,6 @@
-package internal.bean;
+package internal.bean.businessRulesFromTemplate;
+
+import internal.bean.businessRulesFromTemplate.RuleTemplate;
 
 import java.util.Collection;
 

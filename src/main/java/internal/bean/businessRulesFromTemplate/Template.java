@@ -1,8 +1,8 @@
-package internal.bean;
+package internal.bean.businessRulesFromTemplate;
 
 /**
  * Represents a Templated item
- * Eg: SiddhiApp, //todo: Gadget & Dashboard
+ * i.e : SiddhiApp (Not considering Gadget & Dashboard for now)
  */
 public class Template {
     private String type;

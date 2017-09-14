@@ -1,6 +1,6 @@
 package internal.services;
 
-import internal.bean.BusinessRuleFromTemplate;
+import internal.bean.businessRulesFromTemplate.BusinessRuleFromTemplate;
 
 public interface BusinessRulesService {
 

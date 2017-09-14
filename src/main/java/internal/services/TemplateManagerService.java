@@ -1,10 +1,10 @@
 package internal.services;
 
-import internal.bean.BusinessRuleFromTemplate;
-import internal.bean.RuleTemplateProperty;
-import internal.bean.RuleTemplate;
-import internal.bean.Template;
-import internal.bean.TemplateGroup;
+import internal.bean.businessRulesFromTemplate.BusinessRuleFromTemplate;
+import internal.bean.businessRulesFromTemplate.RuleTemplateProperty;
+import internal.bean.businessRulesFromTemplate.RuleTemplate;
+import internal.bean.businessRulesFromTemplate.Template;
+import internal.bean.businessRulesFromTemplate.TemplateGroup;
 import internal.exceptions.TemplateManagerException;
 import internal.util.TemplateManagerConstants;
 import internal.util.TemplateManagerHelper;

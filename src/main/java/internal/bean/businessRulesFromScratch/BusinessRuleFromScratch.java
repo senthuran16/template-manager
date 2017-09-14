@@ -15,12 +15,14 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package internal.bean;
+package internal.bean.businessRulesFromScratch;
+
+import internal.bean.BusinessRule;
 
 import java.util.Collection;
 
 /**
- * Represents a Business Rule created from scratch
+ * Represents a Business Rule, created from scratch
  */
 public class BusinessRuleFromScratch extends BusinessRule {
     private Collection<BusinessRulePropertyFromScratch> ruleTemplateProperties;

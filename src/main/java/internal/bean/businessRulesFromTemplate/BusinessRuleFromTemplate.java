@@ -1,11 +1,13 @@
-package internal.bean;
+package internal.bean.businessRulesFromTemplate;
+
+import internal.bean.BusinessRule;
 
 import java.util.Map;
 
 /**
- * Represents a Business Rule created from Template
+ * Represents a Business Rule, created from Template
  */
-public class BusinessRuleFromTemplate extends BusinessRule{
+public class BusinessRuleFromTemplate extends BusinessRule {
     private String ruleTemplateName;
     private Map<String, String> properties;
 

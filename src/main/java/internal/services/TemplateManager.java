@@ -1,6 +1,6 @@
 package internal.services;
 
-import internal.bean.Template;
+import internal.bean.businessRulesFromTemplate.Template;
 import internal.exceptions.TemplateManagerException;
 
 import java.util.Map;

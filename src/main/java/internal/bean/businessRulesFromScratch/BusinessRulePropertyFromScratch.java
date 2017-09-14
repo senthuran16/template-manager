@@ -15,7 +15,9 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package internal.bean;
+package internal.bean.businessRulesFromScratch;
+
+import internal.bean.BusinessRuleProperty;
 
 import java.util.Map;
 
