@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4fc1d313-e26a-4e28-8a8d-931ddcbf6c8d" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/internal/bean/BusinessRule.java" afterPath="$PROJECT_DIR$/src/main/java/internal/bean/BusinessRuleFromTemplate.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/internal/bean/Property.java" afterPath="$PROJECT_DIR$/src/main/java/internal/bean/RuleTemplateProperty.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/internal/bean/RuleTemplate.java" afterPath="$PROJECT_DIR$/src/main/java/internal/bean/RuleTemplate.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/internal/services/BusinessRulesService.java" afterPath="$PROJECT_DIR$/src/main/java/internal/services/BusinessRulesService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/internal/services/TemplateManagerService.java" afterPath="$PROJECT_DIR$/src/main/java/internal/services/TemplateManagerService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/internal/util/TemplateManagerHelper.java" afterPath="$PROJECT_DIR$/src/main/java/internal/util/TemplateManagerHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/internal/bean/BusinessRuleFromScratch.java" afterPath="$PROJECT_DIR$/src/main/java/internal/bean/BusinessRuleFromScratch.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -41,13 +35,23 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="BusinessRulePropertyFromScratch.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/internal/bean/BusinessRulePropertyFromScratch.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="216">
+              <caret line="24" column="13" lean-forward="false" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="BusinessRuleFromScratch.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/internal/bean/BusinessRuleFromScratch.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="30" column="72" lean-forward="false" selection-start-line="30" selection-start-column="72" selection-end-line="30" selection-end-column="72" />
+            <state relative-caret-position="432">
+              <caret line="32" column="84" lean-forward="false" selection-start-line="32" selection-start-column="84" selection-end-line="32" selection-end-column="84" />
               <folding>
-                <element signature="e#1281#1282#0" expanded="true" />
+                <element signature="e#1347#1348#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -549,7 +553,7 @@
       <workItem from="1504760143834" duration="9000" />
       <workItem from="1504761149971" duration="7000" />
       <workItem from="1505126940339" duration="597000" />
-      <workItem from="1505372387656" duration="6107000" />
+      <workItem from="1505372387656" duration="6877000" />
     </task>
     <task id="LOCAL-00001" summary="Checks whether a given RuleCollection object has valid content">
       <created>1502960237602</created>
@@ -562,7 +566,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="302360000" />
+    <option name="totallyTimeSpent" value="303130000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -908,14 +912,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/internal/bean/BusinessRulePropertyFromScratch.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="23" column="3" lean-forward="true" selection-start-line="23" selection-start-column="3" selection-end-line="23" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/internal/bean/BusinessRuleProperty.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
@@ -924,12 +920,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/internal/bean/BusinessRulePropertyFromScratch.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="24" column="13" lean-forward="false" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/internal/bean/BusinessRuleFromScratch.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="30" column="72" lean-forward="false" selection-start-line="30" selection-start-column="72" selection-end-line="30" selection-end-column="72" />
+        <state relative-caret-position="432">
+          <caret line="32" column="84" lean-forward="false" selection-start-line="32" selection-start-column="84" selection-end-line="32" selection-end-column="84" />
           <folding>
-            <element signature="e#1281#1282#0" expanded="true" />
+            <element signature="e#1347#1348#0" expanded="true" />
           </folding>
         </state>
       </provider>

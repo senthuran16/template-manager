@@ -17,22 +17,24 @@
  */
 package internal.bean;
 
+import java.util.Collection;
+
 /**
  * Represents a Business Rule created from scratch
  */
 public class BusinessRuleFromScratch extends BusinessRule {
-    private BusinessRulePropertyFromScratch ruleTemplateProperties;
+    private Collection<BusinessRulePropertyFromScratch> ruleTemplateProperties;
 
-    public BusinessRuleFromScratch(String uuid, String name, String templateGroupName, String type, BusinessRulePropertyFromScratch ruleTemplateProperties) {
+    public BusinessRuleFromScratch(String uuid, String name, String templateGroupName, String type, Collection<BusinessRulePropertyFromScratch> ruleTemplateProperties) {
         super(uuid, name, templateGroupName, type);
         this.ruleTemplateProperties = ruleTemplateProperties;
     }
 
-    public BusinessRulePropertyFromScratch getRuleTemplateProperties() {
+    public Collection<BusinessRulePropertyFromScratch> getRuleTemplateProperties() {
         return ruleTemplateProperties;
     }
 
-    public void setRuleTemplateProperties(BusinessRulePropertyFromScratch ruleTemplateProperties) {
+    public void setRuleTemplateProperties(Collection<BusinessRulePropertyFromScratch> ruleTemplateProperties) {
         this.ruleTemplateProperties = ruleTemplateProperties;
     }
 }
