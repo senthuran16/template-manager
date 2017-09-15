@@ -274,7 +274,8 @@ public class TemplateManagerService implements BusinessRulesService {
      * @return Templates with replaced properties in the content, denoted by their UUIDs
      */
     public Map<String, Template> deriveTemplates(BusinessRuleFromTemplate businessRuleFromTemplate) {
-        Map<String, Template> derivedTemplates = new HashMap(); // To store derived Template types and Templates
+        // To store derived Template types and Templates
+        HashMap<String, Template> derivedTemplates = new HashMap<String, Template>();
         // Get available Templates under the Rule Template, which is specified in the Business Rule
         Collection<Template> templatesToBeUsed = getTemplates(businessRuleFromTemplate);
         // Get properties, provided in the Business Rule
