@@ -1,4 +1,4 @@
-package internal.services;/*
+package internal.services.businessRulesFromTemplate;/*
  * Copyright (c) 2017, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
  * WSO2 Inc. licenses this file to you under the Apache License,
@@ -34,7 +34,7 @@ public interface BusinessRulesFromTemplate {
      * Overwrites the Business Rule which has the given UUID, with the given Business Rule
      * and Updates the deployed Templates belonging to the Business Rule
      *
-     * @param uuid UUID of the saved Business Rule definition
+     * @param uuid                     UUID of the saved Business Rule definition
      * @param businessRuleFromTemplate
      */
     void editBusinessRuleFromTemplate(String uuid, BusinessRuleFromTemplate businessRuleFromTemplate);

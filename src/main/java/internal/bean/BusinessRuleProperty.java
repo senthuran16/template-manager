@@ -17,8 +17,6 @@
  */
 package internal.bean;
 
-import java.util.Map;
-
 /**
  * Represents the parent of a Property, that is contained in a Business Rule
  */

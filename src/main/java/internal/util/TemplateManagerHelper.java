@@ -5,11 +5,11 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import internal.bean.businessRulesFromScratch.BusinessRuleFromScratch;
 import internal.bean.businessRulesFromTemplate.BusinessRuleFromTemplate;
-import internal.exceptions.TemplateManagerException;
-import internal.bean.businessRulesFromTemplate.RuleTemplateProperty;
 import internal.bean.businessRulesFromTemplate.RuleTemplate;
+import internal.bean.businessRulesFromTemplate.RuleTemplateProperty;
 import internal.bean.businessRulesFromTemplate.Template;
 import internal.bean.businessRulesFromTemplate.TemplateGroup;
+import internal.exceptions.TemplateManagerException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -34,48 +34,6 @@ public class TemplateManagerHelper {
      * To avoid instantiation
      */
     private TemplateManagerHelper() {
-
-    }
-
-    // todo : hardcoded test. remove main()
-    public static void main(String[] args) throws TemplateManagerException {
-
-        File directory = new File(TemplateManagerConstants.TEMPLATES_DIRECTORY);
-        Collection<TemplateGroup> availableTemplateGroups = new ArrayList();
-
-        // To store files from the directory
-        File[] files = directory.listFiles();
-        if (files != null) {
-            for (final File fileEntry : files) {
-                // If file is a valid json file
-                if (fileEntry.isFile() && fileEntry.getName().endsWith("json")) {
-                    TemplateGroup templateGroup = null;
-                    // Convert to TemplateGroup object
-                    try {
-                        templateGroup = TemplateManagerHelper.jsonToTemplateGroup(TemplateManagerHelper.fileToJson(fileEntry));
-                    } catch (NullPointerException ne) {
-                        System.out.println("Unable to convert TemplateGroup file : " + fileEntry.getName() + " " + ne);
-                    }
-
-                    // Validate contents of the object
-                    if (templateGroup != null) {
-                        try {
-                            TemplateManagerHelper.validateTemplateGroup(templateGroup);
-                            // Add only valid TemplateGroups to the template
-                            availableTemplateGroups.add(templateGroup);
-                        } catch (TemplateManagerException e) { //todo: implement properly
-                            // Files with invalid content are not added.
-                            System.out.println("Invalid Template Group configuration file found : " + fileEntry.getName() + e);
-                        }
-                    } else {
-                        System.out.println("Invalid Template Group configuration file found : " + fileEntry.getName());
-                    }
-
-                }
-            }
-        }
-
-        System.out.println(availableTemplateGroups.size() + " Templates Found");
 
     }
 
@@ -375,7 +333,7 @@ public class TemplateManagerHelper {
     }
 
     /**
-     * Generates UUID from the given values, entered for the BusinessRuleFromTemplate
+     * Generates UUID from the given values, entered for the BusinessRuleFromTemplate todo: figure out usages
      * todo: This will be only called after user's form values come from the API (Read below)
      * 1. User enters values (propertyName : givenValue)
      * 2. TemplateGroupName, and RuleTemplateName is already there
@@ -388,5 +346,16 @@ public class TemplateManagerHelper {
      */
     public static String generateUUID(Map<String, String> givenValuesForBusinessRule) {
         return UUID.nameUUIDFromBytes(givenValuesForBusinessRule.toString().getBytes()).toString();
+    }
+
+    /**
+     * Generates UUID, which only contains lowercase and hyphens,
+     * from a TemplateGroup name todo: RuleTemplate name
+     *
+     * @param nameWithSpaces
+     * @return
+     */
+    public static String generateUUID(String nameWithSpaces) {
+        return nameWithSpaces.toLowerCase().replace(' ', '-');
     }
 }

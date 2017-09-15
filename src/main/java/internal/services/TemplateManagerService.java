@@ -1,11 +1,14 @@
 package internal.services;
 
+import internal.bean.BusinessRule;
+import internal.bean.businessRulesFromScratch.BusinessRuleFromScratch;
 import internal.bean.businessRulesFromTemplate.BusinessRuleFromTemplate;
-import internal.bean.businessRulesFromTemplate.RuleTemplateProperty;
 import internal.bean.businessRulesFromTemplate.RuleTemplate;
+import internal.bean.businessRulesFromTemplate.RuleTemplateProperty;
 import internal.bean.businessRulesFromTemplate.Template;
 import internal.bean.businessRulesFromTemplate.TemplateGroup;
 import internal.exceptions.TemplateManagerException;
+import internal.services.businessRulesFromTemplate.BusinessRulesFromTemplate;
 import internal.util.TemplateManagerConstants;
 import internal.util.TemplateManagerHelper;
 import org.apache.commons.logging.Log;
@@ -27,16 +30,12 @@ public class TemplateManagerService implements BusinessRulesService {
     private static final Log log = LogFactory.getLog(TemplateManagerService.class);
     // Available Template Groups from the directory
     private Map<String, TemplateGroup> availableTemplateGroups;
-    private Map<String, BusinessRuleFromTemplate> availableBusinessRules;
+    private Map<String, BusinessRule> availableBusinessRules;
 
     public TemplateManagerService() {
         // Load & store available Template Groups & Business Rules at the time of instantiation
         this.availableTemplateGroups = loadTemplateGroups();
         this.availableBusinessRules = loadBusinessRules();
-    }
-
-    public static void main(String[] args) {
-
     }
 
     public void createBusinessRuleFromTemplate(BusinessRuleFromTemplate businessRuleFromTemplate) { // todo: verify next lower level
@@ -71,40 +70,56 @@ public class TemplateManagerService implements BusinessRulesService {
         }
     }
 
+    public BusinessRule findBusinessRuleFromTemplate(String businessRuleUUID) throws TemplateManagerException {
+        for (String availableBusinessRuleUUID : availableBusinessRules.keySet()) {
+            if (availableBusinessRuleUUID.equals(businessRuleUUID)) {
+                return availableBusinessRules.get(availableBusinessRuleUUID);
+            }
+        }
+
+        throw new TemplateManagerException("No Business Rule found with the UUID : " + businessRuleUUID);
+    }
+
     public void deleteBusinessRule(String uuid) { // todo: verify next lower level
-        BusinessRuleFromTemplate foundBusinessRule;
+        BusinessRule foundBusinessRule;
         try {
-            foundBusinessRule = findBusinessRule(uuid);
+            foundBusinessRule = findBusinessRuleFromTemplate(uuid);
         } catch (TemplateManagerException e) {
             // No Business Rule Found
             log.error(e); // todo: (Q) is this ok?
             // No point of further execution
             return;
         }
-        Collection<String[]> templateTypesAndUUIDs = getTemplateTypesAndUUIDs(foundBusinessRule);
 
-        // Business Rule completely un-deployed status
-        boolean isCompletelyUndeployed = true; // todo: think about having noOfDeployedTemplates field in the db
+        // If found Business Rule is from Template
+        if (foundBusinessRule instanceof BusinessRulesFromTemplate) {
+            BusinessRuleFromTemplate foundBusinessRuleFromTemplate = (BusinessRuleFromTemplate) foundBusinessRule;
+            Collection<String[]> templateTypesAndUUIDs = getTemplateTypesAndUUIDs(foundBusinessRuleFromTemplate);
 
-        for (String[] templateTypeAndUUID : templateTypesAndUUIDs) {
-            try {
-                undeployTemplate(templateTypeAndUUID[0], templateTypeAndUUID[1]);
-            } catch (TemplateManagerException e) {
-                isCompletelyUndeployed = false;
-                // todo: (Q) what about previously undeployed partially? now the undeployed ones will cause this to be false [noOfDeployedTemplates] might be a solution
-                log.error("Failed to un-deploy " + templateTypeAndUUID[0] + " : " + templateTypeAndUUID[1]); // todo: (Q) is this ok?
+            // Business Rule completely un-deployed status
+            boolean isCompletelyUndeployed = true; // todo: think about having noOfDeployedTemplates field in the db
+
+            for (String[] templateTypeAndUUID : templateTypesAndUUIDs) {
+                try {
+                    undeployTemplate(templateTypeAndUUID[0], templateTypeAndUUID[1]);
+                } catch (TemplateManagerException e) {
+                    isCompletelyUndeployed = false;
+                    // todo: (Q) what about previously undeployed partially? now the undeployed ones will cause this to be false [noOfDeployedTemplates] might be a solution
+                    log.error("Failed to un-deploy " + templateTypeAndUUID[0] + " : " + templateTypeAndUUID[1]); // todo: (Q) is this ok?
+                }
+            }
+            // If all Templates are undeployed
+            if (isCompletelyUndeployed) {
+                try {
+                    removeBusinessRuleDefinition(uuid);
+                } catch (TemplateManagerException e) {
+                    log.error("Failed to delete Business Rule definition of : " + uuid, e); // todo: (Q) is this ok?
+                }
+            } else {
+                log.error("Failed to un-deploy all the templates. Unable to delete the Business Rule definition of : " + uuid); // todo: (Q) is this ok?
             }
         }
-        // If all Templates are undeployed
-        if (isCompletelyUndeployed) {
-            try {
-                removeBusinessRuleDefinition(uuid);
-            } catch (TemplateManagerException e) {
-                log.error("Failed to delete Business Rule definition of : " + uuid, e); // todo: (Q) is this ok?
-            }
-        } else {
-            log.error("Failed to un-deploy all the templates. Unable to delete the Business Rule definition of : " + uuid); // todo: (Q) is this ok?
-        }
+        // todo: else: If found Business Rule is from scratch
     }
 
     public void deployTemplates(BusinessRuleFromTemplate businessRuleFromTemplate) {
@@ -145,7 +160,7 @@ public class TemplateManagerService implements BusinessRulesService {
                             // Abort loading the current file and continue with the remaining
                             log.error("Invalid Template Group configuration file found: " + fileEntry.getName(), e);
                         }
-                        // Put to map, as denotable by UUID
+                        // Put to map, as denotable by UUID todo: uuid
                         templateGroups.put(templateGroup.getName(), templateGroup);
                     } else {
                         log.error("Invalid Template Group configuration file found: " + fileEntry.getName());
@@ -163,10 +178,12 @@ public class TemplateManagerService implements BusinessRulesService {
      *
      * @return
      */
-    public Map<String, BusinessRuleFromTemplate> loadBusinessRules() {
+    public Map<String, BusinessRule> loadBusinessRules() {
         return null; //todo: implement
     }
 
+    // todo: getTemplateGroup(String templateGroupID);
+    // todo: getRuleTemplate(String ruleTemplateID);
 
     /**
      * Returns available Template Group objects, denoted by UUIDs
@@ -178,26 +195,32 @@ public class TemplateManagerService implements BusinessRulesService {
     }
 
     /**
-     * Returns available Business Rule objects, denoted by UUIDs
+     * Gets the Template Group, that has the given UUID
      *
+     * @param templateGroupUUID
      * @return
      */
-    public Map<String, BusinessRuleFromTemplate> getBusinessRules() {
-        return this.availableBusinessRules;
+    public TemplateGroup getTemplateGroup(String templateGroupUUID) {
+        for (String availableTemplateGroupUUID : availableTemplateGroups.keySet()) {
+            if (availableTemplateGroupUUID.equals(templateGroupUUID)) {
+                return availableTemplateGroups.get(availableTemplateGroupUUID);
+            }
+        }
+        return null; // todo: implement properly
     }
 
     /**
      * Returns RuleTemplate objects belonging to the given Template Group, denoted by UUIDs
      *
-     * @param templateGroupName
+     * @param templateGroupUUID
      * @return
      */
-    public Map<String, RuleTemplate> getRuleTemplates(String templateGroupName) throws TemplateManagerException {
-        Map<String, RuleTemplate> ruleTemplates = new HashMap();
-        for (String availableTemplateGroupName : availableTemplateGroups.keySet()) {
+    public Map<String, RuleTemplate> getRuleTemplates(String templateGroupUUID) throws TemplateManagerException {
+        HashMap<String, RuleTemplate> ruleTemplates = new HashMap<String, RuleTemplate>();
+        for (String availableTemplateGroupUUID : availableTemplateGroups.keySet()) { //todo: uuid
             // If matching UUID found
-            if (availableTemplateGroupName.equals(templateGroupName)) {
-                TemplateGroup foundTemplateGroup = availableTemplateGroups.get(availableTemplateGroupName);
+            if (availableTemplateGroupUUID.equals(templateGroupUUID)) {
+                TemplateGroup foundTemplateGroup = availableTemplateGroups.get(availableTemplateGroupUUID);
                 Collection<RuleTemplate> foundRuleTemplates = foundTemplateGroup.getRuleTemplates();
 
                 // Put all the found Rule Templates denoted by their UUIDs, for returning
@@ -210,6 +233,36 @@ public class TemplateManagerService implements BusinessRulesService {
         }
 
         throw new TemplateManagerException("No Template Group found with the given Name");
+    }
+
+    /**
+     * Gets Rule Template, which belongs to the given Template Group and has the given Rule Template UUID
+     *
+     * @param templateGroupUUID
+     * @param ruleTemplateUUID
+     * @return
+     */
+    public RuleTemplate getRuleTemplate(String templateGroupUUID, String ruleTemplateUUID) {
+        TemplateGroup foundTemplateGroup;
+        for (String availableTemplateGroupUUID : availableTemplateGroups.keySet()) {
+            if (availableTemplateGroupUUID.equals(templateGroupUUID)) {
+                foundTemplateGroup = availableTemplateGroups.get(availableTemplateGroupUUID);
+                for (RuleTemplate ruleTemplate : foundTemplateGroup.getRuleTemplates()) {
+                    // todo: Struck here. Are we going to store? better option is to store in the ruleTemplate itself
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Returns available Business Rule objects, denoted by UUIDs
+     *
+     * @return
+     */
+    public Map<String, BusinessRule> getBusinessRules() {
+        return this.availableBusinessRules;
     }
 
     /**
@@ -260,11 +313,12 @@ public class TemplateManagerService implements BusinessRulesService {
     /**
      * Derives a SiddhiApp by replacing given SiddhiApp template's templated properties with the given values
      *
-     * @param siddhiAppTemplate Templated SiddhiApp
-     * @param givenValues       Values for replacing templated elements
+     * @param siddhiAppTemplate      Templated SiddhiApp
+     * @param templatedElementValues Values for replacing templated elements, that are derived by the script from the
+     *                               TemplateGroup / directly entered by the user (when no script is present)
      * @return
      */
-    public Template deriveSiddhiApp(Template siddhiAppTemplate, Map<String, String> givenValues) {
+    public Template deriveSiddhiApp(Template siddhiAppTemplate, Map<String, String> templatedElementValues) {
         // SiddhiApp content, that contains templated elements
         String templatedSiddhiApp = siddhiAppTemplate.getContent();
 
@@ -282,16 +336,17 @@ public class TemplateManagerService implements BusinessRulesService {
             Pattern templatedElementNamePattern = Pattern.compile(TemplateManagerConstants.TEMPLATED_ELEMENT_NAME_REGEX_PATTERN);
             Matcher templatedElementNameMatcher = templatedElementNamePattern.matcher(templatedElement);
 
+
             // When the templated element's name is found
             if (templatedElementNameMatcher.find()) {
                 String templatedElementName = templatedElementNameMatcher.group(1);
-                String elementReplacement = givenValues.get(templatedElementName);
+                String elementReplacement = templatedElementValues.get(templatedElementName);
                 // Replace templated element with provided value
                 templatedElementMatcher.appendReplacement(derivedSiddhiAppBuffer, elementReplacement);
             }
         }
         templatedElementMatcher.appendTail(derivedSiddhiAppBuffer);
-        Template derivedSiddhiApp = new Template(TemplateManagerConstants.SIDDHI_APP_TEMPLATE_TYPE, derivedSiddhiAppBuffer.toString());
+        Template derivedSiddhiApp = new Template(TemplateManagerConstants.SIDDHI_APP_TEMPLATE_TYPE, derivedSiddhiAppBuffer.toString(), null);
 
         return derivedSiddhiApp;
     }
@@ -465,7 +520,7 @@ public class TemplateManagerService implements BusinessRulesService {
     }
 
     //////////// insert anything on top of this //////////
-    
+
     /**
      * Finds the Template Group with the given name
      *
@@ -475,28 +530,22 @@ public class TemplateManagerService implements BusinessRulesService {
      */
     public TemplateGroup findTemplateGroup(String templateGroupName) throws TemplateManagerException {
         for (String availableTemplateGroupName : availableTemplateGroups.keySet()) {
-            if(availableTemplateGroupName.equals(templateGroupName)){
+            if (availableTemplateGroupName.equals(templateGroupName)) {
                 return availableTemplateGroups.get(availableTemplateGroupName);
             }
         }
 
-        throw new TemplateManagerException("No Template Group found with the name : "+templateGroupName);
+        throw new TemplateManagerException("No Template Group found with the name : " + templateGroupName);
     }
 
-    /**
-     * Gives the Business Rule with the given UUID
-     *
-     * @param businessRuleUUID
-     * @return
-     * @throws TemplateManagerException
-     */
-    public BusinessRuleFromTemplate findBusinessRule(String businessRuleUUID) throws TemplateManagerException {
-        for (String availableBusinessRuleUUID : availableBusinessRules.keySet()) {
-            if (availableBusinessRuleUUID.equals(businessRuleUUID)) {
-                return availableBusinessRules.get(availableBusinessRuleUUID);
-            }
-        }
 
-        throw new TemplateManagerException("No Business Rule found with the UUID : " + businessRuleUUID);
+    @Override
+    public void createBusinessRuleFromScratch(BusinessRuleFromScratch businessRuleFromScratch) {
+        // todo: implement
+    }
+
+    @Override
+    public void editBusinessRuleFromScratch(String uuid, BusinessRuleFromScratch businessRuleFromScratch) {
+        // todo: implement
     }
 }

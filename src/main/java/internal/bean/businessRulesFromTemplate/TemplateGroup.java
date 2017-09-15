@@ -1,7 +1,5 @@
 package internal.bean.businessRulesFromTemplate;
 
-import internal.bean.businessRulesFromTemplate.RuleTemplate;
-
 import java.util.Collection;
 
 /**

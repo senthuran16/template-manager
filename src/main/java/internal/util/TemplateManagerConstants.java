@@ -22,5 +22,4 @@ public class TemplateManagerConstants {
     public static final String DASHBOARD = "dashboard";
 
 
-
 }

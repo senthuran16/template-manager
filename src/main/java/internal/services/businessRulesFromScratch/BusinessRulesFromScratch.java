@@ -1,4 +1,4 @@
-package internal.services;/*
+package internal.services.businessRulesFromScratch;/*
  * Copyright (c) 2017, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
  * WSO2 Inc. licenses this file to you under the Apache License,
@@ -23,4 +23,7 @@ import internal.bean.businessRulesFromScratch.BusinessRuleFromScratch;
  */
 public interface BusinessRulesFromScratch {
     // todo: Implement methods related to BusinessRulesFromScratch
+    void createBusinessRuleFromScratch(BusinessRuleFromScratch businessRuleFromScratch);
+
+    void editBusinessRuleFromScratch(String uuid, BusinessRuleFromScratch businessRuleFromScratch);
 }
