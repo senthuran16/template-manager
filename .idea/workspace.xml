@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4fc1d313-e26a-4e28-8a8d-931ddcbf6c8d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/internal/services/BusinessRulesFromTemplate.java" afterPath="$PROJECT_DIR$/src/main/java/internal/services/BusinessRulesFromTemplate.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/internal/services/BusinessRulesService.java" afterPath="$PROJECT_DIR$/src/main/java/internal/services/BusinessRulesService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/internal/services/TemplateManagerService.java" afterPath="$PROJECT_DIR$/src/main/java/internal/services/TemplateManagerService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/internal/bean/businessRulesFromTemplate/Template.java" afterPath="$PROJECT_DIR$/src/main/java/internal/bean/businessRulesFromTemplate/Template.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/internal/util/TemplateManagerHelper.java" afterPath="$PROJECT_DIR$/src/main/java/internal/util/TemplateManagerHelper.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -31,11 +29,52 @@
       <file leaf-file-name="TemplateManagerHelper.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/internal/util/TemplateManagerHelper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2799">
-              <caret line="157" column="103" lean-forward="false" selection-start-line="157" selection-start-column="103" selection-end-line="157" selection-end-column="103" />
+            <state relative-caret-position="-142">
+              <caret line="357" column="65" lean-forward="false" selection-start-line="357" selection-start-column="65" selection-end-line="357" selection-end-column="65" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#main#0;class#TemplateManagerHelper#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TemplateGroup.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/internal/bean/businessRulesFromTemplate/TemplateGroup.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="189">
+              <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RuleTemplate.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/internal/bean/businessRulesFromTemplate/RuleTemplate.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="189">
+              <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Template.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/internal/bean/businessRulesFromTemplate/Template.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="162">
+              <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+              <folding>
+                <element signature="e#515#516#0" expanded="true" />
+                <element signature="e#542#543#0" expanded="true" />
+                <element signature="e#582#583#0" expanded="true" />
+                <element signature="e#614#615#0" expanded="true" />
+                <element signature="e#648#649#0" expanded="true" />
+                <element signature="e#678#679#0" expanded="true" />
+                <element signature="e#724#725#0" expanded="true" />
+                <element signature="e#762#763#0" expanded="true" />
+                <element signature="e#812#813#0" expanded="true" />
+                <element signature="e#858#859#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -95,6 +134,7 @@
       <find>gadget</find>
       <find>templategroupuuid</find>
       <find>String templateGroupName</find>
+      <find>jsonToBus</find>
     </findStrings>
     <replaceStrings>
       <replace>templated elements</replace>
@@ -163,7 +203,6 @@
         <option value="$PROJECT_DIR$/src/main/java/internal/bean/businessRulesFromScratch/BusinessRuleFromScratch.java" />
         <option value="$PROJECT_DIR$/src/main/java/internal/bean/businessRulesFromTemplate/RuleTemplate.java" />
         <option value="$PROJECT_DIR$/src/main/java/internal/bean/businessRulesFromTemplate/RuleTemplateProperty.java" />
-        <option value="$PROJECT_DIR$/src/main/java/internal/bean/businessRulesFromTemplate/Template.java" />
         <option value="$PROJECT_DIR$/src/main/java/internal/services/BusinessRulesFromScratch.java" />
         <option value="$PROJECT_DIR$/src/main/java/internal/util/BusinessRulesFromTemplateHelper.java" />
         <option value="$PROJECT_DIR$/src/main/java/internal/util/BusinessRulesFromScratchHelper.java" />
@@ -172,6 +211,7 @@
         <option value="$PROJECT_DIR$/src/main/java/internal/services/TemplateManagerService.java" />
         <option value="$PROJECT_DIR$/src/main/java/internal/services/BusinessRulesFromTemplate.java" />
         <option value="$PROJECT_DIR$/src/main/java/internal/services/BusinessRulesService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/internal/bean/businessRulesFromTemplate/Template.java" />
         <option value="$PROJECT_DIR$/src/main/java/internal/util/TemplateManagerHelper.java" />
       </list>
     </option>
@@ -595,7 +635,7 @@
       <workItem from="1504761149971" duration="7000" />
       <workItem from="1505126940339" duration="597000" />
       <workItem from="1505372387656" duration="10284000" />
-      <workItem from="1505450404899" duration="2391000" />
+      <workItem from="1505450404899" duration="3734000" />
     </task>
     <task id="LOCAL-00001" summary="Checks whether a given RuleCollection object has valid content">
       <created>1502960237602</created>
@@ -608,7 +648,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="308928000" />
+    <option name="totallyTimeSpent" value="310271000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -840,34 +880,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/internal/bean/businessRulesFromTemplate/RuleTemplate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="6" column="21" lean-forward="false" selection-start-line="6" selection-start-column="21" selection-end-line="6" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/internal/bean/businessRulesFromTemplate/RuleTemplateProperty.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
           <caret line="6" column="3" lean-forward="false" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/internal/bean/businessRulesFromTemplate/Template.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="4" column="63" lean-forward="false" selection-start-line="4" selection-start-column="63" selection-end-line="4" selection-end-column="63" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/internal/bean/businessRulesFromTemplate/TemplateGroup.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -929,10 +945,45 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/internal/bean/businessRulesFromTemplate/Template.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+          <folding>
+            <element signature="e#515#516#0" expanded="true" />
+            <element signature="e#542#543#0" expanded="true" />
+            <element signature="e#582#583#0" expanded="true" />
+            <element signature="e#614#615#0" expanded="true" />
+            <element signature="e#648#649#0" expanded="true" />
+            <element signature="e#678#679#0" expanded="true" />
+            <element signature="e#724#725#0" expanded="true" />
+            <element signature="e#762#763#0" expanded="true" />
+            <element signature="e#812#813#0" expanded="true" />
+            <element signature="e#858#859#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/internal/bean/businessRulesFromTemplate/RuleTemplate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/internal/bean/businessRulesFromTemplate/TemplateGroup.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/internal/util/TemplateManagerHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2799">
-          <caret line="157" column="103" lean-forward="false" selection-start-line="157" selection-start-column="103" selection-end-line="157" selection-end-column="103" />
+        <state relative-caret-position="-142">
+          <caret line="357" column="65" lean-forward="false" selection-start-line="357" selection-start-column="65" selection-end-line="357" selection-end-column="65" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#main#0;class#TemplateManagerHelper#0" expanded="false" />

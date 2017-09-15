@@ -3,6 +3,7 @@ package internal.util;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+import internal.bean.businessRulesFromScratch.BusinessRuleFromScratch;
 import internal.bean.businessRulesFromTemplate.BusinessRuleFromTemplate;
 import internal.exceptions.TemplateManagerException;
 import internal.bean.businessRulesFromTemplate.RuleTemplateProperty;
@@ -133,14 +134,26 @@ public class TemplateManagerHelper {
      * @return BusinessRuleFromTemplate object
      */
     public static BusinessRuleFromTemplate jsonToBusinessRuleFromTemplate(JsonObject jsonObject) {
-        String businessRuleJsonString = jsonObject.get("businessRuleFromTemplate").toString();
+        String businessRuleJsonString = jsonObject.get("businessRule").toString();
         Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
         BusinessRuleFromTemplate businessRuleFromTemplate = gson.fromJson(businessRuleJsonString, BusinessRuleFromTemplate.class);
 
         return businessRuleFromTemplate;
     }
 
-    // todo : public static BusinessRuleFromScratch jsonToBusinessRuleFromScratch(JsonObject jsonObject)
+    /**
+     * Converts given JSON object to BusinessRuleFromScratch object
+     *
+     * @param jsonObject Given JSON object
+     * @return BusinessRuleFromTemplate object
+     */
+    public static BusinessRuleFromScratch jsonToBusinessRuleFromScratch(JsonObject jsonObject) {
+        String businessRuleJsonString = jsonObject.get("businessRule").toString();
+        Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
+        BusinessRuleFromScratch businessRuleFromScratch = gson.fromJson(businessRuleJsonString, BusinessRuleFromScratch.class);
+
+        return businessRuleFromScratch;
+    }
 
     /**
      * Converts given String JSON definition to BusinessRuleFromTemplate object
@@ -155,11 +168,22 @@ public class TemplateManagerHelper {
         return businessRuleFromTemplate;
     }
 
-    // todo: public static BusinessRuleFromScratch jsonToBusinessRuleFromScratch(String jsonDefinition)
+    /**
+     * Converts given String JSON definition to BusinessRuleFromScratch object
+     *
+     * @param jsonDefinition Given String JSON definition
+     * @return TemplateGroup object
+     */
+    public static BusinessRuleFromScratch jsonToBusinessRuleFromScratch(String jsonDefinition) {
+        Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
+        BusinessRuleFromScratch businessRuleFromScratch = gson.fromJson(jsonDefinition, BusinessRuleFromScratch.class);
+
+        return businessRuleFromScratch;
+    }
 
     /**
      * Checks whether a given TemplateGroup object has valid content
-     * Validation criteria : //todo: confirm
+     * Validation criteria : //todo: Implement properly
      * - name is available
      * - At least one ruleTemplate is available
      *
@@ -187,7 +211,8 @@ public class TemplateManagerHelper {
      * Checks whether a given RuleTemplate object has valid content
      * Validation Criteria : todo: confirm validation criteria for RuleTemplate
      * - name is available
-     * - type is either 'app', 'source' or 'sink'
+     * - type is either 'app', 'source' or 'sink' todo: template / input / output
+     * todo: if input/output => ExposedStreamDefinition is not null
      * - At least one template available
      * - At least one property available
      * - All properties have defaultValue
@@ -246,6 +271,7 @@ public class TemplateManagerHelper {
 
     /**
      * Checks whether all the templated elements of each template, has matching values in properties
+     * todo: no need for this. Since we have the JS to do processing with entered values
      *
      * @param templates  Templates
      * @param properties RuleTemplateProperty names, denoting RuleTemplateProperty objects
@@ -309,8 +335,12 @@ public class TemplateManagerHelper {
         // todo: implement
     }
 
+    public static void validateBusinessRuleFromScratch(BusinessRuleFromScratch businessRuleFromScratch) throws TemplateManagerException {
+        // todo: implement
+    }
+
     /**
-     * Generates UUID for the given Template
+     * Generates UUID for the given Template todo: figure out the needs
      *
      * @param template
      * @return
@@ -325,7 +355,7 @@ public class TemplateManagerHelper {
     }
 
     /**
-     * Gives the name of the given SiddhiApp
+     * Gives the name of the given Template, which is a SiddhiApp
      *
      * @param siddhiAppTemplate
      * @return
