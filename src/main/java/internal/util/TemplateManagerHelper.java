@@ -132,7 +132,7 @@ public class TemplateManagerHelper {
      * @param jsonObject Given JSON object
      * @return BusinessRuleFromTemplate object
      */
-    public static BusinessRuleFromTemplate jsonToBusinessRule(JsonObject jsonObject) {
+    public static BusinessRuleFromTemplate jsonToBusinessRuleFromTemplate(JsonObject jsonObject) {
         String businessRuleJsonString = jsonObject.get("businessRuleFromTemplate").toString();
         Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
         BusinessRuleFromTemplate businessRuleFromTemplate = gson.fromJson(businessRuleJsonString, BusinessRuleFromTemplate.class);
@@ -140,18 +140,22 @@ public class TemplateManagerHelper {
         return businessRuleFromTemplate;
     }
 
+    // todo : public static BusinessRuleFromScratch jsonToBusinessRuleFromScratch(JsonObject jsonObject)
+
     /**
-     * Converts given String JSON definition to TemplateGroup object
+     * Converts given String JSON definition to BusinessRuleFromTemplate object
      *
      * @param jsonDefinition Given String JSON definition
      * @return TemplateGroup object
      */
-    public static BusinessRuleFromTemplate jsonToBusinessRule(String jsonDefinition) {
+    public static BusinessRuleFromTemplate jsonToBusinessRuleFromTemplate(String jsonDefinition) {
         Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
         BusinessRuleFromTemplate businessRuleFromTemplate = gson.fromJson(jsonDefinition, BusinessRuleFromTemplate.class);
 
         return businessRuleFromTemplate;
     }
+
+    // todo: public static BusinessRuleFromScratch jsonToBusinessRuleFromScratch(String jsonDefinition)
 
     /**
      * Checks whether a given TemplateGroup object has valid content
@@ -213,7 +217,7 @@ public class TemplateManagerHelper {
             // todo: throw exception
         }
         for (String property : ruleTemplate.getProperties().keySet()) {
-            validateProperty(ruleTemplate.getProperties().get(property));
+            validateRuleTemplateProperty(ruleTemplate.getProperties().get(property));
             // If template type is not valid
             if (!validTemplateTypes.contains(ruleTemplate.getProperties().get(property).getType())) {
                 // todo: throw exception
@@ -231,7 +235,7 @@ public class TemplateManagerHelper {
      * @param ruleTemplateProperty
      * @throws TemplateManagerException
      */
-    public static void validateProperty(RuleTemplateProperty ruleTemplateProperty) throws TemplateManagerException { //todo: conversion null pointer exception
+    public static void validateRuleTemplateProperty(RuleTemplateProperty ruleTemplateProperty) throws TemplateManagerException { //todo: conversion null pointer exception
         if (ruleTemplateProperty.getDefaultValue() == null) {
             // todo: throw exception
         }
@@ -301,7 +305,7 @@ public class TemplateManagerHelper {
         //todo: no need mostly.
     }
 
-    public static void validateBusinessRule(BusinessRuleFromTemplate businessRuleFromTemplate) throws TemplateManagerException {
+    public static void validateBusinessRuleFromTemplate(BusinessRuleFromTemplate businessRuleFromTemplate) throws TemplateManagerException {
         // todo: implement
     }
 

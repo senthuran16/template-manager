@@ -37,15 +37,7 @@ public interface BusinessRulesFromTemplate {
      * @param uuid UUID of the saved Business Rule definition
      * @param businessRuleFromTemplate
      */
-    void editBusinessRule(String uuid, BusinessRuleFromTemplate businessRuleFromTemplate);
-
-    /**
-     * Deletes the Business Rule that has the given UUID
-     * and Undeploys the Templates belonging to the Business Rule
-     *
-     * @param uuid UUID of the saved Business Rule definition
-     */
-    void deleteBusinessRule(String uuid);
+    void editBusinessRuleFromTemplate(String uuid, BusinessRuleFromTemplate businessRuleFromTemplate);
 
     /**
      * Deploys the Templates belonging to the given BusinessRuleFromTemplate, that is denoted by the given UUID

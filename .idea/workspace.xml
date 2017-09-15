@@ -2,12 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4fc1d313-e26a-4e28-8a8d-931ddcbf6c8d" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/internal/util/businessRulesFromScratch/BusinessRulesFromScratchHelper.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/internal/util/businessRulesFromTemplate/BusinessRulesFromTemplateHelper.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/internal/services/BusinessRulesFromTemplate.java" afterPath="$PROJECT_DIR$/src/main/java/internal/services/BusinessRulesFromTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/internal/services/BusinessRulesService.java" afterPath="$PROJECT_DIR$/src/main/java/internal/services/BusinessRulesService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/internal/services/TemplateManagerService.java" afterPath="$PROJECT_DIR$/src/main/java/internal/services/TemplateManagerService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/internal/util/TemplateManagerHelper.java" afterPath="$PROJECT_DIR$/src/main/java/internal/util/TemplateManagerHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template-manager.iml" afterPath="$PROJECT_DIR$/template-manager.iml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -20,14 +18,45 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="TemplateManagerService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/internal/services/TemplateManagerService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="405">
+              <caret line="56" column="33" lean-forward="false" selection-start-line="56" selection-start-column="33" selection-end-line="56" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="TemplateManagerHelper.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/internal/util/TemplateManagerHelper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-361">
-              <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+            <state relative-caret-position="2799">
+              <caret line="157" column="103" lean-forward="false" selection-start-line="157" selection-start-column="103" selection-end-line="157" selection-end-column="103" />
               <folding>
+                <element signature="imports" expanded="true" />
                 <element signature="method#main#0;class#TemplateManagerHelper#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BusinessRulesFromTemplate.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/internal/services/BusinessRulesFromTemplate.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="592">
+              <caret line="44" column="26" lean-forward="true" selection-start-line="44" selection-start-column="26" selection-end-line="44" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BusinessRulesService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/internal/services/BusinessRulesService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="297">
+              <caret line="12" column="41" lean-forward="false" selection-start-line="12" selection-start-column="41" selection-end-line="12" selection-end-column="41" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -135,14 +164,14 @@
         <option value="$PROJECT_DIR$/src/main/java/internal/bean/businessRulesFromTemplate/RuleTemplate.java" />
         <option value="$PROJECT_DIR$/src/main/java/internal/bean/businessRulesFromTemplate/RuleTemplateProperty.java" />
         <option value="$PROJECT_DIR$/src/main/java/internal/bean/businessRulesFromTemplate/Template.java" />
-        <option value="$PROJECT_DIR$/src/main/java/internal/services/BusinessRulesFromTemplate.java" />
-        <option value="$PROJECT_DIR$/src/main/java/internal/services/BusinessRulesService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/internal/services/TemplateManagerService.java" />
         <option value="$PROJECT_DIR$/src/main/java/internal/services/BusinessRulesFromScratch.java" />
         <option value="$PROJECT_DIR$/src/main/java/internal/util/BusinessRulesFromTemplateHelper.java" />
         <option value="$PROJECT_DIR$/src/main/java/internal/util/BusinessRulesFromScratchHelper.java" />
         <option value="$PROJECT_DIR$/src/main/java/internal/util/businessRulesFromScratch/BusinessRulesFromScratchHelper.java" />
         <option value="$PROJECT_DIR$/src/main/java/internal/util/businessRulesFromTemplate/BusinessRulesFromTemplateHelper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/internal/services/TemplateManagerService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/internal/services/BusinessRulesFromTemplate.java" />
+        <option value="$PROJECT_DIR$/src/main/java/internal/services/BusinessRulesService.java" />
         <option value="$PROJECT_DIR$/src/main/java/internal/util/TemplateManagerHelper.java" />
       </list>
     </option>
@@ -566,7 +595,7 @@
       <workItem from="1504761149971" duration="7000" />
       <workItem from="1505126940339" duration="597000" />
       <workItem from="1505372387656" duration="10284000" />
-      <workItem from="1505450404899" duration="1198000" />
+      <workItem from="1505450404899" duration="2391000" />
     </task>
     <task id="LOCAL-00001" summary="Checks whether a given RuleCollection object has valid content">
       <created>1502960237602</created>
@@ -579,7 +608,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="307735000" />
+    <option name="totallyTimeSpent" value="308928000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -844,36 +873,10 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/internal/services/TemplateManager.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/internal/services/TemplateManagerService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="23" column="64" lean-forward="false" selection-start-line="23" selection-start-column="64" selection-end-line="23" selection-end-column="64" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/internal/services/BusinessRulesService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/internal/services/BusinessRulesFromScratch.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="380">
           <caret line="24" column="66" lean-forward="false" selection-start-line="24" selection-start-column="66" selection-end-line="24" selection-end-column="66" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/internal/services/BusinessRulesFromTemplate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="23" column="17" lean-forward="false" selection-start-line="23" selection-start-column="17" selection-end-line="23" selection-end-column="17" />
           <folding />
         </state>
       </provider>
@@ -902,11 +905,36 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/internal/services/TemplateManagerService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="56" column="33" lean-forward="false" selection-start-line="56" selection-start-column="33" selection-end-line="56" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/internal/services/BusinessRulesService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="12" column="41" lean-forward="false" selection-start-line="12" selection-start-column="41" selection-end-line="12" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/internal/services/BusinessRulesFromTemplate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="592">
+          <caret line="44" column="26" lean-forward="true" selection-start-line="44" selection-start-column="26" selection-end-line="44" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/internal/util/TemplateManagerHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-361">
-          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        <state relative-caret-position="2799">
+          <caret line="157" column="103" lean-forward="false" selection-start-line="157" selection-start-column="103" selection-end-line="157" selection-end-column="103" />
           <folding>
+            <element signature="imports" expanded="true" />
             <element signature="method#main#0;class#TemplateManagerHelper#0" expanded="false" />
           </folding>
         </state>

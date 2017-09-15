@@ -54,7 +54,7 @@ public class TemplateManagerService implements BusinessRulesService {
         }
     }
 
-    public void editBusinessRule(String uuid, BusinessRuleFromTemplate businessRuleFromTemplate) { // todo: verify next lower level
+    public void editBusinessRuleFromTemplate(String uuid, BusinessRuleFromTemplate businessRuleFromTemplate) { // todo: verify next lower level
         Map<String, Template> derivedTemplates = deriveTemplates(businessRuleFromTemplate);
 
         try {
