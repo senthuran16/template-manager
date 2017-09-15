@@ -9,8 +9,6 @@ import internal.bean.businessRulesFromTemplate.RuleTemplateProperty;
 import internal.bean.businessRulesFromTemplate.RuleTemplate;
 import internal.bean.businessRulesFromTemplate.Template;
 import internal.bean.businessRulesFromTemplate.TemplateGroup;
-import internal.util.businessRulesFromScratch.BusinessRulesFromScratchHelper;
-import internal.util.businessRulesFromTemplate.BusinessRulesFromTemplateHelper;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -25,10 +23,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Consists of methods for additional features for the exposed root.Template Manager service
+ * Consists of methods for additional features for the exposed Template Manager service
  */
 //TODO : Verify class names
-public class TemplateManagerHelper implements BusinessRulesFromScratchHelper, BusinessRulesFromTemplateHelper {
+public class TemplateManagerHelper {
     //private static final Log log = LogFactory.getLog(TemplateManagerHelper.class);
 
     /**
